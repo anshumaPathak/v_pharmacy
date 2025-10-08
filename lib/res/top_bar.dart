@@ -5,6 +5,7 @@ import 'package:v_pharmashing/generated/assets.dart';
 import 'package:v_pharmashing/res/const_color.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
 
+import '../auth/login_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../view_model/language_view_model.dart';
 
@@ -100,14 +101,32 @@ class _TopBarState extends State<TopBar> {
             );
           }
 
+          // Widget loginButton() {
+          //   return ElevatedButton(
+          //     onPressed: () {},
+          //     style: ElevatedButton.styleFrom(
+          //       backgroundColor: AppColor.blueColor,
+          //       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          //     ),
+          //     child:  Text(AppLocalizations.of(context)!.login, style: TextStyle(color: Colors.white)),
+          //   );
+          // }
           Widget loginButton() {
             return ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const LoginDialog(),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColor.blueColor,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               ),
-              child:  Text(AppLocalizations.of(context)!.login, style: TextStyle(color: Colors.white)),
+              child: Text(
+                AppLocalizations.of(context)!.login,
+                style: const TextStyle(color: Colors.white),
+              ),
             );
           }
 
