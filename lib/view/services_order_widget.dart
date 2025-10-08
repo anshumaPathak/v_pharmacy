@@ -1,4 +1,602 @@
+// import 'package:flutter/material.dart';
+//
+// import '../l10n/app_localizations.dart';
+// import 'about_widget/upload_image_section.dart';
+//
+// class OrderMedicineScreen extends StatefulWidget {
+//   const OrderMedicineScreen({super.key});
+//
+//   @override
+//   State<OrderMedicineScreen> createState() => _OrderMedicineScreenState();
+// }
+//
+// class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
+//   final _formKey = GlobalKey<FormState>();
+//   String? _selectedCategory;
+//   String? _selectedDuration;
+//   bool _isLoggedIn = false;
+//
+//   final List<String> categories = [
+//     'Pain Relief',
+//     'Cold & Flu',
+//     'Diabetes',
+//     'Heart Disease',
+//     'Blood Pressure',
+//     'Skin Care',
+//     'Digestive Health',
+//     'Mental Health',
+//   ];
+//
+//   final List<String> durations = [
+//     '1-7 days',
+//     '1-2 weeks',
+//     '2-4 weeks',
+//     '1-3 months',
+//     '3-6 months',
+//     '6+ months',
+//   ];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return LayoutBuilder(
+//       builder: (context, constraints) {
+//         bool isMobile = constraints.maxWidth < 700;
+//
+//         return SingleChildScrollView(
+//           child: Column(
+//             children: [
+//               // Gradient Header
+//               Container(
+//                 width: double.infinity,
+//                 padding: EdgeInsets.symmetric(
+//                   vertical: 60,
+//                   horizontal: isMobile ? 20 : 80,
+//                 ),
+//                 decoration: const BoxDecoration(
+//                   gradient: LinearGradient(
+//                     begin: Alignment.topLeft,
+//                     end: Alignment.bottomRight,
+//                     colors: [Color(0xFFEFF6FF), Color(0xFFDBEAFE)],
+//                   ),
+//                 ),
+//                 child: Column(
+//                   children: [
+//                     TweenAnimationBuilder(
+//                       duration: const Duration(milliseconds: 800),
+//                       tween: Tween<double>(begin: 0, end: 1),
+//                       builder: (context, double value, child) {
+//                         return Opacity(
+//                           opacity: value,
+//                           child: Transform.translate(
+//                             offset: Offset(0, 20 * (1 - value)),
+//                             child: child,
+//                           ),
+//                         );
+//                       },
+//                       child:  Text(
+//                           AppLocalizations.of(context)!.orderMedicine,
+//                         style: TextStyle(
+//                           fontSize: 48,
+//                           fontWeight: FontWeight.bold,
+//                           color: Color(0xFF1E293B),
+//                           letterSpacing: -1,
+//                         ),
+//                       ),
+//                     ),
+//                     const SizedBox(height: 16),
+//                     TweenAnimationBuilder(
+//                       duration: const Duration(milliseconds: 1000),
+//                       tween: Tween<double>(begin: 0, end: 1),
+//                       builder: (context, double value, child) {
+//                         return Opacity(opacity: value, child: child);
+//                       },
+//                       child: Text(
+//                         'Fill out the form below to order your medicines. Upload your prescription for verification.',
+//                         textAlign: TextAlign.center,
+//                         style: TextStyle(
+//                           fontSize: 16,
+//                           color: Colors.grey[600],
+//                           height: 1.5,
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//
+//               const SizedBox(height: 60),
+//               Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
+//                 child: Column(
+//                   children: [
+//                     if (!_isLoggedIn)
+//                       Align(
+//                         alignment: Alignment.topCenter,
+//                         child: Container(
+//                           width: isMobile
+//                               ? MediaQuery.of(context).size.width * 0.9
+//                               : 600, // narrower on desktop
+//                           padding: const EdgeInsets.all(20),
+//                           margin: const EdgeInsets.only(bottom: 40),
+//                           decoration: BoxDecoration(
+//                             color: const Color(0xFFEFF6FF),
+//                             borderRadius: BorderRadius.circular(12),
+//                             border: Border.all(
+//                               color: const Color(0xFF2563EB).withOpacity(0.2),
+//                               width: 1,
+//                             ),
+//                           ),
+//                           child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.center,
+//                             children: [
+//                               const Icon(
+//                                 Icons.info_outline,
+//                                 color: Color(0xFF2563EB),
+//                                 size: 24,
+//                               ),
+//                               const SizedBox(width: 10),
+//                               const Text(
+//                                 'Please ',
+//                                 style: TextStyle(
+//                                   fontSize: 15,
+//                                   color: Color(0xFF64748B),
+//                                 ),
+//                               ),
+//                               InkWell(
+//                                 onTap: () {
+//                                   // Navigate to login
+//                                 },
+//                                 child: const Text(
+//                                   'login',
+//                                   style: TextStyle(
+//                                     fontSize: 15,
+//                                     color: Color(0xFF2563EB),
+//                                     fontWeight: FontWeight.w600,
+//                                   ),
+//                                 ),
+//                               ),
+//                               const Text(
+//                                 ' to place an order.',
+//                                 style: TextStyle(
+//                                   fontSize: 15,
+//                                   color: Color(0xFF64748B),
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//
+//                     // 🔹 Order Form Container
+//                     AbsorbPointer(
+//                       absorbing: !_isLoggedIn,
+//                       child: Align(
+//                         alignment: Alignment.topCenter,
+//                         child: Container(
+//                           width: isMobile
+//                               ? MediaQuery.of(context).size.width * 0.9
+//                               : 800,
+//                           padding: EdgeInsets.all(isMobile ? 24 : 40),
+//                           decoration: BoxDecoration(
+//                             color: Colors.white,
+//                             borderRadius: BorderRadius.circular(16),
+//                             border: Border.all(
+//                               color: Colors.grey.withOpacity(0.1),
+//                               width: 1,
+//                             ),
+//                             boxShadow: [
+//                               BoxShadow(
+//                                 color: Colors.black.withOpacity(0.08),
+//                                 blurRadius: 20,
+//                                 offset: const Offset(0, 8),
+//                               ),
+//                             ],
+//                           ),
+//                           child: Form(
+//                             key: _formKey,
+//                             child: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 // Header
+//                                 Row(
+//                                   children: const [
+//                                     Icon(
+//                                       Icons.description_outlined,
+//                                       color: Color(0xFF1E293B),
+//                                       size: 24,
+//                                     ),
+//                                     SizedBox(width: 12),
+//                                     Text(
+//                                       'Order Information',
+//                                       style: TextStyle(
+//                                         fontSize: 20,
+//                                         fontWeight: FontWeight.w600,
+//                                         color: Color(0xFF1E293B),
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//
+//                                 const SizedBox(height: 32),
+//
+//                                 // Name & Category
+//                                 isMobile
+//                                     ? Column(
+//                                   children: [
+//                                     _buildNameField(),
+//                                     const SizedBox(height: 24),
+//                                     _buildCategoryField(),
+//                                   ],
+//                                 )
+//                                     : Row(
+//                                   children: [
+//                                     Expanded(child: _buildNameField()),
+//                                     const SizedBox(width: 24),
+//                                     Expanded(child: _buildCategoryField()),
+//                                   ],
+//                                 ),
+//
+//                                 const SizedBox(height: 24),
+//                                 _buildAddressField(),
+//                                 const SizedBox(height: 24),
+//
+//                                 // Email & Phone
+//                                 isMobile
+//                                     ? Column(
+//                                   children: [
+//                                     _buildEmailField(),
+//                                     const SizedBox(height: 24),
+//                                     _buildPhoneField(),
+//                                   ],
+//                                 )
+//                                     : Row(
+//                                   children: [
+//                                     Expanded(child: _buildEmailField()),
+//                                     const SizedBox(width: 24),
+//                                     Expanded(child: _buildPhoneField()),
+//                                   ],
+//                                 ),
+//
+//                                 const SizedBox(height: 24),
+//
+//                                 // WhatsApp & Alternate Contact
+//                                 isMobile
+//                                     ? Column(
+//                                   children: [
+//                                     _buildWhatsAppField(),
+//                                     const SizedBox(height: 24),
+//                                     _buildAlternateContactField(),
+//                                   ],
+//                                 )
+//                                     : Row(
+//                                   children: [
+//                                     Expanded(child: _buildWhatsAppField()),
+//                                     const SizedBox(width: 24),
+//                                     Expanded(child: _buildAlternateContactField()),
+//                                   ],
+//                                 ),
+//
+//                                 const SizedBox(height: 24),
+//                                 _buildDurationField(),
+//                                 const SizedBox(height: 32),
+//                                 UploadPrescriptionSection(),
+//                                 // _buildUploadSection(),
+//                                 const SizedBox(height: 32),
+//                                 _buildSpecialInstructionsField(),
+//                                 const SizedBox(height: 40),
+//                                 _buildSubmitButton(),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//
+//               const SizedBox(height: 80),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+//
+//   Widget _buildNameField() => _inputField(
+//     'Full Name *',
+//     'Enter your full name',
+//     icon: Icons.person_outline,
+//   );
+//
+//   Widget _buildCategoryField() => _dropdownField(
+//     'Disease/Ailment Category *',
+//     'Select category',
+//     categories,
+//     _selectedCategory,
+//     (value) => setState(() => _selectedCategory = value),
+//     icon: Icons.medical_services_outlined,
+//   );
+//
+//   Widget _buildAddressField() => _inputField(
+//     'Delivery Address *',
+//     'Enter your complete address',
+//     maxLines: 3,
+//     icon: Icons.location_on_outlined,
+//   );
+//
+//   Widget _buildEmailField() => _inputField(
+//     'Email Address (Optional)',
+//     'your.email@example.com',
+//     icon: Icons.email_outlined,
+//   );
+//
+//   Widget _buildPhoneField() => _inputField(
+//     'Phone Number *',
+//     '+1-234-567-8900',
+//     icon: Icons.phone_outlined,
+//   );
+//
+//   Widget _buildWhatsAppField() => Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       _inputField(
+//         'WhatsApp Number *',
+//         '+1-234-567-8900',
+//         icon: Icons.chat_outlined,
+//       ),
+//       const SizedBox(height: 8),
+//       Text(
+//         'All order updates will be sent to this number',
+//         style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+//       ),
+//     ],
+//   );
+//
+//   Widget _buildAlternateContactField() => _inputField(
+//     'Alternate Contact Number',
+//     '+1-234-567-8900',
+//     icon: Icons.phone_outlined,
+//   );
+//
+//   Widget _buildDurationField() => _dropdownField(
+//     'Medicine Duration *',
+//     'Select duration',
+//     durations,
+//     _selectedDuration,
+//     (value) => setState(() => _selectedDuration = value),
+//     icon: Icons.calendar_month_outlined,
+//   );
+//
+//   Widget _buildSpecialInstructionsField() => Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       const Text(
+//         'Special Instructions (Optional)',
+//         style: TextStyle(
+//           fontSize: 15,
+//           fontWeight: FontWeight.w600,
+//           color: Color(0xFF334155),
+//         ),
+//       ),
+//       const SizedBox(height: 12),
+//       TextFormField(
+//         maxLines: 4,
+//         decoration: InputDecoration(
+//           hintText: 'Add any special instructions or notes...',
+//           hintStyle: TextStyle(color: Colors.grey[400]),
+//           filled: true,
+//           fillColor: const Color(0xFFF8FAFC),
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(12),
+//             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(12),
+//             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+//           ),
+//           focusedBorder: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(12),
+//             borderSide: const BorderSide(color: Color(0xFF2563EB)),
+//           ),
+//           contentPadding: const EdgeInsets.symmetric(
+//             horizontal: 20,
+//             vertical: 18,
+//           ),
+//         ),
+//       ),
+//     ],
+//   );
+//
+//   // Widget _buildUploadSection() => Column(
+//   //   crossAxisAlignment: CrossAxisAlignment.start,
+//   //   children: [
+//   //     Row(
+//   //       children: [
+//   //         const Icon(Icons.upload_outlined, color: Color(0xFF1E293B), size: 20),
+//   //         const SizedBox(width: 8),
+//   //         const Text(
+//   //           'Upload Prescription *',
+//   //           style: TextStyle(
+//   //             fontSize: 15,
+//   //             fontWeight: FontWeight.w600,
+//   //             color: Color(0xFF334155),
+//   //           ),
+//   //         ),
+//   //       ],
+//   //     ),
+//   //     const SizedBox(height: 12),
+//   //     Container(
+//   //       width: double.infinity,
+//   //       padding: const EdgeInsets.all(48),
+//   //       decoration: BoxDecoration(
+//   //         color: Colors.white,
+//   //         borderRadius: BorderRadius.circular(12),
+//   //         border: Border.all(
+//   //           color: Colors.grey.withOpacity(0.3),
+//   //           width: 2,
+//   //           style: BorderStyle.solid,
+//   //         ),
+//   //       ),
+//   //       child: Column(
+//   //         children: [
+//   //           Icon(Icons.upload_outlined, color: Colors.grey[400], size: 48),
+//   //           const SizedBox(height: 16),
+//   //           const Text(
+//   //             'Click to upload prescription',
+//   //             style: TextStyle(fontSize: 15, color: Color(0xFF64748B)),
+//   //           ),
+//   //           const SizedBox(height: 8),
+//   //           Text(
+//   //             'Supports: JPG, PNG, PDF (Max 10MB)',
+//   //             style: TextStyle(fontSize: 13, color: Colors.grey[400]),
+//   //           ),
+//   //         ],
+//   //       ),
+//   //     ),
+//   //   ],
+//   // );
+//
+//   Widget _buildSubmitButton() => SizedBox(
+//     width: double.infinity,
+//     child: ElevatedButton(
+//       onPressed: () {
+//         if (_formKey.currentState!.validate()) {
+//           // Submit form
+//         }
+//       },
+//       style: ElevatedButton.styleFrom(
+//         backgroundColor: const Color(0xFF2563EB),
+//         foregroundColor: Colors.white,
+//         padding: const EdgeInsets.symmetric(vertical: 18),
+//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//         elevation: 0,
+//       ),
+//       child: const Text(
+//         'Submit Order',
+//         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+//       ),
+//     ),
+//   );
+//
+//   Widget _inputField(
+//     String label,
+//     String hint, {
+//     int maxLines = 1,
+//     IconData? icon,
+//   }) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Row(
+//           children: [
+//             if (icon != null) ...[
+//               Icon(icon, color: const Color(0xFF0F172A), size: 20),
+//               const SizedBox(width: 8),
+//             ],
+//             Text(
+//               label,
+//               style: const TextStyle(
+//                 fontSize: 15,
+//                 fontWeight: FontWeight.w600,
+//                 color: Color(0xFF0F172A),
+//               ),
+//             ),
+//           ],
+//         ),
+//         const SizedBox(height: 12),
+//         TextFormField(
+//           maxLines: maxLines,
+//           decoration: InputDecoration(
+//             hintText: hint,
+//             hintStyle: TextStyle(color: Colors.grey[400]),
+//             filled: true,
+//             fillColor: const Color(0xFFF8FAFC),
+//             border: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(12),
+//               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+//             ),
+//             enabledBorder: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(12),
+//               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+//             ),
+//             focusedBorder: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(12),
+//               borderSide: const BorderSide(color: Color(0xFF2563EB)),
+//             ),
+//             contentPadding: const EdgeInsets.symmetric(
+//               horizontal: 20,
+//               vertical: 18,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+//
+//   Widget _dropdownField(
+//     String label,
+//     String hint,
+//     List<String> items,
+//     String? value,
+//     Function(String?) onChanged, {
+//     IconData? icon,
+//   }) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Row(
+//           children: [
+//             if (icon != null) ...[
+//               Icon(icon, color: const Color(0xFF1E293B), size: 20),
+//               const SizedBox(width: 8),
+//             ],
+//             Text(
+//               label,
+//               style: const TextStyle(
+//                 fontSize: 15,
+//                 fontWeight: FontWeight.w600,
+//                 color: Color(0xFF334155),
+//               ),
+//             ),
+//           ],
+//         ),
+//         const SizedBox(height: 12),
+//         DropdownButtonFormField<String>(
+//           value: value,
+//           hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
+//           decoration: InputDecoration(
+//             filled: true,
+//             fillColor: const Color(0xFFF8FAFC),
+//             border: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(12),
+//               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+//             ),
+//             enabledBorder: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(12),
+//               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+//             ),
+//             focusedBorder: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(12),
+//               borderSide: const BorderSide(color: Color(0xFF2563EB)),
+//             ),
+//             contentPadding: const EdgeInsets.symmetric(
+//               horizontal: 20,
+//               vertical: 18,
+//             ),
+//           ),
+//           items: items.map((String item) {
+//             return DropdownMenuItem<String>(value: item, child: Text(item));
+//           }).toList(),
+//           onChanged: onChanged,
+//         ),
+//       ],
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
+import 'about_widget/upload_image_section.dart';
 
 class OrderMedicineScreen extends StatefulWidget {
   const OrderMedicineScreen({super.key});
@@ -10,21 +608,31 @@ class OrderMedicineScreen extends StatefulWidget {
 class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedCategory;
+  String? _selectedDuration;
   bool _isLoggedIn = false;
-
-  final List<String> categories = [
-    'Pain Relief',
-    'Cold & Flu',
-    'Diabetes',
-    'Heart Disease',
-    'Blood Pressure',
-    'Skin Care',
-    'Digestive Health',
-    'Mental Health',
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final categories = [
+      AppLocalizations.of(context)!.categoryPainRelief,
+      AppLocalizations.of(context)!.categoryColdFlu,
+      AppLocalizations.of(context)!.categoryDiabetes,
+      AppLocalizations.of(context)!.categoryHeartDisease,
+      AppLocalizations.of(context)!.categoryBloodPressure,
+      AppLocalizations.of(context)!.categorySkinCare,
+      AppLocalizations.of(context)!.categoryDigestiveHealth,
+      AppLocalizations.of(context)!.categoryMentalHealth,
+    ];
+
+    final durations = [
+      AppLocalizations.of(context)!.duration1to7Days,
+      AppLocalizations.of(context)!.duration1to2Weeks,
+      AppLocalizations.of(context)!.duration2to4Weeks,
+      AppLocalizations.of(context)!.duration1to3Months,
+      AppLocalizations.of(context)!.duration3to6Months,
+      AppLocalizations.of(context)!.duration6PlusMonths,
+    ];
+
     return LayoutBuilder(
       builder: (context, constraints) {
         bool isMobile = constraints.maxWidth < 700;
@@ -36,7 +644,9 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
-                    vertical: 60, horizontal: isMobile ? 20 : 80),
+                  vertical: 60,
+                  horizontal: isMobile ? 20 : 80,
+                ),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -58,8 +668,8 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Order Medicine',
+                      child: Text(
+                        AppLocalizations.of(context)!.orderMedicine,
                         style: TextStyle(
                           fontSize: 48,
                           fontWeight: FontWeight.bold,
@@ -76,7 +686,8 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                         return Opacity(opacity: value, child: child);
                       },
                       child: Text(
-                        'Fill out the form below to order your medicines. Upload your prescription for verification.',
+                        AppLocalizations.of(context)!
+                            .orderMedicineSubtitle, // localized subtitle
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -90,174 +701,61 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
               ),
 
               const SizedBox(height: 60),
-
               Padding(
-                padding:
-                EdgeInsets.symmetric(horizontal: isMobile ? 20 : 80),
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
                 child: Column(
                   children: [
-                    // Login Warning
                     if (!_isLoggedIn)
-                      TweenAnimationBuilder(
-                        duration: const Duration(milliseconds: 600),
-                        tween: Tween<double>(begin: 0, end: 1),
-                        builder: (context, double value, child) {
-                          return Opacity(
-                            opacity: value,
-                            child: Transform.scale(
-                              scale: 0.95 + (0.05 * value),
-                              child: child,
-                            ),
-                          );
-                        },
+                      Align(
+                        alignment: Alignment.topCenter,
                         child: Container(
-                          padding: const EdgeInsets.all(24),
+                          width: isMobile
+                              ? MediaQuery.of(context).size.width * 0.9
+                              : 600,
+                          padding: const EdgeInsets.all(20),
                           margin: const EdgeInsets.only(bottom: 40),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFEF3C7),
-                            borderRadius: BorderRadius.circular(16),
+                            color: const Color(0xFFEFF6FF),
+                            borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: const Color(0xFFFBBF24),
+                              color: const Color(0xFF2563EB).withOpacity(0.2),
                               width: 1,
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                const Color(0xFFFBBF24).withOpacity(0.1),
-                                blurRadius: 20,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
                           ),
-                          child: isMobile
-                              ? Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(12),
-                                    ),
-                                    child: const Icon(
-                                      Icons.info_outline_rounded,
-                                      color: Color(0xFFF59E0B),
-                                      size: 28,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  const Expanded(
-                                    child: Text(
-                                      'Please login to place an order',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF92400E),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              const Icon(
+                                Icons.info_outline,
+                                color: Color(0xFF2563EB),
+                                size: 24,
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(width: 10),
                               Text(
-                                'You need to be logged in to access the order form.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey[700],
+                                AppLocalizations.of(context)!.please,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xFF64748B),
                                 ),
                               ),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                  const Color(0xFF2563EB),
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 32,
-                                    vertical: 16,
+                              InkWell(
+                                onTap: () {
+                                  // Navigate to login
+                                },
+                                child: Text(
+                                  AppLocalizations.of(context)!.login,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Color(0xFF2563EB),
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
-                                ),
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
                                 ),
                               ),
-                            ],
-                          )
-                              : Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                  BorderRadius.circular(12),
-                                ),
-                                child: const Icon(
-                                  Icons.info_outline_rounded,
-                                  color: Color(0xFFF59E0B),
-                                  size: 28,
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'Please login to place an order',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF92400E),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      'You need to be logged in to access the order form.',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey[700],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                  const Color(0xFF2563EB),
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 32,
-                                    vertical: 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
-                                ),
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
+                              Text(
+                                AppLocalizations.of(context)!.toPlaceOrder,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xFF64748B),
                                 ),
                               ),
                             ],
@@ -265,32 +763,28 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                         ),
                       ),
 
-                    // Order Form
-                    TweenAnimationBuilder(
-                      duration: const Duration(milliseconds: 800),
-                      tween: Tween<double>(begin: 0, end: 1),
-                      builder: (context, double value, child) {
-                        return Opacity(
-                          opacity: _isLoggedIn ? value : 0.4,
-                          child: child,
-                        );
-                      },
-                      child: AbsorbPointer(
-                        absorbing: !_isLoggedIn,
+                    // 🔹 Order Form Container
+                    AbsorbPointer(
+                      absorbing: !_isLoggedIn,
+                      child: Align(
+                        alignment: Alignment.topCenter,
                         child: Container(
-                          padding: EdgeInsets.all(isMobile ? 24 : 48),
+                          width: isMobile
+                              ? MediaQuery.of(context).size.width * 0.9
+                              : 800,
+                          padding: EdgeInsets.all(isMobile ? 24 : 40),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: Colors.grey.withOpacity(0.1),
                               width: 1,
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 30,
-                                offset: const Offset(0, 10),
+                                color: Colors.black.withOpacity(0.08),
+                                blurRadius: 20,
+                                offset: const Offset(0, 8),
                               ),
                             ],
                           ),
@@ -299,82 +793,93 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // Header
                                 Row(
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(12),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF2563EB)
-                                            .withOpacity(0.1),
-                                        borderRadius:
-                                        BorderRadius.circular(12),
-                                      ),
-                                      child: const Icon(
-                                        Icons.description_rounded,
-                                        color: Color(0xFF2563EB),
-                                        size: 24,
-                                      ),
+                                    const Icon(
+                                      Icons.description_outlined,
+                                      color: Color(0xFF1E293B),
+                                      size: 24,
                                     ),
-                                    const SizedBox(width: 16),
-                                    const Text(
-                                      'Order Information',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
+                                    const SizedBox(width: 12),
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .orderInformation,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
                                         color: Color(0xFF1E293B),
                                       ),
                                     ),
                                   ],
                                 ),
 
-                                const SizedBox(height: 40),
+                                const SizedBox(height: 32),
 
-                                // Responsive name/category
+                                // Name & Category
                                 isMobile
                                     ? Column(
                                   children: [
                                     _buildNameField(),
                                     const SizedBox(height: 24),
-                                    _buildCategoryField(),
+                                    _buildCategoryField(categories),
                                   ],
                                 )
                                     : Row(
                                   children: [
                                     Expanded(child: _buildNameField()),
                                     const SizedBox(width: 24),
-                                    Expanded(child: _buildCategoryField()),
+                                    Expanded(child: _buildCategoryField(categories)),
                                   ],
                                 ),
 
-                                const SizedBox(height: 28),
-
+                                const SizedBox(height: 24),
                                 _buildAddressField(),
+                                const SizedBox(height: 24),
 
-                                const SizedBox(height: 28),
-
-                                // Contact fields
+                                // Email & Phone
                                 isMobile
                                     ? Column(
                                   children: [
-                                    _buildPhoneField(),
-                                    const SizedBox(height: 24),
                                     _buildEmailField(),
+                                    const SizedBox(height: 24),
+                                    _buildPhoneField(),
                                   ],
                                 )
                                     : Row(
                                   children: [
-                                    Expanded(child: _buildPhoneField()),
-                                    const SizedBox(width: 24),
                                     Expanded(child: _buildEmailField()),
+                                    const SizedBox(width: 24),
+                                    Expanded(child: _buildPhoneField()),
                                   ],
                                 ),
 
+                                const SizedBox(height: 24),
+
+                                // WhatsApp & Alternate Contact
+                                isMobile
+                                    ? Column(
+                                  children: [
+                                    _buildWhatsAppField(),
+                                    const SizedBox(height: 24),
+                                    _buildAlternateContactField(),
+                                  ],
+                                )
+                                    : Row(
+                                  children: [
+                                    Expanded(child: _buildWhatsAppField()),
+                                    const SizedBox(width: 24),
+                                    Expanded(child: _buildAlternateContactField()),
+                                  ],
+                                ),
+
+                                const SizedBox(height: 24),
+                                _buildDurationField(durations),
+                                const SizedBox(height: 32),
+                                UploadPrescriptionSection(),
+                                const SizedBox(height: 32),
+                                _buildSpecialInstructionsField(),
                                 const SizedBox(height: 40),
-
-                                _buildUploadSection(),
-
-                                const SizedBox(height: 40),
-
                                 _buildSubmitButton(),
                               ],
                             ),
@@ -385,6 +890,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                   ],
                 ),
               ),
+
               const SizedBox(height: 80),
             ],
           ),
@@ -393,93 +899,159 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
     );
   }
 
-  // === Subsections ===
+  Widget _buildNameField() => _inputField(
+    AppLocalizations.of(context)!.fullName,
+    AppLocalizations.of(context)!.enterFullName,
+    icon: Icons.person_outline,
+  );
 
-  Widget _buildNameField() => _inputField('Full Name *', 'Enter your full name');
-  Widget _buildCategoryField() => _inputField('Disease/Ailment Category *', 'Select category');
-  Widget _buildAddressField() => _inputField('Delivery Address *', 'Enter your complete address', maxLines: 3);
-  Widget _buildPhoneField() => _inputField('Phone Number *', '+91 XXXXX XXXXX');
-  Widget _buildEmailField() => _inputField('Email Address (Optional)', 'your.email@example.com');
-  Widget _buildUploadSection() => Container(
-    padding: const EdgeInsets.all(32),
-    decoration: BoxDecoration(
-      color: const Color(0xFFF8FAFC),
-      borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: const Color(0xFF2563EB).withOpacity(0.2)),
-    ),
-    child: Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: const Color(0xFF2563EB).withOpacity(0.1),
-            shape: BoxShape.circle,
+  Widget _buildCategoryField(List<String> categories) => _dropdownField(
+    AppLocalizations.of(context)!.diseaseCategory,
+    AppLocalizations.of(context)!.selectCategory,
+    categories,
+    _selectedCategory,
+        (value) => setState(() => _selectedCategory = value),
+    icon: Icons.medical_services_outlined,
+  );
+
+  Widget _buildAddressField() => _inputField(
+    AppLocalizations.of(context)!.deliveryAddress,
+    AppLocalizations.of(context)!.enterAddress,
+    maxLines: 3,
+    icon: Icons.location_on_outlined,
+  );
+
+  Widget _buildEmailField() => _inputField(
+    AppLocalizations.of(context)!.emailAddressOptional,
+    AppLocalizations.of(context)!.enterEmail,
+    icon: Icons.email_outlined,
+  );
+
+  Widget _buildPhoneField() => _inputField(
+    AppLocalizations.of(context)!.phoneNumber,
+    AppLocalizations.of(context)!.enterPhoneNumber,
+    icon: Icons.phone_outlined,
+  );
+
+  Widget _buildWhatsAppField() => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _inputField(
+        AppLocalizations.of(context)!.whatsappNumber,
+        AppLocalizations.of(context)!.enterWhatsAppNumber,
+        icon: Icons.chat_outlined,
+      ),
+      const SizedBox(height: 8),
+      Text(
+        AppLocalizations.of(context)!.whatsappInfo,
+        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+      ),
+    ],
+  );
+
+  Widget _buildAlternateContactField() => _inputField(
+    AppLocalizations.of(context)!.alternateContactNumber,
+    AppLocalizations.of(context)!.enterAlternateContact,
+    icon: Icons.phone_outlined,
+  );
+
+  Widget _buildDurationField(List<String> durations) => _dropdownField(
+    AppLocalizations.of(context)!.medicineDuration,
+    AppLocalizations.of(context)!.selectDuration,
+    durations,
+    _selectedDuration,
+        (value) => setState(() => _selectedDuration = value),
+    icon: Icons.calendar_month_outlined,
+  );
+
+  Widget _buildSpecialInstructionsField() => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        AppLocalizations.of(context)!.specialInstructionsOptional,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+          color: Color(0xFF334155),
+        ),
+      ),
+      const SizedBox(height: 12),
+      TextFormField(
+        maxLines: 4,
+        decoration: InputDecoration(
+          hintText: AppLocalizations.of(context)!.addSpecialInstructions,
+          hintStyle: TextStyle(color: Colors.grey[400]),
+          filled: true,
+          fillColor: const Color(0xFFF8FAFC),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
           ),
-          child: const Icon(Icons.cloud_upload_rounded,
-              color: Color(0xFF2563EB), size: 48),
-        ),
-        const SizedBox(height: 20),
-        const Text('Upload Prescription *',
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF1E293B))),
-        const SizedBox(height: 8),
-        const Text(
-          'Drag and drop your prescription here, or click to browse',
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 24),
-        ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.upload_file_rounded),
-          label: const Text('Choose File'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF2563EB),
-            foregroundColor: Colors.white,
-            padding:
-            const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Color(0xFF2563EB)),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 18,
           ),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 
   Widget _buildSubmitButton() => SizedBox(
     width: double.infinity,
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          // Submit form
+        }
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2563EB),
         foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 18),
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 0,
       ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Place Order',
-              style:
-              TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-          SizedBox(width: 12),
-          Icon(Icons.arrow_forward_rounded),
-        ],
+      child: Text(
+        AppLocalizations.of(context)!.submitOrder,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
     ),
   );
 
-  Widget _inputField(String label, String hint, {int maxLines = 1}) {
+  Widget _inputField(
+      String label,
+      String hint, {
+        int maxLines = 1,
+        IconData? icon,
+      }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: const TextStyle(
+        Row(
+          children: [
+            if (icon != null) ...[
+              Icon(icon, color: const Color(0xFF0F172A), size: 20),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              label,
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF334155))),
+                color: Color(0xFF0F172A),
+              ),
+            ),
+          ],
+        ),
         const SizedBox(height: 12),
         TextFormField(
           maxLines: maxLines,
@@ -490,12 +1062,81 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
             fillColor: const Color(0xFFF8FAFC),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide:
-              BorderSide(color: Colors.grey.withOpacity(0.2)),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
             ),
-            contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Color(0xFF2563EB)),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 18,
+            ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _dropdownField(
+      String label,
+      String hint,
+      List<String> items,
+      String? value,
+      Function(String?) onChanged, {
+        IconData? icon,
+      }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            if (icon != null) ...[
+              Icon(icon, color: const Color(0xFF1E293B), size: 20),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF334155),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        DropdownButtonFormField<String>(
+          value: value,
+          hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color(0xFFF8FAFC),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Color(0xFF2563EB)),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 18,
+            ),
+          ),
+          items: items.map((String item) {
+            return DropdownMenuItem<String>(value: item, child: Text(item));
+          }).toList(),
+          onChanged: onChanged,
         ),
       ],
     );
