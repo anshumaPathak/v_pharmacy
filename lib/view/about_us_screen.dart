@@ -876,60 +876,120 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       ],
     );
   }
-
   Widget _testimonialCard({
     required String name,
     required String role,
     required String quote,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: List.generate(
-              5,
-              (index) => const Icon(Icons.star, color: Colors.amber, size: 20),
+    return SizedBox(
+      height: 250, // sab cards ki same height
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            '"$quote"',
-            style: const TextStyle(
-              fontSize: 16,
-              fontStyle: FontStyle.italic,
-              color: Color(0xFF334155),
-              height: 1.5,
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: List.generate(
+                5,
+                    (index) => const Icon(Icons.star, color: Colors.amber, size: 20),
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            name,
-            style: const TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: Colors.black,
+            const SizedBox(height: 12),
+            Expanded(
+              child: Text(
+                '"$quote"',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontStyle: FontStyle.italic,
+                  color: Color(0xFF334155),
+                  height: 1.5,
+                ),
+              ),
             ),
-          ),
-          Text(
-            role,
-            style: const TextStyle(fontSize: 14, color: Color(0xFF64748B)),
-          ),
-        ],
+            const SizedBox(height: 20),
+            Text(
+              name,
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              role,
+              style: const TextStyle(fontSize: 14, color: Color(0xFF64748B)),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  // Widget _testimonialCard({
+  //   required String name,
+  //   required String role,
+  //   required String quote,
+  // }) {
+  //   return Container(
+  //     padding: const EdgeInsets.all(24),
+  //     margin: const EdgeInsets.symmetric(vertical: 10),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(12),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black.withOpacity(0.05),
+  //           blurRadius: 8,
+  //           offset: const Offset(0, 4),
+  //         ),
+  //       ],
+  //     ),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(
+  //           children: List.generate(
+  //             5,
+  //             (index) => const Icon(Icons.star, color: Colors.amber, size: 20),
+  //           ),
+  //         ),
+  //         const SizedBox(height: 12),
+  //         Text(
+  //           '"$quote"',
+  //           style: const TextStyle(
+  //             fontSize: 16,
+  //             fontStyle: FontStyle.italic,
+  //             color: Color(0xFF334155),
+  //             height: 1.5,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 20),
+  //         Text(
+  //           name,
+  //           style: const TextStyle(
+  //             fontWeight: FontWeight.w700,
+  //             fontSize: 16,
+  //             color: Colors.black,
+  //           ),
+  //         ),
+  //         Text(
+  //           role,
+  //           style: const TextStyle(fontSize: 14, color: Color(0xFF64748B)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

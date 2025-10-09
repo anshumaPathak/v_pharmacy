@@ -94,7 +94,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
           // Gradient Section
           Container(
             padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 16 : 80, vertical: isMobile ? 30 : 60),
+              horizontal: isMobile ? 16 : 80,
+              vertical: isMobile ? 30 : 60,
+            ),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -123,7 +125,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   },
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text:  TextSpan(
+                    text: TextSpan(
                       style: TextStyle(
                         fontSize: 42,
                         fontWeight: FontWeight.w700,
@@ -131,11 +133,11 @@ class _ServicesScreenState extends State<ServicesScreen> {
                       ),
                       children: [
                         TextSpan(
-                          text:   AppLocalizations.of(context)!.our,
+                          text: AppLocalizations.of(context)!.our,
                           style: TextStyle(color: Colors.black),
                         ),
                         TextSpan(
-                          text:    AppLocalizations.of(context)!.services,
+                          text: AppLocalizations.of(context)!.services,
                           style: TextStyle(color: Color(0xFF2563EB)),
                         ),
                       ],
@@ -145,8 +147,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 const SizedBox(height: 20),
                 // Subtitle
                 Padding(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: isMobile ? 20 : 100),
+                  padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 100),
                   child: Text(
                     AppLocalizations.of(context)!.comprehensiveHealthcareServicesDesignedTo,
                     textAlign: TextAlign.center,
@@ -163,6 +164,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 LayoutBuilder(
                   builder: (context, constraints) {
                     final isMobile = constraints.maxWidth < 700;
+                    final double cardHeight = 260; // Sab cards ka same height
+
                     final serviceCards = [
                       GestureDetector(
                         onTap: () => setState(() => _selectedIndex = 0),
@@ -170,9 +173,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           icon: Icons.shopping_cart_rounded,
                           iconColor: const Color(0xFF2563EB),
                           iconBgColor: const Color(0xFFDCE7FF),
-                          title:  AppLocalizations.of(context)!.orderMedicine,
-                          description:
-                          AppLocalizations.of(context)!.uploadPrescriptionAndOrderVerifiedMedicines,
+                          title: AppLocalizations.of(context)!.orderMedicine,
+                          description: AppLocalizations.of(context)!.uploadPrescriptionAndOrderVerifiedMedicines,
                           isSelected: _selectedIndex == 0,
                           delay: 0,
                         ),
@@ -183,9 +185,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           icon: Icons.local_shipping_rounded,
                           iconColor: const Color(0xFF2563EB),
                           iconBgColor: const Color(0xFFDCE7FF),
-                          title:  AppLocalizations.of(context)!.trackOrder,
-                          description:
-                          AppLocalizations.of(context)!.realTimeOrderTrackingAndStatusUpdates,
+                          title: AppLocalizations.of(context)!.trackOrder,
+                          description: AppLocalizations.of(context)!.realTimeOrderTrackingAndStatusUpdates,
                           isSelected: _selectedIndex == 1,
                           delay: 200,
                         ),
@@ -196,9 +197,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           icon: Icons.verified_rounded,
                           iconColor: const Color(0xFF2563EB),
                           iconBgColor: const Color(0xFFDCE7FF),
-                          title:  AppLocalizations.of(context)!.verifyMedicine,
-                          description:
-                          AppLocalizations.of(context)!.checkMedicineAuthenticityAndGenuineness,
+                          title: AppLocalizations.of(context)!.verifyMedicine,
+                          description: AppLocalizations.of(context)!.checkMedicineAuthenticityAndGenuineness,
                           isSelected: _selectedIndex == 2,
                           delay: 400,
                         ),
@@ -207,25 +207,40 @@ class _ServicesScreenState extends State<ServicesScreen> {
 
                     if (isMobile) {
                       return Column(
-                        children: [
-                          ...serviceCards
-                              .map((card) => Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 24.0),
+                        children: serviceCards
+                            .map((card) => Padding(
+                          padding: const EdgeInsets.only(bottom: 24.0),
+                          child: SizedBox(
+                            height: cardHeight,
                             child: card,
-                          ))
-                              .toList(),
-                        ],
+                          ),
+                        ))
+                            .toList(),
                       );
                     } else {
                       return Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(child: serviceCards[0]),
+                          Expanded(
+                            child: SizedBox(
+                              height: cardHeight,
+                              child: serviceCards[0],
+                            ),
+                          ),
                           const SizedBox(width: 24),
-                          Expanded(child: serviceCards[1]),
+                          Expanded(
+                            child: SizedBox(
+                              height: cardHeight,
+                              child: serviceCards[1],
+                            ),
+                          ),
                           const SizedBox(width: 24),
-                          Expanded(child: serviceCards[2]),
+                          Expanded(
+                            child: SizedBox(
+                              height: cardHeight,
+                              child: serviceCards[2],
+                            ),
+                          ),
                         ],
                       );
                     }
@@ -234,6 +249,149 @@ class _ServicesScreenState extends State<ServicesScreen> {
               ],
             ),
           ),
+
+          // Container(
+          //   padding: EdgeInsets.symmetric(
+          //       horizontal: isMobile ? 16 : 80, vertical: isMobile ? 30 : 60),
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       colors: [
+          //         AppColor.lightBlueColor,
+          //         AppColor.lightBlueColor.withOpacity(0.8),
+          //       ],
+          //       begin: Alignment.topCenter,
+          //       end: Alignment.bottomCenter,
+          //     ),
+          //   ),
+          //   child: Column(
+          //     children: [
+          //       SizedBox(height: Sizes.screenHeight * 0.02),
+          //       // Title
+          //       TweenAnimationBuilder(
+          //         duration: const Duration(milliseconds: 800),
+          //         tween: Tween<double>(begin: 0, end: 1),
+          //         builder: (context, value, child) {
+          //           return Opacity(
+          //             opacity: value,
+          //             child: Transform.translate(
+          //               offset: Offset(0, 20 * (1 - value)),
+          //               child: child,
+          //             ),
+          //           );
+          //         },
+          //         child: RichText(
+          //           textAlign: TextAlign.center,
+          //           text:  TextSpan(
+          //             style: TextStyle(
+          //               fontSize: 42,
+          //               fontWeight: FontWeight.w700,
+          //               height: 1.2,
+          //             ),
+          //             children: [
+          //               TextSpan(
+          //                 text:   AppLocalizations.of(context)!.our,
+          //                 style: TextStyle(color: Colors.black),
+          //               ),
+          //               TextSpan(
+          //                 text:    AppLocalizations.of(context)!.services,
+          //                 style: TextStyle(color: Color(0xFF2563EB)),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //       const SizedBox(height: 20),
+          //       // Subtitle
+          //       Padding(
+          //         padding:
+          //         EdgeInsets.symmetric(horizontal: isMobile ? 20 : 100),
+          //         child: Text(
+          //           AppLocalizations.of(context)!.comprehensiveHealthcareServicesDesignedTo,
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //             fontSize: isMobile ? 16 : 18,
+          //             color: Colors.grey[700],
+          //             height: 1.6,
+          //           ),
+          //         ),
+          //       ),
+          //       const SizedBox(height: 50),
+          //
+          //       // Service Cards (Responsive)
+          //       LayoutBuilder(
+          //         builder: (context, constraints) {
+          //           final isMobile = constraints.maxWidth < 700;
+          //           final serviceCards = [
+          //             GestureDetector(
+          //               onTap: () => setState(() => _selectedIndex = 0),
+          //               child: _ServiceCard(
+          //                 icon: Icons.shopping_cart_rounded,
+          //                 iconColor: const Color(0xFF2563EB),
+          //                 iconBgColor: const Color(0xFFDCE7FF),
+          //                 title:  AppLocalizations.of(context)!.orderMedicine,
+          //                 description:
+          //                 AppLocalizations.of(context)!.uploadPrescriptionAndOrderVerifiedMedicines,
+          //                 isSelected: _selectedIndex == 0,
+          //                 delay: 0,
+          //               ),
+          //             ),
+          //             GestureDetector(
+          //               onTap: () => setState(() => _selectedIndex = 1),
+          //               child: _ServiceCard(
+          //                 icon: Icons.local_shipping_rounded,
+          //                 iconColor: const Color(0xFF2563EB),
+          //                 iconBgColor: const Color(0xFFDCE7FF),
+          //                 title:  AppLocalizations.of(context)!.trackOrder,
+          //                 description:
+          //                 AppLocalizations.of(context)!.realTimeOrderTrackingAndStatusUpdates,
+          //                 isSelected: _selectedIndex == 1,
+          //                 delay: 200,
+          //               ),
+          //             ),
+          //             GestureDetector(
+          //               onTap: () => setState(() => _selectedIndex = 2),
+          //               child: _ServiceCard(
+          //                 icon: Icons.verified_rounded,
+          //                 iconColor: const Color(0xFF2563EB),
+          //                 iconBgColor: const Color(0xFFDCE7FF),
+          //                 title:  AppLocalizations.of(context)!.verifyMedicine,
+          //                 description:
+          //                 AppLocalizations.of(context)!.checkMedicineAuthenticityAndGenuineness,
+          //                 isSelected: _selectedIndex == 2,
+          //                 delay: 400,
+          //               ),
+          //             ),
+          //           ];
+          //
+          //           if (isMobile) {
+          //             return Column(
+          //               children: [
+          //                 ...serviceCards
+          //                     .map((card) => Padding(
+          //                   padding:
+          //                   const EdgeInsets.only(bottom: 24.0),
+          //                   child: card,
+          //                 ))
+          //                     .toList(),
+          //               ],
+          //             );
+          //           } else {
+          //             return Row(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: [
+          //                 Expanded(child: serviceCards[0]),
+          //                 const SizedBox(width: 24),
+          //                 Expanded(child: serviceCards[1]),
+          //                 const SizedBox(width: 24),
+          //                 Expanded(child: serviceCards[2]),
+          //               ],
+          //             );
+          //           }
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
 
           const SizedBox(height: 60),
 

@@ -1,5 +1,600 @@
+// // import 'package:flutter/material.dart';
+// //
+// // import '../l10n/app_localizations.dart';
+// // import 'about_widget/upload_image_section.dart';
+// //
+// // class OrderMedicineScreen extends StatefulWidget {
+// //   const OrderMedicineScreen({super.key});
+// //
+// //   @override
+// //   State<OrderMedicineScreen> createState() => _OrderMedicineScreenState();
+// // }
+// //
+// // class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
+// //   final _formKey = GlobalKey<FormState>();
+// //   String? _selectedCategory;
+// //   String? _selectedDuration;
+// //   bool _isLoggedIn = false;
+// //
+// //   final List<String> categories = [
+// //     'Pain Relief',
+// //     'Cold & Flu',
+// //     'Diabetes',
+// //     'Heart Disease',
+// //     'Blood Pressure',
+// //     'Skin Care',
+// //     'Digestive Health',
+// //     'Mental Health',
+// //   ];
+// //
+// //   final List<String> durations = [
+// //     '1-7 days',
+// //     '1-2 weeks',
+// //     '2-4 weeks',
+// //     '1-3 months',
+// //     '3-6 months',
+// //     '6+ months',
+// //   ];
+// //
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return LayoutBuilder(
+// //       builder: (context, constraints) {
+// //         bool isMobile = constraints.maxWidth < 700;
+// //
+// //         return SingleChildScrollView(
+// //           child: Column(
+// //             children: [
+// //               // Gradient Header
+// //               Container(
+// //                 width: double.infinity,
+// //                 padding: EdgeInsets.symmetric(
+// //                   vertical: 60,
+// //                   horizontal: isMobile ? 20 : 80,
+// //                 ),
+// //                 decoration: const BoxDecoration(
+// //                   gradient: LinearGradient(
+// //                     begin: Alignment.topLeft,
+// //                     end: Alignment.bottomRight,
+// //                     colors: [Color(0xFFEFF6FF), Color(0xFFDBEAFE)],
+// //                   ),
+// //                 ),
+// //                 child: Column(
+// //                   children: [
+// //                     TweenAnimationBuilder(
+// //                       duration: const Duration(milliseconds: 800),
+// //                       tween: Tween<double>(begin: 0, end: 1),
+// //                       builder: (context, double value, child) {
+// //                         return Opacity(
+// //                           opacity: value,
+// //                           child: Transform.translate(
+// //                             offset: Offset(0, 20 * (1 - value)),
+// //                             child: child,
+// //                           ),
+// //                         );
+// //                       },
+// //                       child:  Text(
+// //                           AppLocalizations.of(context)!.orderMedicine,
+// //                         style: TextStyle(
+// //                           fontSize: 48,
+// //                           fontWeight: FontWeight.bold,
+// //                           color: Color(0xFF1E293B),
+// //                           letterSpacing: -1,
+// //                         ),
+// //                       ),
+// //                     ),
+// //                     const SizedBox(height: 16),
+// //                     TweenAnimationBuilder(
+// //                       duration: const Duration(milliseconds: 1000),
+// //                       tween: Tween<double>(begin: 0, end: 1),
+// //                       builder: (context, double value, child) {
+// //                         return Opacity(opacity: value, child: child);
+// //                       },
+// //                       child: Text(
+// //                         'Fill out the form below to order your medicines. Upload your prescription for verification.',
+// //                         textAlign: TextAlign.center,
+// //                         style: TextStyle(
+// //                           fontSize: 16,
+// //                           color: Colors.grey[600],
+// //                           height: 1.5,
+// //                         ),
+// //                       ),
+// //                     ),
+// //                   ],
+// //                 ),
+// //               ),
+// //
+// //               const SizedBox(height: 60),
+// //               Padding(
+// //                 padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
+// //                 child: Column(
+// //                   children: [
+// //                     if (!_isLoggedIn)
+// //                       Align(
+// //                         alignment: Alignment.topCenter,
+// //                         child: Container(
+// //                           width: isMobile
+// //                               ? MediaQuery.of(context).size.width * 0.9
+// //                               : 600, // narrower on desktop
+// //                           padding: const EdgeInsets.all(20),
+// //                           margin: const EdgeInsets.only(bottom: 40),
+// //                           decoration: BoxDecoration(
+// //                             color: const Color(0xFFEFF6FF),
+// //                             borderRadius: BorderRadius.circular(12),
+// //                             border: Border.all(
+// //                               color: const Color(0xFF2563EB).withOpacity(0.2),
+// //                               width: 1,
+// //                             ),
+// //                           ),
+// //                           child: Row(
+// //                             mainAxisAlignment: MainAxisAlignment.center,
+// //                             children: [
+// //                               const Icon(
+// //                                 Icons.info_outline,
+// //                                 color: Color(0xFF2563EB),
+// //                                 size: 24,
+// //                               ),
+// //                               const SizedBox(width: 10),
+// //                               const Text(
+// //                                 'Please ',
+// //                                 style: TextStyle(
+// //                                   fontSize: 15,
+// //                                   color: Color(0xFF64748B),
+// //                                 ),
+// //                               ),
+// //                               InkWell(
+// //                                 onTap: () {
+// //                                   // Navigate to login
+// //                                 },
+// //                                 child: const Text(
+// //                                   'login',
+// //                                   style: TextStyle(
+// //                                     fontSize: 15,
+// //                                     color: Color(0xFF2563EB),
+// //                                     fontWeight: FontWeight.w600,
+// //                                   ),
+// //                                 ),
+// //                               ),
+// //                               const Text(
+// //                                 ' to place an order.',
+// //                                 style: TextStyle(
+// //                                   fontSize: 15,
+// //                                   color: Color(0xFF64748B),
+// //                                 ),
+// //                               ),
+// //                             ],
+// //                           ),
+// //                         ),
+// //                       ),
+// //
+// //                     // 🔹 Order Form Container
+// //                     AbsorbPointer(
+// //                       absorbing: !_isLoggedIn,
+// //                       child: Align(
+// //                         alignment: Alignment.topCenter,
+// //                         child: Container(
+// //                           width: isMobile
+// //                               ? MediaQuery.of(context).size.width * 0.9
+// //                               : 800,
+// //                           padding: EdgeInsets.all(isMobile ? 24 : 40),
+// //                           decoration: BoxDecoration(
+// //                             color: Colors.white,
+// //                             borderRadius: BorderRadius.circular(16),
+// //                             border: Border.all(
+// //                               color: Colors.grey.withOpacity(0.1),
+// //                               width: 1,
+// //                             ),
+// //                             boxShadow: [
+// //                               BoxShadow(
+// //                                 color: Colors.black.withOpacity(0.08),
+// //                                 blurRadius: 20,
+// //                                 offset: const Offset(0, 8),
+// //                               ),
+// //                             ],
+// //                           ),
+// //                           child: Form(
+// //                             key: _formKey,
+// //                             child: Column(
+// //                               crossAxisAlignment: CrossAxisAlignment.start,
+// //                               children: [
+// //                                 // Header
+// //                                 Row(
+// //                                   children: const [
+// //                                     Icon(
+// //                                       Icons.description_outlined,
+// //                                       color: Color(0xFF1E293B),
+// //                                       size: 24,
+// //                                     ),
+// //                                     SizedBox(width: 12),
+// //                                     Text(
+// //                                       'Order Information',
+// //                                       style: TextStyle(
+// //                                         fontSize: 20,
+// //                                         fontWeight: FontWeight.w600,
+// //                                         color: Color(0xFF1E293B),
+// //                                       ),
+// //                                     ),
+// //                                   ],
+// //                                 ),
+// //
+// //                                 const SizedBox(height: 32),
+// //
+// //                                 // Name & Category
+// //                                 isMobile
+// //                                     ? Column(
+// //                                   children: [
+// //                                     _buildNameField(),
+// //                                     const SizedBox(height: 24),
+// //                                     _buildCategoryField(),
+// //                                   ],
+// //                                 )
+// //                                     : Row(
+// //                                   children: [
+// //                                     Expanded(child: _buildNameField()),
+// //                                     const SizedBox(width: 24),
+// //                                     Expanded(child: _buildCategoryField()),
+// //                                   ],
+// //                                 ),
+// //
+// //                                 const SizedBox(height: 24),
+// //                                 _buildAddressField(),
+// //                                 const SizedBox(height: 24),
+// //
+// //                                 // Email & Phone
+// //                                 isMobile
+// //                                     ? Column(
+// //                                   children: [
+// //                                     _buildEmailField(),
+// //                                     const SizedBox(height: 24),
+// //                                     _buildPhoneField(),
+// //                                   ],
+// //                                 )
+// //                                     : Row(
+// //                                   children: [
+// //                                     Expanded(child: _buildEmailField()),
+// //                                     const SizedBox(width: 24),
+// //                                     Expanded(child: _buildPhoneField()),
+// //                                   ],
+// //                                 ),
+// //
+// //                                 const SizedBox(height: 24),
+// //
+// //                                 // WhatsApp & Alternate Contact
+// //                                 isMobile
+// //                                     ? Column(
+// //                                   children: [
+// //                                     _buildWhatsAppField(),
+// //                                     const SizedBox(height: 24),
+// //                                     _buildAlternateContactField(),
+// //                                   ],
+// //                                 )
+// //                                     : Row(
+// //                                   children: [
+// //                                     Expanded(child: _buildWhatsAppField()),
+// //                                     const SizedBox(width: 24),
+// //                                     Expanded(child: _buildAlternateContactField()),
+// //                                   ],
+// //                                 ),
+// //
+// //                                 const SizedBox(height: 24),
+// //                                 _buildDurationField(),
+// //                                 const SizedBox(height: 32),
+// //                                 UploadPrescriptionSection(),
+// //                                 // _buildUploadSection(),
+// //                                 const SizedBox(height: 32),
+// //                                 _buildSpecialInstructionsField(),
+// //                                 const SizedBox(height: 40),
+// //                                 _buildSubmitButton(),
+// //                               ],
+// //                             ),
+// //                           ),
+// //                         ),
+// //                       ),
+// //                     ),
+// //                   ],
+// //                 ),
+// //               ),
+// //
+// //               const SizedBox(height: 80),
+// //             ],
+// //           ),
+// //         );
+// //       },
+// //     );
+// //   }
+// //
+// //   Widget _buildNameField() => _inputField(
+// //     'Full Name *',
+// //     'Enter your full name',
+// //     icon: Icons.person_outline,
+// //   );
+// //
+// //   Widget _buildCategoryField() => _dropdownField(
+// //     'Disease/Ailment Category *',
+// //     'Select category',
+// //     categories,
+// //     _selectedCategory,
+// //     (value) => setState(() => _selectedCategory = value),
+// //     icon: Icons.medical_services_outlined,
+// //   );
+// //
+// //   Widget _buildAddressField() => _inputField(
+// //     'Delivery Address *',
+// //     'Enter your complete address',
+// //     maxLines: 3,
+// //     icon: Icons.location_on_outlined,
+// //   );
+// //
+// //   Widget _buildEmailField() => _inputField(
+// //     'Email Address (Optional)',
+// //     'your.email@example.com',
+// //     icon: Icons.email_outlined,
+// //   );
+// //
+// //   Widget _buildPhoneField() => _inputField(
+// //     'Phone Number *',
+// //     '+1-234-567-8900',
+// //     icon: Icons.phone_outlined,
+// //   );
+// //
+// //   Widget _buildWhatsAppField() => Column(
+// //     crossAxisAlignment: CrossAxisAlignment.start,
+// //     children: [
+// //       _inputField(
+// //         'WhatsApp Number *',
+// //         '+1-234-567-8900',
+// //         icon: Icons.chat_outlined,
+// //       ),
+// //       const SizedBox(height: 8),
+// //       Text(
+// //         'All order updates will be sent to this number',
+// //         style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+// //       ),
+// //     ],
+// //   );
+// //
+// //   Widget _buildAlternateContactField() => _inputField(
+// //     'Alternate Contact Number',
+// //     '+1-234-567-8900',
+// //     icon: Icons.phone_outlined,
+// //   );
+// //
+// //   Widget _buildDurationField() => _dropdownField(
+// //     'Medicine Duration *',
+// //     'Select duration',
+// //     durations,
+// //     _selectedDuration,
+// //     (value) => setState(() => _selectedDuration = value),
+// //     icon: Icons.calendar_month_outlined,
+// //   );
+// //
+// //   Widget _buildSpecialInstructionsField() => Column(
+// //     crossAxisAlignment: CrossAxisAlignment.start,
+// //     children: [
+// //       const Text(
+// //         'Special Instructions (Optional)',
+// //         style: TextStyle(
+// //           fontSize: 15,
+// //           fontWeight: FontWeight.w600,
+// //           color: Color(0xFF334155),
+// //         ),
+// //       ),
+// //       const SizedBox(height: 12),
+// //       TextFormField(
+// //         maxLines: 4,
+// //         decoration: InputDecoration(
+// //           hintText: 'Add any special instructions or notes...',
+// //           hintStyle: TextStyle(color: Colors.grey[400]),
+// //           filled: true,
+// //           fillColor: const Color(0xFFF8FAFC),
+// //           border: OutlineInputBorder(
+// //             borderRadius: BorderRadius.circular(12),
+// //             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+// //           ),
+// //           enabledBorder: OutlineInputBorder(
+// //             borderRadius: BorderRadius.circular(12),
+// //             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+// //           ),
+// //           focusedBorder: OutlineInputBorder(
+// //             borderRadius: BorderRadius.circular(12),
+// //             borderSide: const BorderSide(color: Color(0xFF2563EB)),
+// //           ),
+// //           contentPadding: const EdgeInsets.symmetric(
+// //             horizontal: 20,
+// //             vertical: 18,
+// //           ),
+// //         ),
+// //       ),
+// //     ],
+// //   );
+// //
+// //   // Widget _buildUploadSection() => Column(
+// //   //   crossAxisAlignment: CrossAxisAlignment.start,
+// //   //   children: [
+// //   //     Row(
+// //   //       children: [
+// //   //         const Icon(Icons.upload_outlined, color: Color(0xFF1E293B), size: 20),
+// //   //         const SizedBox(width: 8),
+// //   //         const Text(
+// //   //           'Upload Prescription *',
+// //   //           style: TextStyle(
+// //   //             fontSize: 15,
+// //   //             fontWeight: FontWeight.w600,
+// //   //             color: Color(0xFF334155),
+// //   //           ),
+// //   //         ),
+// //   //       ],
+// //   //     ),
+// //   //     const SizedBox(height: 12),
+// //   //     Container(
+// //   //       width: double.infinity,
+// //   //       padding: const EdgeInsets.all(48),
+// //   //       decoration: BoxDecoration(
+// //   //         color: Colors.white,
+// //   //         borderRadius: BorderRadius.circular(12),
+// //   //         border: Border.all(
+// //   //           color: Colors.grey.withOpacity(0.3),
+// //   //           width: 2,
+// //   //           style: BorderStyle.solid,
+// //   //         ),
+// //   //       ),
+// //   //       child: Column(
+// //   //         children: [
+// //   //           Icon(Icons.upload_outlined, color: Colors.grey[400], size: 48),
+// //   //           const SizedBox(height: 16),
+// //   //           const Text(
+// //   //             'Click to upload prescription',
+// //   //             style: TextStyle(fontSize: 15, color: Color(0xFF64748B)),
+// //   //           ),
+// //   //           const SizedBox(height: 8),
+// //   //           Text(
+// //   //             'Supports: JPG, PNG, PDF (Max 10MB)',
+// //   //             style: TextStyle(fontSize: 13, color: Colors.grey[400]),
+// //   //           ),
+// //   //         ],
+// //   //       ),
+// //   //     ),
+// //   //   ],
+// //   // );
+// //
+// //   Widget _buildSubmitButton() => SizedBox(
+// //     width: double.infinity,
+// //     child: ElevatedButton(
+// //       onPressed: () {
+// //         if (_formKey.currentState!.validate()) {
+// //           // Submit form
+// //         }
+// //       },
+// //       style: ElevatedButton.styleFrom(
+// //         backgroundColor: const Color(0xFF2563EB),
+// //         foregroundColor: Colors.white,
+// //         padding: const EdgeInsets.symmetric(vertical: 18),
+// //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+// //         elevation: 0,
+// //       ),
+// //       child: const Text(
+// //         'Submit Order',
+// //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+// //       ),
+// //     ),
+// //   );
+// //
+// //   Widget _inputField(
+// //     String label,
+// //     String hint, {
+// //     int maxLines = 1,
+// //     IconData? icon,
+// //   }) {
+// //     return Column(
+// //       crossAxisAlignment: CrossAxisAlignment.start,
+// //       children: [
+// //         Row(
+// //           children: [
+// //             if (icon != null) ...[
+// //               Icon(icon, color: const Color(0xFF0F172A), size: 20),
+// //               const SizedBox(width: 8),
+// //             ],
+// //             Text(
+// //               label,
+// //               style: const TextStyle(
+// //                 fontSize: 15,
+// //                 fontWeight: FontWeight.w600,
+// //                 color: Color(0xFF0F172A),
+// //               ),
+// //             ),
+// //           ],
+// //         ),
+// //         const SizedBox(height: 12),
+// //         TextFormField(
+// //           maxLines: maxLines,
+// //           decoration: InputDecoration(
+// //             hintText: hint,
+// //             hintStyle: TextStyle(color: Colors.grey[400]),
+// //             filled: true,
+// //             fillColor: const Color(0xFFF8FAFC),
+// //             border: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(12),
+// //               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+// //             ),
+// //             enabledBorder: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(12),
+// //               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+// //             ),
+// //             focusedBorder: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(12),
+// //               borderSide: const BorderSide(color: Color(0xFF2563EB)),
+// //             ),
+// //             contentPadding: const EdgeInsets.symmetric(
+// //               horizontal: 20,
+// //               vertical: 18,
+// //             ),
+// //           ),
+// //         ),
+// //       ],
+// //     );
+// //   }
+// //
+// //   Widget _dropdownField(
+// //     String label,
+// //     String hint,
+// //     List<String> items,
+// //     String? value,
+// //     Function(String?) onChanged, {
+// //     IconData? icon,
+// //   }) {
+// //     return Column(
+// //       crossAxisAlignment: CrossAxisAlignment.start,
+// //       children: [
+// //         Row(
+// //           children: [
+// //             if (icon != null) ...[
+// //               Icon(icon, color: const Color(0xFF1E293B), size: 20),
+// //               const SizedBox(width: 8),
+// //             ],
+// //             Text(
+// //               label,
+// //               style: const TextStyle(
+// //                 fontSize: 15,
+// //                 fontWeight: FontWeight.w600,
+// //                 color: Color(0xFF334155),
+// //               ),
+// //             ),
+// //           ],
+// //         ),
+// //         const SizedBox(height: 12),
+// //         DropdownButtonFormField<String>(
+// //           value: value,
+// //           hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
+// //           decoration: InputDecoration(
+// //             filled: true,
+// //             fillColor: const Color(0xFFF8FAFC),
+// //             border: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(12),
+// //               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+// //             ),
+// //             enabledBorder: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(12),
+// //               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+// //             ),
+// //             focusedBorder: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(12),
+// //               borderSide: const BorderSide(color: Color(0xFF2563EB)),
+// //             ),
+// //             contentPadding: const EdgeInsets.symmetric(
+// //               horizontal: 20,
+// //               vertical: 18,
+// //             ),
+// //           ),
+// //           items: items.map((String item) {
+// //             return DropdownMenuItem<String>(value: item, child: Text(item));
+// //           }).toList(),
+// //           onChanged: onChanged,
+// //         ),
+// //       ],
+// //     );
+// //   }
+// // }
 // import 'package:flutter/material.dart';
-//
 // import '../l10n/app_localizations.dart';
 // import 'about_widget/upload_image_section.dart';
 //
@@ -16,28 +611,28 @@
 //   String? _selectedDuration;
 //   bool _isLoggedIn = false;
 //
-//   final List<String> categories = [
-//     'Pain Relief',
-//     'Cold & Flu',
-//     'Diabetes',
-//     'Heart Disease',
-//     'Blood Pressure',
-//     'Skin Care',
-//     'Digestive Health',
-//     'Mental Health',
-//   ];
-//
-//   final List<String> durations = [
-//     '1-7 days',
-//     '1-2 weeks',
-//     '2-4 weeks',
-//     '1-3 months',
-//     '3-6 months',
-//     '6+ months',
-//   ];
-//
 //   @override
 //   Widget build(BuildContext context) {
+//     final categories = [
+//       AppLocalizations.of(context)!.categoryPainRelief,
+//       AppLocalizations.of(context)!.categoryColdFlu,
+//       AppLocalizations.of(context)!.categoryDiabetes,
+//       AppLocalizations.of(context)!.categoryHeartDisease,
+//       AppLocalizations.of(context)!.categoryBloodPressure,
+//       AppLocalizations.of(context)!.categorySkinCare,
+//       AppLocalizations.of(context)!.categoryDigestiveHealth,
+//       AppLocalizations.of(context)!.categoryMentalHealth,
+//     ];
+//
+//     final durations = [
+//       AppLocalizations.of(context)!.duration1to7Days,
+//       AppLocalizations.of(context)!.duration1to2Weeks,
+//       AppLocalizations.of(context)!.duration2to4Weeks,
+//       AppLocalizations.of(context)!.duration1to3Months,
+//       AppLocalizations.of(context)!.duration3to6Months,
+//       AppLocalizations.of(context)!.duration6PlusMonths,
+//     ];
+//
 //     return LayoutBuilder(
 //       builder: (context, constraints) {
 //         bool isMobile = constraints.maxWidth < 700;
@@ -73,8 +668,8 @@
 //                           ),
 //                         );
 //                       },
-//                       child:  Text(
-//                           AppLocalizations.of(context)!.orderMedicine,
+//                       child: Text(
+//                         AppLocalizations.of(context)!.orderMedicine,
 //                         style: TextStyle(
 //                           fontSize: 48,
 //                           fontWeight: FontWeight.bold,
@@ -91,7 +686,8 @@
 //                         return Opacity(opacity: value, child: child);
 //                       },
 //                       child: Text(
-//                         'Fill out the form below to order your medicines. Upload your prescription for verification.',
+//                         AppLocalizations.of(context)!
+//                             .orderMedicineSubtitle, // localized subtitle
 //                         textAlign: TextAlign.center,
 //                         style: TextStyle(
 //                           fontSize: 16,
@@ -115,7 +711,7 @@
 //                         child: Container(
 //                           width: isMobile
 //                               ? MediaQuery.of(context).size.width * 0.9
-//                               : 600, // narrower on desktop
+//                               : 600,
 //                           padding: const EdgeInsets.all(20),
 //                           margin: const EdgeInsets.only(bottom: 40),
 //                           decoration: BoxDecoration(
@@ -135,9 +731,9 @@
 //                                 size: 24,
 //                               ),
 //                               const SizedBox(width: 10),
-//                               const Text(
-//                                 'Please ',
-//                                 style: TextStyle(
+//                               Text(
+//                                 AppLocalizations.of(context)!.please,
+//                                 style: const TextStyle(
 //                                   fontSize: 15,
 //                                   color: Color(0xFF64748B),
 //                                 ),
@@ -146,18 +742,18 @@
 //                                 onTap: () {
 //                                   // Navigate to login
 //                                 },
-//                                 child: const Text(
-//                                   'login',
-//                                   style: TextStyle(
+//                                 child: Text(
+//                                   AppLocalizations.of(context)!.login,
+//                                   style: const TextStyle(
 //                                     fontSize: 15,
 //                                     color: Color(0xFF2563EB),
 //                                     fontWeight: FontWeight.w600,
 //                                   ),
 //                                 ),
 //                               ),
-//                               const Text(
-//                                 ' to place an order.',
-//                                 style: TextStyle(
+//                               Text(
+//                                 AppLocalizations.of(context)!.toPlaceOrder,
+//                                 style: const TextStyle(
 //                                   fontSize: 15,
 //                                   color: Color(0xFF64748B),
 //                                 ),
@@ -199,16 +795,17 @@
 //                               children: [
 //                                 // Header
 //                                 Row(
-//                                   children: const [
-//                                     Icon(
+//                                   children: [
+//                                     const Icon(
 //                                       Icons.description_outlined,
 //                                       color: Color(0xFF1E293B),
 //                                       size: 24,
 //                                     ),
-//                                     SizedBox(width: 12),
+//                                     const SizedBox(width: 12),
 //                                     Text(
-//                                       'Order Information',
-//                                       style: TextStyle(
+//                                       AppLocalizations.of(context)!
+//                                           .orderInformation,
+//                                       style: const TextStyle(
 //                                         fontSize: 20,
 //                                         fontWeight: FontWeight.w600,
 //                                         color: Color(0xFF1E293B),
@@ -225,14 +822,14 @@
 //                                   children: [
 //                                     _buildNameField(),
 //                                     const SizedBox(height: 24),
-//                                     _buildCategoryField(),
+//                                     _buildCategoryField(categories),
 //                                   ],
 //                                 )
 //                                     : Row(
 //                                   children: [
 //                                     Expanded(child: _buildNameField()),
 //                                     const SizedBox(width: 24),
-//                                     Expanded(child: _buildCategoryField()),
+//                                     Expanded(child: _buildCategoryField(categories)),
 //                                   ],
 //                                 ),
 //
@@ -277,10 +874,9 @@
 //                                 ),
 //
 //                                 const SizedBox(height: 24),
-//                                 _buildDurationField(),
+//                                 _buildDurationField(durations),
 //                                 const SizedBox(height: 32),
 //                                 UploadPrescriptionSection(),
-//                                 // _buildUploadSection(),
 //                                 const SizedBox(height: 32),
 //                                 _buildSpecialInstructionsField(),
 //                                 const SizedBox(height: 40),
@@ -304,36 +900,36 @@
 //   }
 //
 //   Widget _buildNameField() => _inputField(
-//     'Full Name *',
-//     'Enter your full name',
+//     AppLocalizations.of(context)!.fullName,
+//     AppLocalizations.of(context)!.enterFullName,
 //     icon: Icons.person_outline,
 //   );
 //
-//   Widget _buildCategoryField() => _dropdownField(
-//     'Disease/Ailment Category *',
-//     'Select category',
+//   Widget _buildCategoryField(List<String> categories) => _dropdownField(
+//     AppLocalizations.of(context)!.diseaseCategory,
+//     AppLocalizations.of(context)!.selectCategory,
 //     categories,
 //     _selectedCategory,
-//     (value) => setState(() => _selectedCategory = value),
+//         (value) => setState(() => _selectedCategory = value),
 //     icon: Icons.medical_services_outlined,
 //   );
 //
 //   Widget _buildAddressField() => _inputField(
-//     'Delivery Address *',
-//     'Enter your complete address',
+//     AppLocalizations.of(context)!.deliveryAddress,
+//     AppLocalizations.of(context)!.enterAddress,
 //     maxLines: 3,
 //     icon: Icons.location_on_outlined,
 //   );
 //
 //   Widget _buildEmailField() => _inputField(
-//     'Email Address (Optional)',
-//     'your.email@example.com',
+//     AppLocalizations.of(context)!.emailAddressOptional,
+//     AppLocalizations.of(context)!.enterEmail,
 //     icon: Icons.email_outlined,
 //   );
 //
 //   Widget _buildPhoneField() => _inputField(
-//     'Phone Number *',
-//     '+1-234-567-8900',
+//     AppLocalizations.of(context)!.phoneNumber,
+//     AppLocalizations.of(context)!.enterPhoneNumber,
 //     icon: Icons.phone_outlined,
 //   );
 //
@@ -341,39 +937,39 @@
 //     crossAxisAlignment: CrossAxisAlignment.start,
 //     children: [
 //       _inputField(
-//         'WhatsApp Number *',
-//         '+1-234-567-8900',
+//         AppLocalizations.of(context)!.whatsappNumber,
+//         AppLocalizations.of(context)!.enterWhatsAppNumber,
 //         icon: Icons.chat_outlined,
 //       ),
 //       const SizedBox(height: 8),
 //       Text(
-//         'All order updates will be sent to this number',
+//         AppLocalizations.of(context)!.whatsappInfo,
 //         style: TextStyle(fontSize: 13, color: Colors.grey[600]),
 //       ),
 //     ],
 //   );
 //
 //   Widget _buildAlternateContactField() => _inputField(
-//     'Alternate Contact Number',
-//     '+1-234-567-8900',
+//     AppLocalizations.of(context)!.alternateContactNumber,
+//     AppLocalizations.of(context)!.enterAlternateContact,
 //     icon: Icons.phone_outlined,
 //   );
 //
-//   Widget _buildDurationField() => _dropdownField(
-//     'Medicine Duration *',
-//     'Select duration',
+//   Widget _buildDurationField(List<String> durations) => _dropdownField(
+//     AppLocalizations.of(context)!.medicineDuration,
+//     AppLocalizations.of(context)!.selectDuration,
 //     durations,
 //     _selectedDuration,
-//     (value) => setState(() => _selectedDuration = value),
+//         (value) => setState(() => _selectedDuration = value),
 //     icon: Icons.calendar_month_outlined,
 //   );
 //
 //   Widget _buildSpecialInstructionsField() => Column(
 //     crossAxisAlignment: CrossAxisAlignment.start,
 //     children: [
-//       const Text(
-//         'Special Instructions (Optional)',
-//         style: TextStyle(
+//       Text(
+//         AppLocalizations.of(context)!.specialInstructionsOptional,
+//         style: const TextStyle(
 //           fontSize: 15,
 //           fontWeight: FontWeight.w600,
 //           color: Color(0xFF334155),
@@ -383,7 +979,7 @@
 //       TextFormField(
 //         maxLines: 4,
 //         decoration: InputDecoration(
-//           hintText: 'Add any special instructions or notes...',
+//           hintText: AppLocalizations.of(context)!.addSpecialInstructions,
 //           hintStyle: TextStyle(color: Colors.grey[400]),
 //           filled: true,
 //           fillColor: const Color(0xFFF8FAFC),
@@ -408,55 +1004,6 @@
 //     ],
 //   );
 //
-//   // Widget _buildUploadSection() => Column(
-//   //   crossAxisAlignment: CrossAxisAlignment.start,
-//   //   children: [
-//   //     Row(
-//   //       children: [
-//   //         const Icon(Icons.upload_outlined, color: Color(0xFF1E293B), size: 20),
-//   //         const SizedBox(width: 8),
-//   //         const Text(
-//   //           'Upload Prescription *',
-//   //           style: TextStyle(
-//   //             fontSize: 15,
-//   //             fontWeight: FontWeight.w600,
-//   //             color: Color(0xFF334155),
-//   //           ),
-//   //         ),
-//   //       ],
-//   //     ),
-//   //     const SizedBox(height: 12),
-//   //     Container(
-//   //       width: double.infinity,
-//   //       padding: const EdgeInsets.all(48),
-//   //       decoration: BoxDecoration(
-//   //         color: Colors.white,
-//   //         borderRadius: BorderRadius.circular(12),
-//   //         border: Border.all(
-//   //           color: Colors.grey.withOpacity(0.3),
-//   //           width: 2,
-//   //           style: BorderStyle.solid,
-//   //         ),
-//   //       ),
-//   //       child: Column(
-//   //         children: [
-//   //           Icon(Icons.upload_outlined, color: Colors.grey[400], size: 48),
-//   //           const SizedBox(height: 16),
-//   //           const Text(
-//   //             'Click to upload prescription',
-//   //             style: TextStyle(fontSize: 15, color: Color(0xFF64748B)),
-//   //           ),
-//   //           const SizedBox(height: 8),
-//   //           Text(
-//   //             'Supports: JPG, PNG, PDF (Max 10MB)',
-//   //             style: TextStyle(fontSize: 13, color: Colors.grey[400]),
-//   //           ),
-//   //         ],
-//   //       ),
-//   //     ),
-//   //   ],
-//   // );
-//
 //   Widget _buildSubmitButton() => SizedBox(
 //     width: double.infinity,
 //     child: ElevatedButton(
@@ -469,22 +1016,23 @@
 //         backgroundColor: const Color(0xFF2563EB),
 //         foregroundColor: Colors.white,
 //         padding: const EdgeInsets.symmetric(vertical: 18),
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//         shape:
+//         RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
 //         elevation: 0,
 //       ),
-//       child: const Text(
-//         'Submit Order',
-//         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+//       child: Text(
+//         AppLocalizations.of(context)!.submitOrder,
+//         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
 //       ),
 //     ),
 //   );
 //
 //   Widget _inputField(
-//     String label,
-//     String hint, {
-//     int maxLines = 1,
-//     IconData? icon,
-//   }) {
+//       String label,
+//       String hint, {
+//         int maxLines = 1,
+//         IconData? icon,
+//       }) {
 //     return Column(
 //       crossAxisAlignment: CrossAxisAlignment.start,
 //       children: [
@@ -535,13 +1083,13 @@
 //   }
 //
 //   Widget _dropdownField(
-//     String label,
-//     String hint,
-//     List<String> items,
-//     String? value,
-//     Function(String?) onChanged, {
-//     IconData? icon,
-//   }) {
+//       String label,
+//       String hint,
+//       List<String> items,
+//       String? value,
+//       Function(String?) onChanged, {
+//         IconData? icon,
+//       }) {
 //     return Column(
 //       crossAxisAlignment: CrossAxisAlignment.start,
 //       children: [
@@ -594,7 +1142,10 @@
 //     );
 //   }
 // }
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../l10n/app_localizations.dart';
 import 'about_widget/upload_image_section.dart';
 
@@ -607,12 +1158,65 @@ class OrderMedicineScreen extends StatefulWidget {
 
 class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _picker = ImagePicker();
+  File? _selectedImage;
+
   String? _selectedCategory;
   String? _selectedDuration;
-  bool _isLoggedIn = false;
+  bool _isLoggedIn = true; // Testing ke liye true set kiya
+
+  // Text Controllers
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _whatsappController = TextEditingController();
+  final TextEditingController _alternateController = TextEditingController();
+  final TextEditingController _instructionsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final ImagePicker _picker = ImagePicker();
+
+    List<File> _selectedImages = []; // Mobile
+    List<Uint8List> _webImages = []; // Web
+
+    Future<void> _pickImage() async {
+      final List<XFile>? images = await _picker.pickMultiImage(); // Multiple images
+      if (images != null && images.isNotEmpty) {
+        if (kIsWeb) {
+          List<Uint8List> webBytes = [];
+          for (var image in images) {
+            final bytes = await image.readAsBytes();
+            webBytes.add(bytes);
+          }
+          setState(() {
+            _webImages.addAll(webBytes);
+          });
+        } else {
+          setState(() {
+            _selectedImages.addAll(images.map((e) => File(e.path)));
+          });
+        }
+      }
+    }
+    List<Widget> imageWidgets = [];
+
+    if (kIsWeb) {
+      imageWidgets = _webImages
+          .map((img) => Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Image.memory(img, width: 100, height: 100, fit: BoxFit.cover),
+      ))
+          .toList();
+    } else {
+      imageWidgets = _selectedImages
+          .map((img) => Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Image.file(img, width: 100, height: 100, fit: BoxFit.cover),
+      ))
+          .toList();
+    }
     final categories = [
       AppLocalizations.of(context)!.categoryPainRelief,
       AppLocalizations.of(context)!.categoryColdFlu,
@@ -647,12 +1251,13 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                   vertical: 60,
                   horizontal: isMobile ? 20 : 80,
                 ),
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [Color(0xFFEFF6FF), Color(0xFFDBEAFE)],
                   ),
+
                 ),
                 child: Column(
                   children: [
@@ -670,7 +1275,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.orderMedicine,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 48,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1E293B),
@@ -686,8 +1291,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                         return Opacity(opacity: value, child: child);
                       },
                       child: Text(
-                        AppLocalizations.of(context)!
-                            .orderMedicineSubtitle, // localized subtitle
+                        AppLocalizations.of(context)!.orderMedicineSubtitle,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -705,184 +1309,216 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                 padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
                 child: Column(
                   children: [
-                    if (!_isLoggedIn)
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          width: isMobile
-                              ? MediaQuery.of(context).size.width * 0.9
-                              : 600,
-                          padding: const EdgeInsets.all(20),
-                          margin: const EdgeInsets.only(bottom: 40),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFEFF6FF),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: const Color(0xFF2563EB).withOpacity(0.2),
-                              width: 1,
-                            ),
+                    // Order Form Container
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        width: isMobile
+                            ? MediaQuery.of(context).size.width * 0.9
+                            : 800,
+                        padding: EdgeInsets.all(isMobile ? 24 : 40),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Colors.grey.withOpacity(0.3),
+                            width: 1,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(
-                                Icons.info_outline,
-                                color: Color(0xFF2563EB),
-                                size: 24,
+                              // Header
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.description_outlined,
+                                    color: Color(0xFF1E293B),
+                                    size: 24,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    AppLocalizations.of(context)!.orderInformation,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      // fontWeight: FontWeight.w600,
+                                      color: Color(0xFF1E293B),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 10),
-                              Text(
-                                AppLocalizations.of(context)!.please,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xFF64748B),
-                                ),
+
+                              const SizedBox(height: 10),
+
+                              // Name & Category
+                              isMobile
+                                  ? Column(
+                                children: [
+                                  _buildTextField(
+                                      controller: _nameController,
+                                      label: AppLocalizations.of(context)!.fullName,
+                                      hint: AppLocalizations.of(context)!.enterFullName,
+                                      icon: Icons.person_outline),
+                                  const SizedBox(height: 24),
+                                  _buildDropdownField(
+                                      label: AppLocalizations.of(context)!.diseaseCategory,
+                                      hint: AppLocalizations.of(context)!.selectCategory,
+                                      items: categories,
+                                      value: _selectedCategory,
+                                      onChanged: (val) {
+                                        setState(() => _selectedCategory = val);
+                                      },
+                                      icon: Icons.medical_services_outlined),
+                                ],
+                              )
+                                  : Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildTextField(
+                                        controller: _nameController,
+                                        label: AppLocalizations.of(context)!.fullName,
+                                        hint: AppLocalizations.of(context)!.enterFullName,
+                                        icon: Icons.person_outline),
+                                  ),
+                                  const SizedBox(width: 24),
+                                  Expanded(
+                                    child: _buildDropdownField(
+                                        label: AppLocalizations.of(context)!.diseaseCategory,
+                                        hint: AppLocalizations.of(context)!.selectCategory,
+                                        items: categories,
+                                        value: _selectedCategory,
+                                        onChanged: (val) {
+                                          setState(() => _selectedCategory = val);
+                                        },
+                                        icon: Icons.medical_services_outlined),
+                                  ),
+                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  // Navigate to login
-                                },
-                                child: Text(
-                                  AppLocalizations.of(context)!.login,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    color: Color(0xFF2563EB),
-                                    fontWeight: FontWeight.w600,
+
+                              const SizedBox(height: 20),
+                              _buildTextField(
+                                  controller: _addressController,
+                                  label: AppLocalizations.of(context)!.deliveryAddress,
+                                  hint: AppLocalizations.of(context)!.enterAddress,
+                                  maxLines: 3,
+                                  icon: Icons.location_on_outlined),
+                              const SizedBox(height: 20),
+
+                              isMobile
+                                  ? Column(
+                                children: [
+                                  _buildTextField(
+                                      controller: _emailController,
+                                      label: AppLocalizations.of(context)!.emailAddressOptional,
+                                      hint: AppLocalizations.of(context)!.enterEmail,
+                                      icon: Icons.email_outlined),
+                                  const SizedBox(height: 24),
+                                  _buildTextField(
+                                      controller: _phoneController,
+                                      label: AppLocalizations.of(context)!.phoneNumber,
+                                      hint: AppLocalizations.of(context)!.enterPhoneNumber,
+                                      icon: Icons.phone_outlined),
+                                ],
+                              )
+                                  : Row(
+                                children: [
+                                  Expanded(
+                                    child: _buildTextField(
+                                        controller: _emailController,
+                                        label: AppLocalizations.of(context)!.emailAddressOptional,
+                                        hint: AppLocalizations.of(context)!.enterEmail,
+                                        icon: Icons.email_outlined),
+                                  ),
+                                  const SizedBox(width: 24),
+                                  Expanded(
+                                    child: _buildTextField(
+                                        controller: _phoneController,
+                                        label: AppLocalizations.of(context)!.phoneNumber,
+                                        hint: AppLocalizations.of(context)!.enterPhoneNumber,
+                                        icon: Icons.phone_outlined),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 24),
+
+                              // Upload Prescription Section
+                              // GestureDetector(
+                              //   onTap: _pickImage,
+                              //   child: Container(
+                              //     height: 150,
+                              //     width: double.infinity,
+                              //     decoration: BoxDecoration(
+                              //       border: Border.all(color: Colors.blue),
+                              //       borderRadius: BorderRadius.circular(12),
+                              //       color: Colors.blue[50],
+                              //     ),
+                              //     child: _selectedImage != null
+                              //         ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                              //         : const Center(
+                              //       child: Text(
+                              //         'Tap to upload prescription',
+                              //         style: TextStyle(color: Colors.blue),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              GestureDetector(
+                                onTap: _pickImage,
+                                child: Container(
+                                  height: 150,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFEFF6FF),
+                                    border: Border.all(color: const Color(0xFF2563EB)),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Center(
+                                    child: _selectedImages.isEmpty && _webImages.isEmpty
+                                        ? const Text(
+                                      "Tap to upload prescription",
+                                      style: TextStyle(color: Color(0xFF2563EB)),
+                                    )
+                                        : SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(children: imageWidgets),
+                                    ),
                                   ),
                                 ),
                               ),
-                              Text(
-                                AppLocalizations.of(context)!.toPlaceOrder,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xFF64748B),
-                                ),
-                              ),
+                              const SizedBox(height: 32),
+
+                              _buildDropdownField(
+                                  label: AppLocalizations.of(context)!.medicineDuration,
+                                  hint: AppLocalizations.of(context)!.selectDuration,
+                                  items: durations,
+                                  value: _selectedDuration,
+                                  onChanged: (val) {
+                                    setState(() => _selectedDuration = val);
+                                  },
+                                  icon: Icons.calendar_month_outlined),
+
+                              const SizedBox(height: 32),
+
+                              _buildTextField(
+                                  controller: _instructionsController,
+                                  label: AppLocalizations.of(context)!.specialInstructionsOptional,
+                                  hint: AppLocalizations.of(context)!.addSpecialInstructions,
+                                  maxLines: 4),
+
+                              const SizedBox(height: 40),
+
+                              _buildSubmitButton(),
                             ],
-                          ),
-                        ),
-                      ),
-
-                    // 🔹 Order Form Container
-                    AbsorbPointer(
-                      absorbing: !_isLoggedIn,
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          width: isMobile
-                              ? MediaQuery.of(context).size.width * 0.9
-                              : 800,
-                          padding: EdgeInsets.all(isMobile ? 24 : 40),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Colors.grey.withOpacity(0.1),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.08),
-                                blurRadius: 20,
-                                offset: const Offset(0, 8),
-                              ),
-                            ],
-                          ),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Header
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.description_outlined,
-                                      color: Color(0xFF1E293B),
-                                      size: 24,
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Text(
-                                      AppLocalizations.of(context)!
-                                          .orderInformation,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF1E293B),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                                const SizedBox(height: 32),
-
-                                // Name & Category
-                                isMobile
-                                    ? Column(
-                                  children: [
-                                    _buildNameField(),
-                                    const SizedBox(height: 24),
-                                    _buildCategoryField(categories),
-                                  ],
-                                )
-                                    : Row(
-                                  children: [
-                                    Expanded(child: _buildNameField()),
-                                    const SizedBox(width: 24),
-                                    Expanded(child: _buildCategoryField(categories)),
-                                  ],
-                                ),
-
-                                const SizedBox(height: 24),
-                                _buildAddressField(),
-                                const SizedBox(height: 24),
-
-                                // Email & Phone
-                                isMobile
-                                    ? Column(
-                                  children: [
-                                    _buildEmailField(),
-                                    const SizedBox(height: 24),
-                                    _buildPhoneField(),
-                                  ],
-                                )
-                                    : Row(
-                                  children: [
-                                    Expanded(child: _buildEmailField()),
-                                    const SizedBox(width: 24),
-                                    Expanded(child: _buildPhoneField()),
-                                  ],
-                                ),
-
-                                const SizedBox(height: 24),
-
-                                // WhatsApp & Alternate Contact
-                                isMobile
-                                    ? Column(
-                                  children: [
-                                    _buildWhatsAppField(),
-                                    const SizedBox(height: 24),
-                                    _buildAlternateContactField(),
-                                  ],
-                                )
-                                    : Row(
-                                  children: [
-                                    Expanded(child: _buildWhatsAppField()),
-                                    const SizedBox(width: 24),
-                                    Expanded(child: _buildAlternateContactField()),
-                                  ],
-                                ),
-
-                                const SizedBox(height: 24),
-                                _buildDurationField(durations),
-                                const SizedBox(height: 32),
-                                UploadPrescriptionSection(),
-                                const SizedBox(height: 32),
-                                _buildSpecialInstructionsField(),
-                                const SizedBox(height: 40),
-                                _buildSubmitButton(),
-                              ],
-                            ),
                           ),
                         ),
                       ),
@@ -890,7 +1526,6 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 80),
             ],
           ),
@@ -899,118 +1534,138 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
     );
   }
 
-  Widget _buildNameField() => _inputField(
-    AppLocalizations.of(context)!.fullName,
-    AppLocalizations.of(context)!.enterFullName,
-    icon: Icons.person_outline,
-  );
-
-  Widget _buildCategoryField(List<String> categories) => _dropdownField(
-    AppLocalizations.of(context)!.diseaseCategory,
-    AppLocalizations.of(context)!.selectCategory,
-    categories,
-    _selectedCategory,
-        (value) => setState(() => _selectedCategory = value),
-    icon: Icons.medical_services_outlined,
-  );
-
-  Widget _buildAddressField() => _inputField(
-    AppLocalizations.of(context)!.deliveryAddress,
-    AppLocalizations.of(context)!.enterAddress,
-    maxLines: 3,
-    icon: Icons.location_on_outlined,
-  );
-
-  Widget _buildEmailField() => _inputField(
-    AppLocalizations.of(context)!.emailAddressOptional,
-    AppLocalizations.of(context)!.enterEmail,
-    icon: Icons.email_outlined,
-  );
-
-  Widget _buildPhoneField() => _inputField(
-    AppLocalizations.of(context)!.phoneNumber,
-    AppLocalizations.of(context)!.enterPhoneNumber,
-    icon: Icons.phone_outlined,
-  );
-
-  Widget _buildWhatsAppField() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      _inputField(
-        AppLocalizations.of(context)!.whatsappNumber,
-        AppLocalizations.of(context)!.enterWhatsAppNumber,
-        icon: Icons.chat_outlined,
-      ),
-      const SizedBox(height: 8),
-      Text(
-        AppLocalizations.of(context)!.whatsappInfo,
-        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-      ),
-    ],
-  );
-
-  Widget _buildAlternateContactField() => _inputField(
-    AppLocalizations.of(context)!.alternateContactNumber,
-    AppLocalizations.of(context)!.enterAlternateContact,
-    icon: Icons.phone_outlined,
-  );
-
-  Widget _buildDurationField(List<String> durations) => _dropdownField(
-    AppLocalizations.of(context)!.medicineDuration,
-    AppLocalizations.of(context)!.selectDuration,
-    durations,
-    _selectedDuration,
-        (value) => setState(() => _selectedDuration = value),
-    icon: Icons.calendar_month_outlined,
-  );
-
-  Widget _buildSpecialInstructionsField() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        AppLocalizations.of(context)!.specialInstructionsOptional,
-        style: const TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Color(0xFF334155),
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    int maxLines = 1,
+    IconData? icon,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (label.isNotEmpty)
+          Row(
+            children: [
+              if (icon != null) ...[
+                Icon(icon, color: const Color(0xFF0F172A), size: 20),
+                const SizedBox(width: 8),
+              ],
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF646b75),
+                ),
+              ),
+            ],
+          ),
+        const SizedBox(height: 12),
+        TextFormField(
+          controller: controller,
+          maxLines: maxLines,
+          decoration: InputDecoration(
+            hintText: hint,
+            constraints: BoxConstraints(
+              maxHeight: 35
+            ),
+            hintStyle: TextStyle(color: Colors.grey[400]),
+            filled: true,
+            fillColor: const Color(0xFFf8fafc),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Color(0xFF2563EB)),
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          ),
+          validator: (value) => value!.isEmpty ? 'Field cannot be empty' : null,
         ),
-      ),
-      const SizedBox(height: 12),
-      TextFormField(
-        maxLines: 4,
-        decoration: InputDecoration(
-          hintText: AppLocalizations.of(context)!.addSpecialInstructions,
-          hintStyle: TextStyle(color: Colors.grey[400]),
-          filled: true,
-          fillColor: const Color(0xFFF8FAFC),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFF2563EB)),
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 18,
-          ),
+      ],
+    );
+  }
+
+  Widget _buildDropdownField({
+    required String label,
+    required String hint,
+    required List<String> items,
+    String? value,
+    required Function(String?) onChanged,
+    IconData? icon,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            if (icon != null) ...[
+              Icon(icon, color: const Color(0xFF1E293B), size: 20),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF646b75),
+              ),
+            ),
+          ],
         ),
-      ),
-    ],
-  );
+        const SizedBox(height: 12),
+        DropdownButtonFormField<String>(
+          value: value,
+          hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
+          decoration: InputDecoration(
+            constraints: BoxConstraints(
+                maxHeight: 35
+            ),
+            filled: true,
+            fillColor: const Color(0xFFf8fafc),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Color(0xFF2563EB)),
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          ),
+          items: items.map((String item) {
+            return DropdownMenuItem<String>(value: item, child: Text(item));
+          }).toList(),
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
 
   Widget _buildSubmitButton() => SizedBox(
     width: double.infinity,
     child: ElevatedButton(
       onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          // Submit form
-        }
+        // if (_formKey.currentState!.validate()) {
+        //   if (_selectedImage == null) {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //         const SnackBar(content: Text('Please upload prescription')));
+        //     return;
+        //   }
+        //   ScaffoldMessenger.of(context)
+        //       .showSnackBar(const SnackBar(content: Text('Order Submitted!')));
+        // }
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2563EB),
@@ -1027,118 +1682,12 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
     ),
   );
 
-  Widget _inputField(
-      String label,
-      String hint, {
-        int maxLines = 1,
-        IconData? icon,
-      }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            if (icon != null) ...[
-              Icon(icon, color: const Color(0xFF0F172A), size: 20),
-              const SizedBox(width: 8),
-            ],
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF0F172A),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        TextFormField(
-          maxLines: maxLines,
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: TextStyle(color: Colors.grey[400]),
-            filled: true,
-            fillColor: const Color(0xFFF8FAFC),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF2563EB)),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 18,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _dropdownField(
-      String label,
-      String hint,
-      List<String> items,
-      String? value,
-      Function(String?) onChanged, {
-        IconData? icon,
-      }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            if (icon != null) ...[
-              Icon(icon, color: const Color(0xFF1E293B), size: 20),
-              const SizedBox(width: 8),
-            ],
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF334155),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        DropdownButtonFormField<String>(
-          value: value,
-          hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFFF8FAFC),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF2563EB)),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 18,
-            ),
-          ),
-          items: items.map((String item) {
-            return DropdownMenuItem<String>(value: item, child: Text(item));
-          }).toList(),
-          onChanged: onChanged,
-        ),
-      ],
-    );
+  Future<void> _pickImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _selectedImage = File(image.path);
+      });
+    }
   }
 }
