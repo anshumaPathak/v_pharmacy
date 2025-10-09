@@ -276,7 +276,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fillOutTheFormBelowAndWeGetBackToYouWithin24Hours => 'Fill out the form below and we\'ll get back to you within 24 hours.';
 
   @override
-  String get fullName => 'Full Name *';
+  String get fullName => 'Full Name';
 
   @override
   String get enterYourFullName => 'Enter your full name';
@@ -544,4 +544,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get available247 => 'Available 24/7';
+
+  @override
+  String get enterPhoneNumberTo => 'Enter your phone number to get started';
+
+  @override
+  String get sendOTP => 'Send OTP';
+
+  @override
+  String get sms => 'SMS';
+
+  @override
+  String get verifyOTP => 'Verify OTP';
+
+  @override
+  String get enterOTP => 'Enter OTP';
+
+  @override
+  String get resendOTP => 'Resend OTP';
+
+  @override
+  String get changePhoneNumber => 'Change Phone Number';
+
+  @override
+  String get completeRegistration => 'Complete Registration';
+
+  @override
+  String get verified => 'Verified';
+
+  @override
+  String get weSendYouAnOTPToVerifyYourNumber => 'We\'ll send you an OTP to verify your number';
+
+  @override
+  String get demoUseAnyPhoneNumberEndingWith1234For => 'Demo: Use any phone number ending with 1234 for existing user';
+
+  @override
+  String get byContinuingYouAgreeToOur => 'By continuing, you agree to our';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get getStarted => 'Get Started';
 }

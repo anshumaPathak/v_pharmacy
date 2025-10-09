@@ -632,7 +632,7 @@ abstract class AppLocalizations {
   /// No description provided for @fullName.
   ///
   /// In en, this message translates to:
-  /// **'Full Name *'**
+  /// **'Full Name'**
   String get fullName;
 
   /// No description provided for @enterYourFullName.
@@ -1168,6 +1168,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Available 24/7'**
   String get available247;
+
+  /// No description provided for @enterPhoneNumberTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number to get started'**
+  String get enterPhoneNumberTo;
+
+  /// No description provided for @sendOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOTP;
+
+  /// No description provided for @sms.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS'**
+  String get sms;
+
+  /// No description provided for @verifyOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify OTP'**
+  String get verifyOTP;
+
+  /// No description provided for @enterOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter OTP'**
+  String get enterOTP;
+
+  /// No description provided for @resendOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get resendOTP;
+
+  /// No description provided for @changePhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Phone Number'**
+  String get changePhoneNumber;
+
+  /// No description provided for @completeRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete Registration'**
+  String get completeRegistration;
+
+  /// No description provided for @verified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get verified;
+
+  /// No description provided for @weSendYouAnOTPToVerifyYourNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll send you an OTP to verify your number'**
+  String get weSendYouAnOTPToVerifyYourNumber;
+
+  /// No description provided for @demoUseAnyPhoneNumberEndingWith1234For.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo: Use any phone number ending with 1234 for existing user'**
+  String get demoUseAnyPhoneNumberEndingWith1234For;
+
+  /// No description provided for @byContinuingYouAgreeToOur.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing, you agree to our'**
+  String get byContinuingYouAgreeToOur;
+
+  /// No description provided for @termsOfService.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfService;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

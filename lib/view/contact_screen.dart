@@ -705,14 +705,23 @@ class _ContactScreenState extends State<ContactScreen> {
               style: TextStyle(color: Colors.black54, fontSize: 12)),
           Text(info,
               textAlign: TextAlign.center, style: TextStyle(color: Colors.blue)),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: buttonColor,
-              minimumSize: Size(double.infinity, 40),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth * 0.03),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: buttonColor,
+                minimumSize: Size(double.infinity, 50), // yaha height 50 kar di
+                padding: EdgeInsets.symmetric(vertical: 14), // thoda extra padding
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8), // thoda rounded corners
+                ),
+              ),
+              onPressed: () {},
+              child: Text(
+                buttonText,
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
             ),
-            onPressed: () {},
-            child: Text(buttonText,
-                style: TextStyle(color: Colors.white, fontSize: 14)),
           ),
         ],
       ),

@@ -9,7 +9,7 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get whatsApp => 'WhatsApp';
+  String get whatsApp => 'व्हाट्सएप';
 
   @override
   String get login => 'लॉगिन करें';
@@ -276,7 +276,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get fillOutTheFormBelowAndWeGetBackToYouWithin24Hours => 'नीचे दिया गया फ़ॉर्म भरें और हम 24 घंटे के भीतर आपसे संपर्क करेंगे।';
 
   @override
-  String get fullName => 'पूरा नाम *';
+  String get fullName => 'पूरा नाम';
 
   @override
   String get enterYourFullName => 'अपना पूरा नाम दर्ज करें';
@@ -285,7 +285,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get emailAddress => 'ईमेल पता';
 
   @override
-  String get phoneNumber => 'फोन नंबर *';
+  String get phoneNumber => 'फोन नंबर';
 
   @override
   String get category => 'श्रेणी';
@@ -544,4 +544,46 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get available247 => '24/7 उपलब्ध';
+
+  @override
+  String get enterPhoneNumberTo => 'आरंभ करने के लिए अपना फोन नंबर दर्ज करें';
+
+  @override
+  String get sendOTP => 'OTP भेजें';
+
+  @override
+  String get sms => 'एसएमएस';
+
+  @override
+  String get verifyOTP => 'OTP सत्यापित करें';
+
+  @override
+  String get enterOTP => 'OTP दर्ज करें';
+
+  @override
+  String get resendOTP => 'OTP फिर से भेजें';
+
+  @override
+  String get changePhoneNumber => 'फोन नंबर बदलें';
+
+  @override
+  String get completeRegistration => 'पंजीकरण पूरा करें';
+
+  @override
+  String get verified => 'सत्यापित';
+
+  @override
+  String get weSendYouAnOTPToVerifyYourNumber => 'We\'ll send you an OTP to verify your number';
+
+  @override
+  String get demoUseAnyPhoneNumberEndingWith1234For => 'Demo: Use any phone number ending with 1234 for existing user';
+
+  @override
+  String get byContinuingYouAgreeToOur => 'By continuing, you agree to our';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get getStarted => 'शुरू करें';
 }

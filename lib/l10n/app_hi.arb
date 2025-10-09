@@ -1,5 +1,5 @@
 {
-  "whatsApp": "WhatsApp",
+  "whatsApp": "व्हाट्सएप",
   "login": "लॉगिन",
   "vPharmacy":"V फ़ार्मेसी",
   "home":"होम",
@@ -191,7 +191,22 @@
   "helpDescription": "हमारी सहायता टीम किसी भी प्रश्न या समस्या में आपकी 24/7 मदद के लिए उपलब्ध है।",
   "whatsappSupport": "व्हाट्सएप सहायता",
   "callSupport": "कॉल सहायता",
-  "available247": "24/7 उपलब्ध"
+  "available247": "24/7 उपलब्ध",
+
+  "enterPhoneNumberTo": "आरंभ करने के लिए अपना फोन नंबर दर्ज करें",
+  "phoneNumber": "फोन नंबर",
+  "sendOTP": "OTP भेजें",
+  "whatsApp": "व्हाट्सएप",
+  "sms": "एसएमएस",
+  "verifyOTP": "OTP सत्यापित करें",
+  "enterOTP": "OTP दर्ज करें",
+  "resendOTP": "OTP फिर से भेजें",
+  "changePhoneNumber": "फोन नंबर बदलें",
+  "completeRegistration": "पंजीकरण पूरा करें",
+  "fullName": "पूरा नाम",
+  "emailAddress": "ईमेल पता",
+  "verified": "सत्यापित",
+  "getStarted": "शुरू करें"
 
 
 
