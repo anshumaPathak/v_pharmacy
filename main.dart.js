@@ -90619,7 +90619,7 @@ ga_2(){return"WhatsApp Support"},
 gUl(){return"Call Support"},
 gU6(){return"Available 24/7"},
 gVY(){return"Enter your phone number to get started"},
-gKm(){return"\u0936\u0941\u0930\u0942 \u0915\u0930\u0947\u0902"}}
+gKm(){return"Get Started"}}
 A.IQ.prototype={
 ga_0(){return"\u0935\u094d\u0939\u093e\u091f\u094d\u0938\u090f\u092a"},
 gIp(){return"\u0932\u0949\u0917\u093f\u0928 \u0915\u0930\u0947\u0902"},
