@@ -519,7 +519,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
   // Order card builder
   Widget _buildOrderCard(Map<String, dynamic> order) {
     return Container(
-      height: double.infinity,
+      // height: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -863,7 +863,6 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
 
           const SizedBox(height: 20),
 
-          // Bottom Buttons
           Row(
             children: [
               Expanded(
