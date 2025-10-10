@@ -116,171 +116,180 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   ),
                 ),
                 const SizedBox(height: 48),
+                // LayoutBuilder(
+                //   builder: (context, constraints) {
+                //     bool isMobile = constraints.maxWidth < 900;
+                //     return isMobile
+                //         ? Column(
+                //             children: [
+                //               _valueCard(
+                //                 Icons.shield_outlined,
+                //                 AppLocalizations.of(context)!.qualityAssurance,
+                //                 AppLocalizations.of(
+                //                   context,
+                //                 )!.everyMedicineUndergoesRigorousQualityChecks,
+                //               ),
+                //               const SizedBox(height: 20),
+                //               _valueCard(
+                //                 Icons.favorite_border,
+                //                 AppLocalizations.of(context)!.patientCare,
+                //                 AppLocalizations.of(
+                //                   context,
+                //                 )!.wePrioritizePatientWellbeingProvidingCompassionate,
+                //               ),
+                //               const SizedBox(height: 20),
+                //               _valueCard(
+                //                 Icons.check_circle_outline,
+                //                 AppLocalizations.of(context)!.reliability,
+                //                 AppLocalizations.of(
+                //                   context,
+                //                 )!.trustedByThousandsOfCustomersWeMaintainTheHighest,
+                //               ),
+                //               const SizedBox(height: 20),
+                //               _valueCard(
+                //                 Icons.schedule,
+                //                 AppLocalizations.of(context)!.accessibility,
+                //                 '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
+                //               ),
+                //             ],
+                //           )
+                //         : IntrinsicHeight(
+                //             // 👈 equal height wrapper
+                //             child: Row(
+                //               crossAxisAlignment: CrossAxisAlignment.stretch,
+                //               children: [
+                //                 Expanded(
+                //                   child: _valueCard(
+                //                     Icons.shield_outlined,
+                //                     AppLocalizations.of(
+                //                       context,
+                //                     )!.qualityAssurance,
+                //                     AppLocalizations.of(
+                //                       context,
+                //                     )!.everyMedicineUndergoesRigorousQualityChecks,
+                //                   ),
+                //                 ),
+                //                 const SizedBox(width: 24),
+                //                 Expanded(
+                //                   child: _valueCard(
+                //                     Icons.favorite_border,
+                //                     AppLocalizations.of(context)!.patientCare,
+                //                     AppLocalizations.of(
+                //                       context,
+                //                     )!.wePrioritizePatientWellbeingProvidingCompassionate,
+                //                   ),
+                //                 ),
+                //                 const SizedBox(width: 24),
+                //                 Expanded(
+                //                   child: _valueCard(
+                //                     Icons.check_circle_outline,
+                //                     AppLocalizations.of(context)!.reliability,
+                //                     AppLocalizations.of(
+                //                       context,
+                //                     )!.trustedByThousandsOfCustomersWeMaintainTheHighest,
+                //                   ),
+                //                 ),
+                //                 const SizedBox(width: 24),
+                //                 Expanded(
+                //                   child: _valueCard(
+                //                     Icons.schedule,
+                //                     AppLocalizations.of(context)!.accessibility,
+                //                     '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           );
+                //   },
+                // ),
                 LayoutBuilder(
                   builder: (context, constraints) {
                     bool isMobile = constraints.maxWidth < 900;
                     return isMobile
                         ? Column(
-                            children: [
-                              _valueCard(
-                                Icons.shield_outlined,
-                                AppLocalizations.of(context)!.qualityAssurance,
-                                AppLocalizations.of(
-                                  context,
-                                )!.everyMedicineUndergoesRigorousQualityChecks,
-                              ),
-                              const SizedBox(height: 20),
-                              _valueCard(
-                                Icons.favorite_border,
-                                AppLocalizations.of(context)!.patientCare,
-                                AppLocalizations.of(
-                                  context,
-                                )!.wePrioritizePatientWellbeingProvidingCompassionate,
-                              ),
-                              const SizedBox(height: 20),
-                              _valueCard(
-                                Icons.check_circle_outline,
-                                AppLocalizations.of(context)!.reliability,
-                                AppLocalizations.of(
-                                  context,
-                                )!.trustedByThousandsOfCustomersWeMaintainTheHighest,
-                              ),
-                              const SizedBox(height: 20),
-                              _valueCard(
-                                Icons.schedule,
-                                AppLocalizations.of(context)!.accessibility,
-                                '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
-                              ),
-                            ],
-                          )
+                      children: [
+                        FractionallySizedBox(
+                          widthFactor: 1, // 👈 screen ke width ke 100%
+                          child: _valueCard(
+                            Icons.shield_outlined,
+                            AppLocalizations.of(context)!.qualityAssurance,
+                            AppLocalizations.of(context)!.everyMedicineUndergoesRigorousQualityChecks,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        FractionallySizedBox(
+                          widthFactor: 1,
+                          child: _valueCard(
+                            Icons.favorite_border,
+                            AppLocalizations.of(context)!.patientCare,
+                            AppLocalizations.of(context)!.wePrioritizePatientWellbeingProvidingCompassionate,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        FractionallySizedBox(
+                          widthFactor: 1,
+                          child: _valueCard(
+                            Icons.check_circle_outline,
+                            AppLocalizations.of(context)!.reliability,
+                            AppLocalizations.of(context)!.trustedByThousandsOfCustomersWeMaintainTheHighest,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        FractionallySizedBox(
+                          widthFactor: 1,
+                          child: _valueCard(
+                            Icons.schedule,
+                            AppLocalizations.of(context)!.accessibility,
+                            '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
+                          ),
+                        ),
+                      ],
+                    )
                         : IntrinsicHeight(
-                            // 👈 equal height wrapper
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: _valueCard(
-                                    Icons.shield_outlined,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.qualityAssurance,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.everyMedicineUndergoesRigorousQualityChecks,
-                                  ),
-                                ),
-                                const SizedBox(width: 24),
-                                Expanded(
-                                  child: _valueCard(
-                                    Icons.favorite_border,
-                                    AppLocalizations.of(context)!.patientCare,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.wePrioritizePatientWellbeingProvidingCompassionate,
-                                  ),
-                                ),
-                                const SizedBox(width: 24),
-                                Expanded(
-                                  child: _valueCard(
-                                    Icons.check_circle_outline,
-                                    AppLocalizations.of(context)!.reliability,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.trustedByThousandsOfCustomersWeMaintainTheHighest,
-                                  ),
-                                ),
-                                const SizedBox(width: 24),
-                                Expanded(
-                                  child: _valueCard(
-                                    Icons.schedule,
-                                    AppLocalizations.of(context)!.accessibility,
-                                    '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
-                                  ),
-                                ),
-                              ],
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
+                            child: _valueCard(
+                              Icons.shield_outlined,
+                              AppLocalizations.of(context)!.qualityAssurance,
+                              AppLocalizations.of(context)!.everyMedicineUndergoesRigorousQualityChecks,
                             ),
-                          );
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _valueCard(
+                              Icons.favorite_border,
+                              AppLocalizations.of(context)!.patientCare,
+                              AppLocalizations.of(context)!.wePrioritizePatientWellbeingProvidingCompassionate,
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _valueCard(
+                              Icons.check_circle_outline,
+                              AppLocalizations.of(context)!.reliability,
+                              AppLocalizations.of(context)!.trustedByThousandsOfCustomersWeMaintainTheHighest,
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _valueCard(
+                              Icons.schedule,
+                              AppLocalizations.of(context)!.accessibility,
+                              '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 ),
+
               ],
             ),
           ),
 
-          // Container(
-          //   color: const Color(0xFFF8FAFC),
-          //   padding: EdgeInsets.symmetric(
-          //     horizontal: width < 600 ? 20 : 80,
-          //     vertical: width < 600 ? 40 : 60,
-          //   ),
-          //   child: Column(
-          //     children: [
-          //        Text(
-          //         AppLocalizations.of(context)!.ourValues,
-          //         style: TextStyle(
-          //           fontSize: 36,
-          //           fontWeight: FontWeight.w700,
-          //           color: Colors.black,
-          //         ),
-          //       ),
-          //       const SizedBox(height: 12),
-          //        Text(
-          //          AppLocalizations.of(context)!.thePrinciplesThatGuideEverythingWeDo,
-          //         style: TextStyle(fontSize: 18, color: Color(0xFF64748B)),
-          //       ),
-          //       const SizedBox(height: 48),
-          //       LayoutBuilder(
-          //         builder: (context, constraints) {
-          //           bool isMobile = constraints.maxWidth < 900;
-          //           return isMobile
-          //               ? Column(
-          //             children: [
-          //               _valueCard(Icons.shield_outlined,
-          //                   AppLocalizations.of(context)!.qualityAssurance,
-          //                 AppLocalizations.of(context)!.everyMedicineUndergoesRigorousQualityChecks,),
-          //               const SizedBox(height: 20),
-          //               _valueCard(Icons.favorite_border,  AppLocalizations.of(context)!.patientCare,
-          //                 AppLocalizations.of(context)!.wePrioritizePatientWellbeingProvidingCompassionate,),
-          //               const SizedBox(height: 20),
-          //               _valueCard(Icons.check_circle_outline,  AppLocalizations.of(context)!.reliability,
-          //                 AppLocalizations.of(context)!.trustedByThousandsOfCustomersWeMaintainTheHighest,),
-          //               const SizedBox(height: 20),
-          //               _valueCard(Icons.schedule,  AppLocalizations.of(context)!.accessibility,
-          //                   '24/7${ AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}'),
-          //             ],
-          //           )
-          //               : Row(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Expanded(
-          //                   child: _valueCard(
-          //                       Icons.shield_outlined,
-          //                       AppLocalizations.of(context)!.qualityAssurance,
-          //                     AppLocalizations.of(context)!.everyMedicineUndergoesRigorousQualityChecks,)),
-          //               const SizedBox(width: 24),
-          //               Expanded(
-          //                   child: _valueCard(
-          //                       Icons.favorite_border,
-          //                       AppLocalizations.of(context)!.patientCare,
-          //                     AppLocalizations.of(context)!.wePrioritizePatientWellbeingProvidingCompassionate,)),
-          //               const SizedBox(width: 24),
-          //               Expanded(
-          //                   child: _valueCard(
-          //                       Icons.check_circle_outline,
-          //                       AppLocalizations.of(context)!.reliability,
-          //                     AppLocalizations.of(context)!.trustedByThousandsOfCustomersWeMaintainTheHighest,)),
-          //               const SizedBox(width: 24),
-          //               Expanded(
-          //                   child: _valueCard(
-          //                       Icons.schedule,
-          //                       AppLocalizations.of(context)!.accessibility,
-          //                       '24/7 ${ AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}')),
-          //             ],
-          //           );
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Sizes.spaceHeight10,
 
           // 🔹 Our Impact Section (unchanged)
@@ -453,63 +462,125 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   ),
                 ),
                 const SizedBox(height: 48),
+                // LayoutBuilder(
+                //   builder: (context, constraints) {
+                //     bool isMobile = constraints.maxWidth < 900;
+                //     return isMobile
+                //         ? Column(
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             crossAxisAlignment: CrossAxisAlignment.center,
+                //             children: [
+                //               _certCard(
+                //                 Icons.military_tech_outlined,
+                //                 AppLocalizations.of(context)!.fDAApproved,
+                //               ),
+                //               const SizedBox(height: 20),
+                //               _certCard(
+                //                 Icons.shield_outlined,
+                //                 "${AppLocalizations.of(context)!.iSO} 9001:2015",
+                //               ),
+                //               const SizedBox(height: 20),
+                //               _certCard(
+                //                 Icons.verified_outlined,
+                //                 AppLocalizations.of(context)!.wHOGMPCertified,
+                //               ),
+                //               const SizedBox(height: 20),
+                //               _certCard(
+                //                 Icons.stars_outlined,
+                //                 AppLocalizations.of(context)!.licensedPharmacy,
+                //               ),
+                //             ],
+                //           )
+                //         : Row(
+                //             mainAxisAlignment: MainAxisAlignment
+                //                 .center, // 👈 horizontally center row
+                //             crossAxisAlignment: CrossAxisAlignment.center,
+                //             children: [
+                //               _certCard(
+                //                 Icons.military_tech_outlined,
+                //                 AppLocalizations.of(context)!.fDAApproved,
+                //               ),
+                //               const SizedBox(width: 24),
+                //               _certCard(
+                //                 Icons.shield_outlined,
+                //                 "${AppLocalizations.of(context)!.iSO} 9001:2015",
+                //               ),
+                //               const SizedBox(width: 24),
+                //               _certCard(
+                //                 Icons.verified_outlined,
+                //                 AppLocalizations.of(context)!.wHOGMPCertified,
+                //               ),
+                //               const SizedBox(width: 24),
+                //               _certCard(
+                //                 Icons.stars_outlined,
+                //                 AppLocalizations.of(context)!.licensedPharmacy,
+                //               ),
+                //             ],
+                //           );
+                //   },
+                // ),
                 LayoutBuilder(
                   builder: (context, constraints) {
+                    double cardWidth = constraints.maxWidth < 900 ? constraints.maxWidth * 0.8 : 200;
+                    double cardHeight = 250; // you can adjust this to fit your content
+
                     bool isMobile = constraints.maxWidth < 900;
+
                     return isMobile
                         ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              _certCard(
-                                Icons.military_tech_outlined,
-                                AppLocalizations.of(context)!.fDAApproved,
-                              ),
-                              const SizedBox(height: 20),
-                              _certCard(
-                                Icons.shield_outlined,
-                                "${AppLocalizations.of(context)!.iSO} 9001:2015",
-                              ),
-                              const SizedBox(height: 20),
-                              _certCard(
-                                Icons.verified_outlined,
-                                AppLocalizations.of(context)!.wHOGMPCertified,
-                              ),
-                              const SizedBox(height: 20),
-                              _certCard(
-                                Icons.stars_outlined,
-                                AppLocalizations.of(context)!.licensedPharmacy,
-                              ),
-                            ],
-                          )
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _certCard(Icons.military_tech_outlined,
+                            AppLocalizations.of(context)!.fDAApproved,
+                            width: cardWidth,
+                            height: cardHeight),
+                        const SizedBox(height: 20),
+                        _certCard(Icons.shield_outlined,
+                            "${AppLocalizations.of(context)!.iSO} 9001:2015",
+                            width: cardWidth,
+                            height: cardHeight),
+                        const SizedBox(height: 20),
+                        _certCard(Icons.verified_outlined,
+                            AppLocalizations.of(context)!.wHOGMPCertified,
+                            width: cardWidth,
+                            height: cardHeight),
+                        const SizedBox(height: 20),
+                        _certCard(Icons.stars_outlined,
+                            AppLocalizations.of(context)!.licensedPharmacy,
+                            width: cardWidth,
+                            height: cardHeight),
+                      ],
+                    )
                         : Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .center, // 👈 horizontally center row
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              _certCard(
-                                Icons.military_tech_outlined,
-                                AppLocalizations.of(context)!.fDAApproved,
-                              ),
-                              const SizedBox(width: 24),
-                              _certCard(
-                                Icons.shield_outlined,
-                                "${AppLocalizations.of(context)!.iSO} 9001:2015",
-                              ),
-                              const SizedBox(width: 24),
-                              _certCard(
-                                Icons.verified_outlined,
-                                AppLocalizations.of(context)!.wHOGMPCertified,
-                              ),
-                              const SizedBox(width: 24),
-                              _certCard(
-                                Icons.stars_outlined,
-                                AppLocalizations.of(context)!.licensedPharmacy,
-                              ),
-                            ],
-                          );
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _certCard(Icons.military_tech_outlined,
+                            AppLocalizations.of(context)!.fDAApproved,
+                            width: cardWidth,
+                            height: cardHeight),
+                        const SizedBox(width: 24),
+                        _certCard(Icons.shield_outlined,
+                            "${AppLocalizations.of(context)!.iSO} 9001:2015",
+                            width: cardWidth,
+                            height: cardHeight),
+                        const SizedBox(width: 24),
+                        _certCard(Icons.verified_outlined,
+                            AppLocalizations.of(context)!.wHOGMPCertified,
+                            width: cardWidth,
+                            height: cardHeight),
+                        const SizedBox(width: 24),
+                        _certCard(Icons.stars_outlined,
+                            AppLocalizations.of(context)!.licensedPharmacy,
+                            width: cardWidth,
+                            height: cardHeight),
+                      ],
+                    );
                   },
                 ),
+
+
               ],
             ),
           ),
@@ -822,7 +893,39 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     ),
   );
 
-  Widget _certCard(IconData icon, String title) => Container(
+  // Widget _certCard(IconData icon, String title) => Container(
+  //   padding: const EdgeInsets.all(32),
+  //   decoration: BoxDecoration(
+  //     border: Border.all(color: const Color(0xFFE2E8F0)),
+  //     borderRadius: BorderRadius.circular(12),
+  //     color: Colors.white,
+  //   ),
+  //   child: Column(
+  //     children: [
+  //       Container(
+  //         width: 80,
+  //         height: 80,
+  //         decoration: const BoxDecoration(
+  //           color: Color(0xFFDEEBFF),
+  //           shape: BoxShape.circle,
+  //         ),
+  //         child: Icon(icon, color: const Color(0xFF2563EB), size: 40),
+  //       ),
+  //       const SizedBox(height: 20),
+  //       Text(
+  //         title,
+  //         style: const TextStyle(
+  //           fontSize: 20,
+  //           fontWeight: FontWeight.w600,
+  //           color: Colors.black,
+  //         ),
+  //       ),
+  //     ],
+  //   ),
+  // );
+  Widget _certCard(IconData icon, String title, {required double width, required double height}) => Container(
+    width: width,      // same width
+    height: height,    // same height
     padding: const EdgeInsets.all(32),
     decoration: BoxDecoration(
       border: Border.all(color: const Color(0xFFE2E8F0)),
@@ -830,6 +933,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       color: Colors.white,
     ),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.center, // vertically center content
       children: [
         Container(
           width: 80,
@@ -843,6 +947,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
         const SizedBox(height: 20),
         Text(
           title,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,

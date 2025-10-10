@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get whatsApp => 'WhatsApp';
+  String get whatsApp => 'WhatsApp:';
 
   @override
   String get login => 'login';
@@ -288,7 +288,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phoneNumber => 'Phone Number *';
 
   @override
-  String get category => 'Category';
+  String get category => 'Category:';
 
   @override
   String get subject => 'Subject';
@@ -426,7 +426,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectCategory => 'Select category';
 
   @override
-  String get deliveryAddress => 'Delivery Address *';
+  String get deliveryAddress => 'Delivery Address:';
 
   @override
   String get enterAddress => 'Enter your complete address';
@@ -586,4 +586,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getStarted => 'Get Started';
+
+  @override
+  String get yourOrders => 'Your Orders';
+
+  @override
+  String get trackOrdersInfo => 'Track all your medicine orders and manage price confirmations.';
+
+  @override
+  String get customer => 'Customer:';
+
+  @override
+  String get duration => 'Duration:';
+
+  @override
+  String get orderDate => 'Order Date:';
+
+  @override
+  String get estimatedDelivery => 'Estimated Delivery:';
+
+  @override
+  String get finalPrice => 'Final Price:';
+
+  @override
+  String get medicines => 'Medicines:';
+
+  @override
+  String get orderTimeline => 'Order Timeline';
+
+  @override
+  String get priceConfirmationRequired => 'Price Confirmation Required';
+
+  @override
+  String get originalPrice => 'Original:';
+
+  @override
+  String get discount => 'Discount:';
+
+  @override
+  String get finalPriceText => 'Final:';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get shippedTrack => 'Shipped! Track:';
+
+  @override
+  String get viewDetails => 'View Details';
 }

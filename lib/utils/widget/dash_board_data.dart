@@ -316,16 +316,73 @@ class DashboardTextSection extends StatelessWidget {
             textAlign: isMobile ? TextAlign.center : TextAlign.start,
           ),
           const SizedBox(height: 20),
+          // Row(
+          //   mainAxisAlignment:
+          //   isMobile ? MainAxisAlignment.center : MainAxisAlignment.start,
+          //   children: [
+          //     GestureDetector(
+          //       onTap: onOrderMedicineTap, // ✅ updated
+          //       child: Container(
+          //         alignment: Alignment.center,
+          //         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          //         height: screen.height * 0.075,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(10),
+          //           color: AppColor.blueColor,
+          //         ),
+          //         child: Row(
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: [
+          //             Icon(Icons.add_shopping_cart_sharp, color: AppColor.whiteColor),
+          //             const SizedBox(width: 6),
+          //             Text(
+          //               AppLocalizations.of(context)!.orderMedicine,
+          //               style: TextStyle(
+          //                 color: AppColor.whiteColor,
+          //                 fontWeight: FontWeight.w500,
+          //                 fontSize: isMobile ? 14 : 16,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(width: 12),
+          //     GestureDetector(
+          //       onTap: onLearnMoreTap,
+          //       child: Container(
+          //         alignment: Alignment.center,
+          //         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          //         height: screen.height * 0.075,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(10),
+          //           color: AppColor.whiteColor,
+          //         ),
+          //         child: Row(
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: [
+          //             Text(
+          //               AppLocalizations.of(context)!.learnMore,
+          //               style: TextStyle(
+          //                 fontWeight: FontWeight.bold,
+          //                 fontSize: isMobile ? 14 : 16,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           Row(
             mainAxisAlignment:
             isMobile ? MainAxisAlignment.center : MainAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: onOrderMedicineTap, // ✅ updated
+                onTap: onOrderMedicineTap,
                 child: Container(
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  height: screen.height * 0.075,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColor.blueColor,
@@ -352,8 +409,7 @@ class DashboardTextSection extends StatelessWidget {
                 onTap: onLearnMoreTap,
                 child: Container(
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  height: screen.height * 0.075,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColor.whiteColor,
@@ -374,6 +430,7 @@ class DashboardTextSection extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment:

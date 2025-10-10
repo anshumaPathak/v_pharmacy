@@ -709,15 +709,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               GestureDetector(
-                                onTap: () =>
-                                    setState(() => activeSection = "services"),
+                                onTap: () => setState(() => activeSection = "services"),
                                 child: Container(
                                   alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 8,
-                                  ),
-                                  height: Sizes.screenHeight * 0.075,
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: AppColor.blueColor,
@@ -725,10 +720,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(
-                                        Icons.add_shopping_cart_sharp,
-                                        color: Colors.white,
-                                      ),
+                                      const Icon(Icons.add_shopping_cart_sharp, color: Colors.white),
                                       const SizedBox(width: 6),
                                       Text(
                                         AppLocalizations.of(context)!.services,
@@ -743,23 +735,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               SizedBox(width: Sizes.screenWidth * 0.03),
                               GestureDetector(
-                                onTap: () {
-                                  setState(() => activeSection = "contact");
-                                  // topBarKey.currentState?.setSelectedIndex(1); // Services tab highlight hoga
-                                },
+                                onTap: () => setState(() => activeSection = "contact"),
                                 child: Container(
                                   alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 8,
-                                  ),
-                                  height: Sizes.screenHeight * 0.075,
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: AppColor.whiteColor,
-                                    border: Border.all(
-                                      color: Colors.grey.shade200,
-                                    ),
+                                    border: Border.all(color: Colors.grey.shade200),
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -768,7 +751,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       const SizedBox(width: 6),
                                       Text(
                                         AppLocalizations.of(context)!.contact,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -779,6 +762,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                             ],
                           ),
+
                         ],
                       ),
                     ),
@@ -899,24 +883,46 @@ class _CategoryCardState extends State<CategoryCard> {
                 textAlign: TextAlign.center,
               ),
               const Spacer(),
+              // GestureDetector(
+              //   onTap: widget.onTap, // 🔹 Parent callback trigger
+              //   child: Container(
+              //     alignment: Alignment.center,
+              //     height: Sizes.screenHeight * 0.06,
+              //     width: MediaQuery.of(context).size.width < 600
+              //         ? double.infinity
+              //         : Sizes.screenWidth * 0.1,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(10),
+              //       border: Border.all(color: Colors.grey.shade400),
+              //     ),
+              //     child:  Text(
+              //       AppLocalizations.of(context)!.getStarted,
+              //       style: TextStyle(fontWeight: FontWeight.bold),
+              //     ),
+              //   ),
+              // ),
               GestureDetector(
                 onTap: widget.onTap, // 🔹 Parent callback trigger
                 child: Container(
                   alignment: Alignment.center,
-                  height: Sizes.screenHeight * 0.06,
+                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                   width: MediaQuery.of(context).size.width < 600
                       ? double.infinity
-                      : Sizes.screenWidth * 0.1,
+                      : Sizes.screenWidth * 0.15,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.grey.shade400),
                   ),
-                  child:  Text(
+                  child: Text(
                     AppLocalizations.of(context)!.getStarted,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
+
             ],
           ),
         ),

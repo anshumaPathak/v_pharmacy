@@ -411,7 +411,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
           decoration: InputDecoration(
             hintText: hint,
             constraints: BoxConstraints(
-              maxHeight: 35
+              maxHeight: 38
             ),
             hintStyle: TextStyle(color: Colors.grey[400]),
             filled: true,
@@ -428,7 +428,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Color(0xFF2563EB)),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           validator: (value) => value!.isEmpty ? 'Field cannot be empty' : null,
         ),
@@ -469,7 +469,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
           hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
           decoration: InputDecoration(
             constraints: BoxConstraints(
-                maxHeight: 35
+                maxHeight: 38
             ),
             filled: true,
             fillColor: const Color(0xFFf8fafc),
@@ -500,20 +500,11 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
     width: double.infinity,
     child: ElevatedButton(
       onPressed: () {
-        // if (_formKey.currentState!.validate()) {
-        //   if (_selectedImage == null) {
-        //     ScaffoldMessenger.of(context).showSnackBar(
-        //         const SnackBar(content: Text('Please upload prescription')));
-        //     return;
-        //   }
-        //   ScaffoldMessenger.of(context)
-        //       .showSnackBar(const SnackBar(content: Text('Order Submitted!')));
-        // }
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2563EB),
         foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 18),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0,

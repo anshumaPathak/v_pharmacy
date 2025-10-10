@@ -30,6 +30,7 @@ dependencies:
   go_router:
   shared_preferences:
   provider:
+  dotted_border: ^3.1.0
   image_picker:
   intl:
   flutter_localizations:

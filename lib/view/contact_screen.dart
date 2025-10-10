@@ -27,22 +27,52 @@ class _ContactScreenState extends State<ContactScreen> {
       child: Column(
         children: [
           // ===== Top Section =====
+          // Container(
+          //   height: Sizes.screenHeight * 0.3,
+          //   width: double.infinity,
+          //   color: const Color(0xFFe8f2ff),
+          //   padding: EdgeInsets.symmetric(
+          //       horizontal: Sizes.screenWidth * 0.03, vertical: 15),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Text(
+          //         AppLocalizations.of(context)!.getInTouch,
+          //         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          //       ),
+          //       Sizes.spaceHeight10,
+          //       Text(
+          //         AppLocalizations.of(context)!.weHereToHelpReachOutToUsAnytimeForSupport,
+          //         style: TextStyle(fontSize: 14, color: Colors.black54),
+          //         textAlign: TextAlign.center,
+          //       ),
+          //       Text(
+          //         AppLocalizations.of(context)!.medicineOrdersAndVerification,
+          //         style: TextStyle(fontSize: 14, color: Colors.black54),
+          //         textAlign: TextAlign.center,
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Container(
-            height: Sizes.screenHeight * 0.3,
             width: double.infinity,
             color: const Color(0xFFe8f2ff),
             padding: EdgeInsets.symmetric(
-                horizontal: Sizes.screenWidth * 0.03, vertical: 15),
+              horizontal: Sizes.screenWidth * 0.03,
+              vertical: 20,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min, // <-- content ke hisaab se height
               children: [
                 Text(
                   AppLocalizations.of(context)!.getInTouch,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                Sizes.spaceHeight10,
+                SizedBox(height: 10),
                 Text(
-                  AppLocalizations.of(context)!.weHereToHelpReachOutToUsAnytimeForSupport,
+                  AppLocalizations.of(context)!
+                      .weHereToHelpReachOutToUsAnytimeForSupport,
                   style: TextStyle(fontSize: 14, color: Colors.black54),
                   textAlign: TextAlign.center,
                 ),

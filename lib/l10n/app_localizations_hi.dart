@@ -9,7 +9,7 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get whatsApp => 'व्हाट्सएप';
+  String get whatsApp => 'व्हाट्सएप:';
 
   @override
   String get login => 'लॉगिन करें';
@@ -288,7 +288,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get phoneNumber => 'फोन नंबर';
 
   @override
-  String get category => 'श्रेणी';
+  String get category => 'श्रेणी:';
 
   @override
   String get subject => 'विषय';
@@ -426,7 +426,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get selectCategory => 'श्रेणी चुनें';
 
   @override
-  String get deliveryAddress => 'डिलीवरी पता *';
+  String get deliveryAddress => 'डिलीवरी पता:';
 
   @override
   String get enterAddress => 'अपना पूरा पता दर्ज करें';
@@ -586,4 +586,55 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get getStarted => 'शुरू करें';
+
+  @override
+  String get yourOrders => 'आपके ऑर्डर्स';
+
+  @override
+  String get trackOrdersInfo => 'अपने सभी दवा ऑर्डर्स को ट्रैक करें और मूल्य पुष्टि प्रबंधित करें।';
+
+  @override
+  String get customer => 'ग्राहक:';
+
+  @override
+  String get duration => 'अवधि:';
+
+  @override
+  String get orderDate => 'ऑर्डर तिथि:';
+
+  @override
+  String get estimatedDelivery => 'अनुमानित डिलीवरी:';
+
+  @override
+  String get finalPrice => 'अंतिम मूल्य:';
+
+  @override
+  String get medicines => 'दवाइयाँ:';
+
+  @override
+  String get orderTimeline => 'ऑर्डर समयरेखा';
+
+  @override
+  String get priceConfirmationRequired => 'मूल्य पुष्टि आवश्यक';
+
+  @override
+  String get originalPrice => 'मूल:';
+
+  @override
+  String get discount => 'छूट:';
+
+  @override
+  String get finalPriceText => 'अंतिम:';
+
+  @override
+  String get accept => 'स्वीकृत करें';
+
+  @override
+  String get cancel => 'रद्द करें';
+
+  @override
+  String get shippedTrack => 'शिप हो गया! ट्रैक:';
+
+  @override
+  String get viewDetails => 'विवरण देखें';
 }

@@ -98,7 +98,7 @@ abstract class AppLocalizations {
   /// No description provided for @whatsApp.
   ///
   /// In en, this message translates to:
-  /// **'WhatsApp'**
+  /// **'WhatsApp:'**
   String get whatsApp;
 
   /// No description provided for @login.
@@ -656,7 +656,7 @@ abstract class AppLocalizations {
   /// No description provided for @category.
   ///
   /// In en, this message translates to:
-  /// **'Category'**
+  /// **'Category:'**
   String get category;
 
   /// No description provided for @subject.
@@ -932,7 +932,7 @@ abstract class AppLocalizations {
   /// No description provided for @deliveryAddress.
   ///
   /// In en, this message translates to:
-  /// **'Delivery Address *'**
+  /// **'Delivery Address:'**
   String get deliveryAddress;
 
   /// No description provided for @enterAddress.
@@ -1252,6 +1252,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get Started'**
   String get getStarted;
+
+  /// No description provided for @yourOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Orders'**
+  String get yourOrders;
+
+  /// No description provided for @trackOrdersInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Track all your medicine orders and manage price confirmations.'**
+  String get trackOrdersInfo;
+
+  /// No description provided for @customer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer:'**
+  String get customer;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration:'**
+  String get duration;
+
+  /// No description provided for @orderDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Date:'**
+  String get orderDate;
+
+  /// No description provided for @estimatedDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Delivery:'**
+  String get estimatedDelivery;
+
+  /// No description provided for @finalPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Final Price:'**
+  String get finalPrice;
+
+  /// No description provided for @medicines.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines:'**
+  String get medicines;
+
+  /// No description provided for @orderTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Timeline'**
+  String get orderTimeline;
+
+  /// No description provided for @priceConfirmationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Confirmation Required'**
+  String get priceConfirmationRequired;
+
+  /// No description provided for @originalPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Original:'**
+  String get originalPrice;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount:'**
+  String get discount;
+
+  /// No description provided for @finalPriceText.
+  ///
+  /// In en, this message translates to:
+  /// **'Final:'**
+  String get finalPriceText;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @shippedTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped! Track:'**
+  String get shippedTrack;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

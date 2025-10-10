@@ -206,7 +206,28 @@
   "fullName": "पूरा नाम",
   "emailAddress": "ईमेल पता",
   "verified": "सत्यापित",
-  "getStarted": "शुरू करें"
+  "getStarted": "शुरू करें",
+
+  "yourOrders": "आपके ऑर्डर्स",
+  "trackOrdersInfo": "अपने सभी दवा ऑर्डर्स को ट्रैक करें और मूल्य पुष्टि प्रबंधित करें।",
+  "customer": "ग्राहक:",
+  "category": "श्रेणी:",
+  "duration": "अवधि:",
+  "whatsApp": "व्हाट्सएप:",
+  "orderDate": "ऑर्डर तिथि:",
+  "deliveryAddress": "डिलीवरी पता:",
+  "estimatedDelivery": "अनुमानित डिलीवरी:",
+  "finalPrice": "अंतिम मूल्य:",
+  "medicines": "दवाइयाँ:",
+  "orderTimeline": "ऑर्डर समयरेखा",
+  "priceConfirmationRequired": "मूल्य पुष्टि आवश्यक",
+  "originalPrice": "मूल:",
+  "discount": "छूट:",
+  "finalPriceText": "अंतिम:",
+  "accept": "स्वीकृत करें",
+  "cancel": "रद्द करें",
+  "shippedTrack": "शिप हो गया! ट्रैक:",
+  "viewDetails": "विवरण देखें"
 
 
 

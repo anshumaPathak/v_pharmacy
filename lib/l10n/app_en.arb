@@ -208,6 +208,28 @@
   "demoUseAnyPhoneNumberEndingWith1234For": "Demo: Use any phone number ending with 1234 for existing user",
   "byContinuingYouAgreeToOur": "By continuing, you agree to our",
   "termsOfService": "Terms of Service",
-  "getStarted": "Get Started"
+  "getStarted": "Get Started",
+
+
+   "yourOrders" : "Your Orders",
+   "trackOrdersInfo" : "Track all your medicine orders and manage price confirmations.",
+   "customer" : "Customer:",
+   "category" : "Category:",
+   "duration" : "Duration:",
+   "whatsApp" : "WhatsApp:",
+   "orderDate" : "Order Date:",
+   "deliveryAddress" : "Delivery Address:",
+   "estimatedDelivery" : "Estimated Delivery:",
+   "finalPrice" : "Final Price:",
+   "medicines" : "Medicines:",
+   "orderTimeline" : "Order Timeline",
+   "priceConfirmationRequired":"Price Confirmation Required",
+   "originalPrice" : "Original:",
+   "discount" : "Discount:",
+   "finalPriceText" : "Final:",
+   "accept" : "Accept",
+   "cancel" : "Cancel",
+   "shippedTrack" : "Shipped! Track:",
+   "viewDetails" : "View Details"
 
 }
