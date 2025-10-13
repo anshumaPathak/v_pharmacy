@@ -205,7 +205,7 @@ class _CompleteRegistrationDialogState extends State<CompleteRegistrationDialog>
               child: ElevatedButton(
                 onPressed:(){
                   final registerViewModel = Provider.of<RegisterViewModel>(context,listen: false);
-       registerViewModel.registerApi(
+          registerViewModel.registerApi(
            _nameController.text,
            _emailController.text,
            widget.phoneNumber,

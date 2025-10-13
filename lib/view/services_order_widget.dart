@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:v_pharmashing/res/const_color.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
+import 'package:v_pharmashing/utils/utils.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/create_order_view_model.dart';
 import '../l10n/app_localizations.dart';
 import '../view_model/user_view_model.dart';
@@ -17,7 +18,6 @@ class OrderMedicineScreen extends StatefulWidget {
 }
 
 class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
-  bool _isLoggedIn = false;
 
   final _formKey = GlobalKey<FormState>();
   final _picker = ImagePicker();
@@ -195,12 +195,13 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                 ),
               ),
               const SizedBox(height: 40),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 60),
-                child: AbsorbPointer(
-                  absorbing: userId == null,
+              if (userId == null)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 60),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth*0.03,vertical: Sizes.screenHeight*0.03),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Sizes.screenWidth * 0.03,
+                        vertical: Sizes.screenHeight * 0.03),
                     width: isMobile
                         ? MediaQuery.of(context).size.width * 0.9
                         : 800,
@@ -221,9 +222,9 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
+                      children: [
                         Text("Please"),
-                        SizedBox(height: Sizes.screenHeight*0.02,),
+                        SizedBox(height: Sizes.screenHeight * 0.02),
                         Text(
                           "login",
                           style: TextStyle(
@@ -231,13 +232,12 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: Sizes.screenHeight*0.02,),
+                        SizedBox(height: Sizes.screenHeight * 0.02),
                         Text("to place an order"),
                       ],
                     ),
                   ),
                 ),
-              ),
 
               const SizedBox(height: 60),
               Padding(
@@ -640,65 +640,6 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
     );
   }
 
-  // Widget _buildTextField({
-  //   required TextEditingController controller,
-  //   required String label,
-  //   required String hint,
-  //   int maxLines = 1,
-  //   IconData? icon,
-  // }) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       if (label.isNotEmpty)
-  //         Row(
-  //           children: [
-  //             if (icon != null) ...[
-  //               Icon(icon, color: const Color(0xFF0F172A), size: 20),
-  //               const SizedBox(width: 8),
-  //             ],
-  //             Text(
-  //               label,
-  //               style: const TextStyle(
-  //                 fontSize: 15,
-  //                 fontWeight: FontWeight.w400,
-  //                 color: Color(0xFF646b75),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       const SizedBox(height: 12),
-  //       TextFormField(
-  //         controller: controller,
-  //         maxLines: maxLines,
-  //         decoration: InputDecoration(
-  //           hintText: hint,
-  //           constraints: BoxConstraints(
-  //             maxHeight: 38
-  //           ),
-  //           hintStyle: TextStyle(color: Colors.grey[400]),
-  //           filled: true,
-  //           fillColor: const Color(0xFFf8fafc),
-  //           border: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(12),
-  //             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-  //           ),
-  //           enabledBorder: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(12),
-  //             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-  //           ),
-  //           focusedBorder: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(12),
-  //             borderSide: const BorderSide(color: Color(0xFF2563EB)),
-  //           ),
-  //           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  //         ),
-  //         validator: (value) => value!.isEmpty ? 'Field cannot be empty' : null,
-  //       ),
-  //     ],
-  //   );
-  // }
-
   Widget _buildDropdownField({
     required String label,
     required String hint,
@@ -763,11 +704,80 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
   }
 
 
+  // Widget _buildSubmitButton() => SizedBox(
+  //   width: double.infinity,
+  //   child: ElevatedButton(
+  //     onPressed: () {
+  //       final createOrderViewModel = Provider.of<CreateOrderViewModel>(context,listen: false);
+  //       createOrderViewModel.createOrderApi(
+  //         _nameController.text,
+  //         _selectedCategory,
+  //         _addressController.text,
+  //         _phoneController.text,
+  //         _whatsappController.text,
+  //         _selectedDuration ?? _otherDurationController.text,
+  //         _instructionsController.text,
+  //         _selectedImages,
+  //         context,
+  //       );
+  //     },
+  //     style: ElevatedButton.styleFrom(
+  //       backgroundColor: const Color(0xFF2563EB),
+  //       foregroundColor: Colors.white,
+  //       padding: const EdgeInsets.symmetric(vertical: 14),
+  //       shape:
+  //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  //       elevation: 0,
+  //     ),
+  //     child: Text(
+  //       AppLocalizations.of(context)!.submitOrder,
+  //       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+  //     ),
+  //   ),
+  // );
   Widget _buildSubmitButton() => SizedBox(
     width: double.infinity,
     child: ElevatedButton(
       onPressed: () {
-        final createOrderViewModel = Provider.of<CreateOrderViewModel>(context,listen: false);
+        // 🔹 Validation Start
+        String name = _nameController.text.trim();
+        String email = _emailController.text.trim();
+        String phone = _phoneController.text.trim();
+        String address = _addressController.text.trim();
+
+        // Email validation pattern
+        final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+        if (name.isEmpty ||
+            address.isEmpty ||
+            phone.isEmpty ||
+            (_selectedCategory == null || _selectedCategory!.isEmpty) ||
+            (_selectedDuration == null && _otherDurationController.text.isEmpty)) {
+          Utils.show("Please fill all required fields", context);
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(content: Text('Please fill all required fields')),
+          // );
+          return;
+        }
+
+        if (phone.length != 10) {
+          Utils.show("Please enter a valid 10-digit phone number", context);
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(content: Text('Please enter a valid 10-digit phone number')),
+          // );
+          return;
+        }
+
+        if (email.isNotEmpty && !emailRegex.hasMatch(email)) {
+          Utils.show("Please enter a valid email address", context);
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(content: Text('Please enter a valid email address')),
+          // );
+          return;
+        }
+        // 🔹 Validation End
+
+        final createOrderViewModel = Provider.of<CreateOrderViewModel>(context, listen: false);
         createOrderViewModel.createOrderApi(
           _nameController.text,
           _selectedCategory,
@@ -784,8 +794,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
         backgroundColor: const Color(0xFF2563EB),
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 14),
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0,
       ),
       child: Text(
@@ -795,46 +804,4 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
     ),
   );
 
-
-  // Widget _buildSubmitButton() => SizedBox(
-  //   width: double.infinity,
-  //   child: ElevatedButton(
-  //     onPressed: isLoggedIn
-  //         ? () {
-  //       final createOrderViewModel = Provider.of<CreateOrderViewModel>(context, listen: false);
-  //       createOrderViewModel.createOrderApi(
-  //         _nameController.text,
-  //         _selectedCategory,
-  //         _addressController.text,
-  //         _phoneController.text,
-  //         _whatsappController.text,
-  //         _selectedDuration ?? _otherDurationController.text,
-  //         _instructionsController.text,
-  //         _selectedImages,
-  //         context,
-  //       );
-  //     }
-  //         : null, // 🔹 disable button if not logged in
-  //     style: ElevatedButton.styleFrom(
-  //       backgroundColor: const Color(0xFF2563EB),
-  //       foregroundColor: Colors.white,
-  //       padding: const EdgeInsets.symmetric(vertical: 14),
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  //       elevation: 0,
-  //     ),
-  //     child: Text(
-  //       AppLocalizations.of(context)!.submitOrder,
-  //       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-  //     ),
-  //   ),
-  // );
-
-  Future<void> _pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setState(() {
-        _selectedImage = File(image.path);
-      });
-    }
-  }
 }

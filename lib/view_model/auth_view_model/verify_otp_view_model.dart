@@ -20,36 +20,114 @@ class VerifyOtpViewModel with ChangeNotifier {
     notifyListeners();
   }
   Future<void> verifyOtpApi(
-      dynamic phone, dynamic otp, dynamic userid, bool isRegistered, BuildContext context) async {
+      dynamic phone,
+      dynamic otp,
+      dynamic userid,
+      bool isRegistered,
+      BuildContext context,
+      ) async {
     setLoading(true);
-    _loginRepo.verifyOtpApi(phone, otp).then((value) {
+
+    try {
+      final value = await _loginRepo.verifyOtpApi(phone, otp);
       setLoading(false);
+
       if (value['error'].toString() == "200") {
         Utils.show(value['msg'] ?? "OTP Verified", context);
-        if (isRegistered == true) {
-          UserViewModel().saveUser(userid);
-          print("UserID saved: $userid");
+
+        if (isRegistered) {
+          // Already registered
+          if (userid.isNotEmpty) UserViewModel().saveUser(userid);
+
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => AlreadyRegisteredDialog(phoneNumber: phone),
+          );
         } else {
-          // User not registered → show registration dialog
-          Future.delayed(const Duration(milliseconds: 300), () {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => CompleteRegistrationDialog(
-                phoneNumber: phone,
-              ),
-            );
-          });
+          // Not registered → show registration
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
+          );
         }
       } else {
         Utils.show(value['msg'] ?? "OTP Verification failed", context);
       }
-    }).onError((error, stackTrace) {
+    } catch (error) {
       setLoading(false);
-      if (kDebugMode) {
-        print('error: $error');
-      }
-      Utils.show(error.toString(), context);
-    });
+      Utils.show("Something went wrong", context);
+    }
+  }
+
+
+
+// Future<void> verifyOtpApi(
+  //     dynamic phone, dynamic otp, dynamic userid, bool isRegistered, BuildContext context) async
+  // {
+  //   setLoading(true);
+  //   _loginRepo.verifyOtpApi(phone, otp).then((value) {
+  //     setLoading(false);
+  //     if (value['error'].toString() == "200") {
+  //       Utils.show(value['msg'] ?? "OTP Verified", context);
+  //       if (isRegistered == true) {
+  //         UserViewModel().saveUser(userid);
+  //         Future.delayed(const Duration(milliseconds: 300), () {
+  //           showDialog(
+  //             context: context,
+  //             barrierDismissible: false,
+  //             builder: (context) => CompleteRegistrationDialog(
+  //               phoneNumber: phone,
+  //
+  //             ),
+  //           );
+  //         });
+  //         print("UserID saved: $userid");
+  //       } else {
+  //         // User not registered → show registration dialog
+  //         Future.delayed(const Duration(milliseconds: 300), () {
+  //           showDialog(
+  //             context: context,
+  //             barrierDismissible: false,
+  //             builder: (context) => CompleteRegistrationDialog(
+  //               phoneNumber: phone,
+  //             ),
+  //           );
+  //         });
+  //       }
+  //     } else {
+  //       Utils.show(value['msg'] ?? "OTP Verification failed", context);
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     setLoading(false);
+  //     if (kDebugMode) {
+  //       print('error: $error');
+  //     }
+  //     Utils.show(error.toString(), context);
+  //   });
+  // }
+}
+
+class AlreadyRegisteredDialog extends StatelessWidget {
+  final String phoneNumber;
+
+  const AlreadyRegisteredDialog({super.key, required this.phoneNumber});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text("Welcome Back!"),
+      content: Text("User $phoneNumber already registered.\nPlease proceed to login."),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
+          child: const Text("OK"),
+        ),
+      ],
+    );
   }
 }

@@ -62,10 +62,14 @@ class LoginViewModel with ChangeNotifier {
     await _loginRepo.loginApi(data).then((response) {
       print("✅ Response: $response");
 
+      setLoading(false);
+
       if (response['success'] == true) {
         final message = response['message'] ?? "OTP sent successfully";
+
+        // API se register_status aur userId fetch karein
         final isRegistered = response['register_status'] == 1;
-        final userId = response['id'].toString();
+        final userId = response['id']?.toString() ?? '';
 
         // Show OTP dialog
         Future.delayed(const Duration(milliseconds: 300), () {
@@ -76,17 +80,30 @@ class LoginViewModel with ChangeNotifier {
               builder: (context) => OTPVerificationDialog(
                 phoneNumber: phone.toString(),
                 userId: userId,
-                isRegistered: isRegistered,
+                isRegistered: isRegistered, // ✅ yaha dynamic
               ),
             );
           }
         });
 
         Utils.show(message, context);
-        setLoading(false);
       } else {
+        // OTP phir bhi bhejna hai, user not registered
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (context.mounted) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => OTPVerificationDialog(
+                phoneNumber: phone.toString(),
+                userId: "",
+                isRegistered: false, // ✅ yaha dynamic false
+              ),
+            );
+          }
+        });
+
         Utils.show(response['message'] ?? "Something went wrong", context);
-        setLoading(false);
       }
     }).onError((error, stackTrace) {
       setLoading(false);

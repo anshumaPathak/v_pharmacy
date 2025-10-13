@@ -73,8 +73,7 @@ class RegisterViewModel with ChangeNotifier {
     _loading = value;
     notifyListeners();
   }
-
-  Future<void> registerApi(dynamic name, dynamic email, dynamic mobile, context) async {
+  Future<void> registerApi(dynamic name, dynamic email, dynamic mobile, BuildContext context) async {
     setLoading(true);
     Map<String, dynamic> data = {
       "name": name,
@@ -88,15 +87,23 @@ class RegisterViewModel with ChangeNotifier {
       if (value['success'] == true) {
         // ✅ Save user login info locally
         UserViewModel userViewModel = UserViewModel();
-        userViewModel.saveUser(value['id'].toString());
+        await userViewModel.saveUser(value['id'].toString());
 
         final sp = await SharedPreferences.getInstance();
         await sp.setString('user_name', name);
         await sp.setBool('is_logged_in', true);
 
+        // Close any open dialogs before navigating
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context); // Close registration dialog
+          Navigator.pop(context); // Close registration dialog
+          Navigator.pop(context); // Close registration dialog
+        }
+
         Utils.show(value['message'], context);
 
-      // Navigator.pushNamed(context, RoutesName.dashboardScreen);
+        // Navigate to dashboard or home screen
+        // context.pushReplacementNamed(context, RoutesName.dashboardScreen);
 
         String? userId = await userViewModel.getUser();
         print("User Registered - User ID: $userId");
@@ -106,8 +113,6 @@ class RegisterViewModel with ChangeNotifier {
         print("Error Message: ${value['message']}");
         if (value['message'] == "Email already exists") {
           Utils.show("Email has already been taken", context);
-        } else {
-          Utils.show(value['message'], context);
         }
       }
     } catch (error) {
@@ -119,4 +124,50 @@ class RegisterViewModel with ChangeNotifier {
       setLoading(false);
     }
   }
+
+  // Future<void> registerApi(dynamic name, dynamic email, dynamic mobile, context) async {
+  //   setLoading(true);
+  //   Map<String, dynamic> data = {
+  //     "name": name,
+  //     "email": email,
+  //     "mobile": mobile
+  //   };
+  //   print(data);
+  //
+  //   try {
+  //     final value = await _loginRepo.registerApi(data);
+  //     if (value['success'] == true) {
+  //       // ✅ Save user login info locally
+  //       UserViewModel userViewModel = UserViewModel();
+  //       userViewModel.saveUser(value['id'].toString());
+  //
+  //       final sp = await SharedPreferences.getInstance();
+  //       await sp.setString('user_name', name);
+  //       await sp.setBool('is_logged_in', true);
+  //
+  //       Utils.show(value['message'], context);
+  //       // context.pop();
+  //     // Navigator.pushNamed(context, RoutesName.dashboardScreen);
+  //
+  //       String? userId = await userViewModel.getUser();
+  //       print("User Registered - User ID: $userId");
+  //
+  //     } else {
+  //       Utils.show(value['message'], context);
+  //       print("Error Message: ${value['message']}");
+  //       if (value['message'] == "Email already exists") {
+  //         Utils.show("Email has already been taken", context);
+  //       } else {
+  //         Utils.show(value['message'], context);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     if (kDebugMode) {
+  //       print('Error: $error');
+  //     }
+  //     Utils.show("Something went wrong. Please try again later.", context);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 }

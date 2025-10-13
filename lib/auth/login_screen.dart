@@ -125,12 +125,43 @@ class _LoginDialogState extends State<LoginDialog> {
               ),
             ),
             const SizedBox(height: 20),
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: ElevatedButton(
+            //     onPressed: () async {
+            //       loginViewModel.loginApi(context, _phoneController.text);
+            //       // _showOTPDialog();
+            //     },
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: const Color(0xFF6B9EFF),
+            //       padding: const EdgeInsets.symmetric(vertical: 14),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(8),
+            //       ),
+            //     ),
+            //     child: const Text(
+            //       'Send OTP',
+            //       style: TextStyle(
+            //         fontSize: 16,
+            //         fontWeight: FontWeight.w600,
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  loginViewModel.loginApi(context, _phoneController.text);
-                  // _showOTPDialog();
+                  String phone = _phoneController.text.trim();
+                  if (phone.length != 10) {
+                    Utils.show("Please enter a valid 10-digit phone number", context);
+                    return;
+                  }
+
+                  // Phone number valid → call login API
+                  final loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
+                  loginViewModel.loginApi(context, phone);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6B9EFF),

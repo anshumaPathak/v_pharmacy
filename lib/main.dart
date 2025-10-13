@@ -12,6 +12,7 @@ import 'package:v_pharmashing/view_model/auth_view_model/register_view_model.dar
 import 'package:v_pharmashing/view_model/auth_view_model/send_otp_view_model.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/verify_otp_view_model.dart';
 import 'package:v_pharmashing/view_model/confirm_order_view_model.dart';
+import 'package:v_pharmashing/view_model/contact_us_view_model.dart';
 import 'package:v_pharmashing/view_model/language_view_model.dart';
 import 'package:v_pharmashing/view_model/order_history_view_model.dart';
 import 'package:v_pharmashing/view_model/profile_view_model.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProfileViewModel(),),
         ChangeNotifierProvider(create: (_) => OrderHistoryViewModel(),),
         ChangeNotifierProvider(create: (_) => ConfirmOrderViewModel(),),
+        ChangeNotifierProvider(create: (_) => ContactUsViewModel(),),
       ],
       child: Consumer<LanguageViewModel>(
         builder: (context, languageVM, child) {
