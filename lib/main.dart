@@ -6,7 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
 import 'package:v_pharmashing/utils/routes/routes.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/create_order_view_model.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/login_view_model.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/register_view_model.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/send_otp_view_model.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/verify_otp_view_model.dart';
+import 'package:v_pharmashing/view_model/confirm_order_view_model.dart';
 import 'package:v_pharmashing/view_model/language_view_model.dart';
+import 'package:v_pharmashing/view_model/order_history_view_model.dart';
+import 'package:v_pharmashing/view_model/profile_view_model.dart';
+import 'package:v_pharmashing/view_model/user_view_model.dart';
 
 import 'l10n/app_localizations.dart';
 
@@ -34,6 +43,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => LanguageViewModel(initialLanguageCode),
         ),
+        ChangeNotifierProvider(create: (_) => LoginViewModel(),),
+        ChangeNotifierProvider(create: (_) => SendOtpViewModel(),),
+        ChangeNotifierProvider(create: (_) => VerifyOtpViewModel(),),
+        ChangeNotifierProvider(create: (_) => UserViewModel(),),
+        ChangeNotifierProvider(create: (_) => RegisterViewModel(),),
+        ChangeNotifierProvider(create: (_) => CreateOrderViewModel(),),
+        ChangeNotifierProvider(create: (_) => ProfileViewModel(),),
+        ChangeNotifierProvider(create: (_) => OrderHistoryViewModel(),),
+        ChangeNotifierProvider(create: (_) => ConfirmOrderViewModel(),),
       ],
       child: Consumer<LanguageViewModel>(
         builder: (context, languageVM, child) {

@@ -73,9 +73,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:date_your_love/helper/app_exception.dart';
-import 'package:date_your_love/helper/network/base_api_services.dart';
-import 'package:date_your_love/main.dart'; // 👈 import navigatorKey from main
+
+import '../app_exception.dart';
+import 'base_api_services.dart'; // 👈 import navigatorKey from main
 
 class NetworkApiServices extends BaseApiServices {
   @override
@@ -143,7 +143,7 @@ class NetworkApiServices extends BaseApiServices {
 
       case 503:
         print("❗️503 Error. Trying to show popup...");
-        DialogUtil.showErrorDialog(context, "Server is busy. Try again later.");
+        // DialogUtil.showErrorDialog(context, "Server is busy. Try again later.");
         throw FetchDataException('Server Busy - 503');
 
       case 400:
@@ -161,28 +161,28 @@ class NetworkApiServices extends BaseApiServices {
   }
 }
 
-class DialogUtil {
-  static void showErrorDialog(BuildContext? context, String message) {
-    final ctx = context ?? navigatorKey.currentContext;
-
-    if (ctx != null) {
-      Future.delayed(Duration.zero, () {
-        showDialog(
-          context: ctx,
-          builder: (ctx2) => AlertDialog(
-            title: const Text("Error"),
-            content: Text(message),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(ctx2).pop(),
-                child: const Text("OK"),
-              ),
-            ],
-          ),
-        );
-      });
-    } else {
-      print("❌ Both passed and global context are null. Can't show dialog.");
-    }
-  }
-}
+// class DialogUtil {
+//   static void showErrorDialog(BuildContext? context, String message) {
+//     // final ctx = context ?? navigatorKey.currentContext;
+//
+//     if (ctx != null) {
+//       Future.delayed(Duration.zero, () {
+//         showDialog(
+//           context: ctx,
+//           builder: (ctx2) => AlertDialog(
+//             title: const Text("Error"),
+//             content: Text(message),
+//             actions: [
+//               TextButton(
+//                 onPressed: () => Navigator.of(ctx2).pop(),
+//                 child: const Text("OK"),
+//               ),
+//             ],
+//           ),
+//         );
+//       });
+//     } else {
+//       print("❌ Both passed and global context are null. Can't show dialog.");
+//     }
+//   }
+// }

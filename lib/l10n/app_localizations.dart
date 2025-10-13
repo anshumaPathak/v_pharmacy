@@ -1354,6 +1354,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Details'**
   String get viewDetails;
+
+  /// No description provided for @generalInquiry.
+  ///
+  /// In en, this message translates to:
+  /// **'General Inquiry'**
+  String get generalInquiry;
+
+  /// No description provided for @orderIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Issue'**
+  String get orderIssue;
+
+  /// No description provided for @technicalSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical Support'**
+  String get technicalSupport;
+
+  /// No description provided for @feedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedback;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

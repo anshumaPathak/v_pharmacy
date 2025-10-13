@@ -57,7 +57,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get whyChooseVPharmacy => 'V फ़ार्मेसी क्यों चुनें';
 
   @override
-  String get wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices => 'हम अपनी विश्वसनीय सेवाओं के साथ आपकी सेहत और सुरक्षा को प्राथमिकता देते हैं';
+  String get wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices => 'हर दवा पर 15% की छूठ महीने में 3 बार फ्री फार्मासिस्ट विजिट आपके घर पर  सुगर, बीपी, ऑक्सीजन इत्यादि जाँच फ्री डाइट चार्ट और योगा गाइडेंस';
 
   @override
   String get happyCustomers => 'संतुष्ट ग्राहक';
@@ -129,7 +129,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get patientCare => 'रोगी देखभाल';
 
   @override
-  String get wePrioritizePatientWellbeingProvidingCompassionate => 'हम रोगियों के कल्याण को प्राथमिकता देते हैं, और संवेदनशील तथा विश्वसनीय स्वास्थ्य सेवाएं प्रदान करते हैं।';
+  String get wePrioritizePatientWellbeingProvidingCompassionate => 'हम सिर्फ दवा नहीं बेचते हम निभाते है रिश्ता - भरोसे का, देखभाल का, और सेहत का हम यू ही नहीं कहते रखेंगे ख्याल आपका कही भी';
 
   @override
   String get reliability => 'विश्वसनीयता';
@@ -189,7 +189,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get regularCustomer => 'नियमित ग्राहक';
 
   @override
-  String get mediCareHasBeenALifesaverFastDeliveryGenuine => 'MediCare जीवन रक्षक साबित हुआ है! तेज़ डिलीवरी, असली दवाइयाँ और उत्कृष्ट ग्राहक सहायता।';
+  String get mediCareHasBeenALifesaverFastDeliveryGenuine => 'V Pharmacy जीवन रक्षक साबित हुआ है! तेज़ डिलीवरी, असली दवाइयाँ और उत्कृष्ट ग्राहक सहायता।';
 
   @override
   String get drMichaelChen => 'डॉ. माइकल चेन';
@@ -198,7 +198,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get healthcareProfessional => 'स्वास्थ्य सेवा विशेषज्ञ';
 
   @override
-  String get iRecommendMediCareToMyPatients => 'मैं अपने मरीजों को MediCare की सिफारिश करता हूँ। उनका सत्यापन सिस्टम दवा की प्रामाणिकता सुनिश्चित करता है।';
+  String get iRecommendMediCareToMyPatients => 'मैं अपने मरीजों को V Pharmacy की सिफारिश करता हूँ। उनका सत्यापन सिस्टम दवा की प्रामाणिकता सुनिश्चित करता है।';
 
   @override
   String get emilyRodriguez => 'एमिली रोड्रिगेज़';
@@ -219,7 +219,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get ourMission => 'हमारा मिशन';
 
   @override
-  String get toProvideAccessibleReliableAndSafeHealthcareServicesByLeveragingTechnologyTo => 'तकनीक का उपयोग करके सुलभ, विश्वसनीय और सुरक्षित स्वास्थ्य सेवाएं प्रदान करना ताकि मरीज सत्यापित दवाओं और पेशेवर स्वास्थ्य सहायता से जुड़ सकें। हमारा लक्ष्य सभी के लिए स्वास्थ्य सेवाओं को अधिक सुविधाजनक और भरोसेमंद बनाना है।';
+  String get toProvideAccessibleReliableAndSafeHealthcareServicesByLeveragingTechnologyTo => 'दवाओं का सही इस्तेमाल, सब कुछ आपके दरवाजे तक सिर्फ एक कॉल या व्हाट्सएप से हमारा वादा आपकी दवा नहीं, आपकी सेहत हमारी जिम्मेदारी है। क्यों की हमारे लिए आप पेशेंट नहीं, हमारे घर के सदस्य है।।';
 
   @override
   String get ourVision => 'हमारा विज़न';
@@ -637,4 +637,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get viewDetails => 'विवरण देखें';
+
+  @override
+  String get generalInquiry => 'सामान्य पूछताछ';
+
+  @override
+  String get orderIssue => 'ऑर्डर से संबंधित समस्या';
+
+  @override
+  String get technicalSupport => 'तकनीकी सहायता';
+
+  @override
+  String get feedback => 'प्रतिक्रिया';
 }

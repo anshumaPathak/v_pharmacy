@@ -637,4 +637,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewDetails => 'View Details';
+
+  @override
+  String get generalInquiry => 'General Inquiry';
+
+  @override
+  String get orderIssue => 'Order Issue';
+
+  @override
+  String get technicalSupport => 'Technical Support';
+
+  @override
+  String get feedback => 'Feedback';
 }

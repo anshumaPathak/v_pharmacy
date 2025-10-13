@@ -507,13 +507,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   Sizes.spaceHeight10,
                   Center(
-                    child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.experienceSeamlessHealthcareServices,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black45,
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.experienceSeamlessHealthcareServices,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black45,
+                        ),
                       ),
                     ),
                   ),
@@ -581,13 +584,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   Sizes.spaceHeight10,
                   Center(
-                    child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black45,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black45,
+                        ),
                       ),
                     ),
                   ),

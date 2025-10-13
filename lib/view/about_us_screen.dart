@@ -66,14 +66,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           _visionCard(),
                         ],
                       )
-                    //     : Row(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Expanded(child: _missionCard()),
-                    //     const SizedBox(width: 40),
-                    //     Expanded(child: _visionCard()),
-                    //   ],
-                    // );
+
                     : IntrinsicHeight(
                         // 👈 equal height wrapper
                         child: Row(
@@ -116,92 +109,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                   ),
                 ),
                 const SizedBox(height: 48),
-                // LayoutBuilder(
-                //   builder: (context, constraints) {
-                //     bool isMobile = constraints.maxWidth < 900;
-                //     return isMobile
-                //         ? Column(
-                //             children: [
-                //               _valueCard(
-                //                 Icons.shield_outlined,
-                //                 AppLocalizations.of(context)!.qualityAssurance,
-                //                 AppLocalizations.of(
-                //                   context,
-                //                 )!.everyMedicineUndergoesRigorousQualityChecks,
-                //               ),
-                //               const SizedBox(height: 20),
-                //               _valueCard(
-                //                 Icons.favorite_border,
-                //                 AppLocalizations.of(context)!.patientCare,
-                //                 AppLocalizations.of(
-                //                   context,
-                //                 )!.wePrioritizePatientWellbeingProvidingCompassionate,
-                //               ),
-                //               const SizedBox(height: 20),
-                //               _valueCard(
-                //                 Icons.check_circle_outline,
-                //                 AppLocalizations.of(context)!.reliability,
-                //                 AppLocalizations.of(
-                //                   context,
-                //                 )!.trustedByThousandsOfCustomersWeMaintainTheHighest,
-                //               ),
-                //               const SizedBox(height: 20),
-                //               _valueCard(
-                //                 Icons.schedule,
-                //                 AppLocalizations.of(context)!.accessibility,
-                //                 '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
-                //               ),
-                //             ],
-                //           )
-                //         : IntrinsicHeight(
-                //             // 👈 equal height wrapper
-                //             child: Row(
-                //               crossAxisAlignment: CrossAxisAlignment.stretch,
-                //               children: [
-                //                 Expanded(
-                //                   child: _valueCard(
-                //                     Icons.shield_outlined,
-                //                     AppLocalizations.of(
-                //                       context,
-                //                     )!.qualityAssurance,
-                //                     AppLocalizations.of(
-                //                       context,
-                //                     )!.everyMedicineUndergoesRigorousQualityChecks,
-                //                   ),
-                //                 ),
-                //                 const SizedBox(width: 24),
-                //                 Expanded(
-                //                   child: _valueCard(
-                //                     Icons.favorite_border,
-                //                     AppLocalizations.of(context)!.patientCare,
-                //                     AppLocalizations.of(
-                //                       context,
-                //                     )!.wePrioritizePatientWellbeingProvidingCompassionate,
-                //                   ),
-                //                 ),
-                //                 const SizedBox(width: 24),
-                //                 Expanded(
-                //                   child: _valueCard(
-                //                     Icons.check_circle_outline,
-                //                     AppLocalizations.of(context)!.reliability,
-                //                     AppLocalizations.of(
-                //                       context,
-                //                     )!.trustedByThousandsOfCustomersWeMaintainTheHighest,
-                //                   ),
-                //                 ),
-                //                 const SizedBox(width: 24),
-                //                 Expanded(
-                //                   child: _valueCard(
-                //                     Icons.schedule,
-                //                     AppLocalizations.of(context)!.accessibility,
-                //                     '24/7 ${AppLocalizations.of(context)!.availabilityEnsuresYouCanAccessHealthcareServicesWheneverYou}',
-                //                   ),
-                //                 ),
-                //               ],
-                //             ),
-                //           );
-                //   },
-                // ),
                 LayoutBuilder(
                   builder: (context, constraints) {
                     bool isMobile = constraints.maxWidth < 900;
@@ -709,7 +616,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     );
   }
 
-  // --- UI helpers (same style) ---
   Widget _aboutLeftContent() => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

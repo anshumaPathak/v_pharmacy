@@ -1,6 +1,6 @@
 
 
-import 'package:date_your_love/helper/response/status.dart';
+import 'package:v_pharmashing/helper/response/status.dart';
 
 class ApiResponse<T> {
   Status? status;

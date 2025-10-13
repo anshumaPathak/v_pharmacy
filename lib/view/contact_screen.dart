@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
+import 'package:v_pharmashing/view_model/contact_us_view_model.dart';
 import '../l10n/app_localizations.dart';
 import '../res/const_color.dart';
 
@@ -11,49 +13,26 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-  final List<String> categories = [
-    "General Inquiry",
-    "Order Issue",
-    "Technical Support",
-    "Feedback"
-  ];
-  String? selectedCategory;
 
+  String? selectedCategory;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final List<String> categories = [
+      AppLocalizations.of(context)!.generalInquiry,
+      AppLocalizations.of(context)!.orderIssue,
+      AppLocalizations.of(context)!.technicalSupport,
+      AppLocalizations.of(context)!.feedback,
+    ];
     final screen = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          // ===== Top Section =====
-          // Container(
-          //   height: Sizes.screenHeight * 0.3,
-          //   width: double.infinity,
-          //   color: const Color(0xFFe8f2ff),
-          //   padding: EdgeInsets.symmetric(
-          //       horizontal: Sizes.screenWidth * 0.03, vertical: 15),
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //       Text(
-          //         AppLocalizations.of(context)!.getInTouch,
-          //         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          //       ),
-          //       Sizes.spaceHeight10,
-          //       Text(
-          //         AppLocalizations.of(context)!.weHereToHelpReachOutToUsAnytimeForSupport,
-          //         style: TextStyle(fontSize: 14, color: Colors.black54),
-          //         textAlign: TextAlign.center,
-          //       ),
-          //       Text(
-          //         AppLocalizations.of(context)!.medicineOrdersAndVerification,
-          //         style: TextStyle(fontSize: 14, color: Colors.black54),
-          //         textAlign: TextAlign.center,
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Container(
             width: double.infinity,
             color: const Color(0xFFe8f2ff),
@@ -218,11 +197,14 @@ class _ContactScreenState extends State<ContactScreen> {
                           _buildTextField(
                               label: "${  AppLocalizations.of(context)!.fullName} *",
                               hint:   AppLocalizations.of(context)!.enterYourFullName,
+                            controller: _nameController
                           ),
                           SizedBox(height: 20),
                           _buildTextField(
                               label: "${  AppLocalizations.of(context)!.emailAddress}*",
-                              hint: "your.email@example.com"),
+                              hint: "your.email@example.com",
+                            controller: _emailController
+                          ),
                         ],
                       )
                           : Row(
@@ -230,13 +212,17 @@ class _ContactScreenState extends State<ContactScreen> {
                           Expanded(
                             child: _buildTextField(
                               label: "${  AppLocalizations.of(context)!.fullName} *",
-                              hint:   AppLocalizations.of(context)!.enterYourFullName,),
+                              hint:   AppLocalizations.of(context)!.enterYourFullName,
+                              controller: _nameController
+                            ),
                           ),
                           SizedBox(width: 20),
                           Expanded(
                             child: _buildTextField(
                                 label: "${AppLocalizations.of(context)!.emailAddress}*",
-                                hint: "your.email@example.com"),
+                                hint: "your.email@example.com",
+                              controller: _emailController
+                            ),
                           ),
                         ],
                       ),
@@ -248,7 +234,9 @@ class _ContactScreenState extends State<ContactScreen> {
                         children: [
                           _buildTextField(
                               label: AppLocalizations.of(context)!.phoneNumber,
-                              hint: "+1-234-567-8900"),
+                              hint: "+1-234-567-8900",
+                            controller: _phoneController
+                          ),
                           SizedBox(height: 20),
                           DropdownButtonFormField<String>(
                             decoration: InputDecoration(
@@ -277,7 +265,9 @@ class _ContactScreenState extends State<ContactScreen> {
                           Expanded(
                             child: _buildTextField(
                                 label: AppLocalizations.of(context)!.phoneNumber,
-                                hint: "+1-234-567-8900"),
+                                hint: "+1-234-567-8900",
+                              controller: _phoneController
+                            ),
                           ),
                           SizedBox(width: 20),
                           Expanded(
@@ -308,10 +298,13 @@ class _ContactScreenState extends State<ContactScreen> {
 
                       _buildTextField(
                           label: "${AppLocalizations.of(context)!.subject} *",
-                          hint:AppLocalizations.of(context)!.briefDescriptionOfYourInquiry),
+                          hint:AppLocalizations.of(context)!.briefDescriptionOfYourInquiry,
+                        controller: _messageController
+                      ),
                       SizedBox(height: 20),
 
                       TextFormField(
+                        controller: _messageController,
                         maxLines: 4,
                         decoration: InputDecoration(
                           labelText: AppLocalizations.of(context)!.description,
@@ -692,8 +685,9 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   // ====== Reusable TextField ======
-  Widget _buildTextField({required String label, required String hint}) {
+  Widget _buildTextField({required String label, required String hint, TextEditingController? controller}) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -746,7 +740,31 @@ class _ContactScreenState extends State<ContactScreen> {
                   borderRadius: BorderRadius.circular(8), // thoda rounded corners
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                final contactUsViewModel = Provider.of<ContactUsViewModel>(context, listen: false);
+
+                if (_nameController.text.isEmpty ||
+                    _emailController.text.isEmpty ||
+                    _phoneController.text.isEmpty ||
+                    _subjectController.text.isEmpty ||
+                    _messageController.text.isEmpty ||
+                    selectedCategory == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Please fill all fields")),
+                  );
+                  return;
+                }
+
+                contactUsViewModel.contactUsApi(
+                  _nameController.text,
+              _emailController.text,
+              _phoneController.text,
+             selectedCategory!,
+                 _subjectController.text,
+              _messageController.text,
+           context,
+                );
+              },
               child: Text(
                 buttonText,
                 style: TextStyle(color: Colors.white, fontSize: 14),

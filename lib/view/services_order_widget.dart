@@ -2,7 +2,12 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:v_pharmashing/res/const_color.dart';
+import 'package:v_pharmashing/res/sizing_const.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/create_order_view_model.dart';
 import '../l10n/app_localizations.dart';
+import '../view_model/user_view_model.dart';
 
 class OrderMedicineScreen extends StatefulWidget {
   const OrderMedicineScreen({super.key});
@@ -12,15 +17,16 @@ class OrderMedicineScreen extends StatefulWidget {
 }
 
 class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
+  bool _isLoggedIn = false;
+
   final _formKey = GlobalKey<FormState>();
   final _picker = ImagePicker();
   File? _selectedImage;
-  // ✅ Images at state level
-  List<File> _selectedImages = []; // Mobile
-  List<Uint8List> _webImages = []; // Web
+  List<File> _selectedImages = [];
+  List<Uint8List> _webImages = [];
   String? _selectedCategory;
   String? _selectedDuration;
-  bool _isLoggedIn = true; // Testing ke liye true set kiya
+  String? userId;
 
   // Text Controllers
   final TextEditingController _nameController = TextEditingController();
@@ -30,6 +36,23 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
   final TextEditingController _whatsappController = TextEditingController();
   final TextEditingController _alternateController = TextEditingController();
   final TextEditingController _instructionsController = TextEditingController();
+  bool showOtherDurationField = false;
+  TextEditingController _otherDurationController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserId();
+  }
+
+  Future<void> _loadUserId() async {
+    final userViewModel = Provider.of<UserViewModel>(context, listen: false);
+    String? id = await userViewModel.getUser();
+    setState(() {
+      userId = id; // ab form editable hoga agar login hai
+    });
+  }
+
 
   Future<void> _pickImages() async {
     final List<XFile>? images = await _picker.pickMultiImage();
@@ -52,6 +75,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     List<Widget> imageWidgets = [];
     if (kIsWeb) {
       imageWidgets = _webImages
@@ -170,6 +194,50 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 40),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 60),
+                child: AbsorbPointer(
+                  absorbing: userId == null,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth*0.03,vertical: Sizes.screenHeight*0.03),
+                    width: isMobile
+                        ? MediaQuery.of(context).size.width * 0.9
+                        : 800,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(0.3),
+                        width: 1,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 20,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        Text("Please"),
+                        SizedBox(height: Sizes.screenHeight*0.02,),
+                        Text(
+                          "login",
+                          style: TextStyle(
+                            color: AppColor.blueColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: Sizes.screenHeight*0.02,),
+                        Text("to place an order"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
 
               const SizedBox(height: 60),
               Padding(
@@ -179,85 +247,65 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                     // Order Form Container
                     Align(
                       alignment: Alignment.topCenter,
-                      child: Container(
-                        width: isMobile
-                            ? MediaQuery.of(context).size.width * 0.9
-                            : 800,
-                        padding: EdgeInsets.all(isMobile ? 24 : 40),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: Colors.grey.withOpacity(0.3),
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.08),
-                              blurRadius: 20,
-                              offset: const Offset(0, 8),
+                      child: AbsorbPointer(
+                        absorbing: userId == null,
+                        child: Container(
+                          width: isMobile
+                              ? MediaQuery.of(context).size.width * 0.9
+                              : 800,
+                          padding: EdgeInsets.all(isMobile ? 24 : 40),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: Colors.grey.withOpacity(0.3),
+                              width: 1,
                             ),
-                          ],
-                        ),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Header
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.description_outlined,
-                                    color: Color(0xFF1E293B),
-                                    size: 24,
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Text(
-                                    AppLocalizations.of(context)!.orderInformation,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      // fontWeight: FontWeight.w600,
-                                      color: Color(0xFF1E293B),
-                                    ),
-                                  ),
-                                ],
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.08),
+                                blurRadius: 20,
+                                offset: const Offset(0, 8),
                               ),
+                            ],
+                          ),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Header
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.description_outlined,
+                                      color: Color(0xFF1E293B),
+                                      size: 24,
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Text(
+                                      AppLocalizations.of(context)!.orderInformation,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        // fontWeight: FontWeight.w600,
+                                        color: Color(0xFF1E293B),
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
-                              const SizedBox(height: 10),
+                                const SizedBox(height: 10),
 
-                              isMobile
-                                  ? Column(
-                                children: [
-                                  _buildTextField(
-                                      controller: _nameController,
-                                      label: AppLocalizations.of(context)!.fullName,
-                                      hint: AppLocalizations.of(context)!.enterFullName,
-                                      icon: Icons.person_outline),
-                                  const SizedBox(height: 24),
-                                  _buildDropdownField(
-                                      label: AppLocalizations.of(context)!.diseaseCategory,
-                                      hint: AppLocalizations.of(context)!.selectCategory,
-                                      items: categories,
-                                      value: _selectedCategory,
-                                      onChanged: (val) {
-                                        setState(() => _selectedCategory = val);
-                                      },
-                                      icon: Icons.medical_services_outlined),
-                                ],
-                              )
-                                  : Row(
-                                children: [
-                                  Expanded(
-                                    child: _buildTextField(
+                                isMobile
+                                    ? Column(
+                                  children: [
+                                    _buildTextField(
                                         controller: _nameController,
                                         label: AppLocalizations.of(context)!.fullName,
                                         hint: AppLocalizations.of(context)!.enterFullName,
                                         icon: Icons.person_outline),
-                                  ),
-                                  const SizedBox(width: 24),
-                                  Expanded(
-                                    child: _buildDropdownField(
+                                    const SizedBox(height: 24),
+                                    _buildDropdownField(
                                         label: AppLocalizations.of(context)!.diseaseCategory,
                                         hint: AppLocalizations.of(context)!.selectCategory,
                                         items: categories,
@@ -266,102 +314,257 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                                           setState(() => _selectedCategory = val);
                                         },
                                         icon: Icons.medical_services_outlined),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                )
+                                    : Row(
+                                  children: [
+                                    Expanded(
+                                      child: _buildTextField(
+                                          controller: _nameController,
+                                          label: AppLocalizations.of(context)!.fullName,
+                                          hint: AppLocalizations.of(context)!.enterFullName,
+                                          icon: Icons.person_outline),
+                                    ),
+                                    const SizedBox(width: 24),
+                                    Expanded(
+                                      child: _buildDropdownField(
+                                          label: AppLocalizations.of(context)!.diseaseCategory,
+                                          hint: AppLocalizations.of(context)!.selectCategory,
+                                          items: categories,
+                                          value: _selectedCategory,
+                                          onChanged: (val) {
+                                            setState(() => _selectedCategory = val);
+                                          },
+                                          icon: Icons.medical_services_outlined),
+                                    ),
+                                  ],
+                                ),
 
-                              const SizedBox(height: 20),
-                              _buildTextField(
-                                  controller: _addressController,
-                                  label: AppLocalizations.of(context)!.deliveryAddress,
-                                  hint: AppLocalizations.of(context)!.enterAddress,
-                                  maxLines: 3,
-                                  icon: Icons.location_on_outlined),
-                              const SizedBox(height: 20),
+                                const SizedBox(height: 20),
+                                _buildTextField(
+                                    controller: _addressController,
+                                    label: AppLocalizations.of(context)!.deliveryAddress,
+                                    hint: AppLocalizations.of(context)!.enterAddress,
+                                    maxLines: 3,
+                                    icon: Icons.location_on_outlined),
+                                const SizedBox(height: 20),
 
-                              isMobile
-                                  ? Column(
-                                children: [
-                                  _buildTextField(
-                                      controller: _emailController,
-                                      label: AppLocalizations.of(context)!.emailAddressOptional,
-                                      hint: AppLocalizations.of(context)!.enterEmail,
-                                      icon: Icons.email_outlined),
-                                  const SizedBox(height: 24),
-                                  _buildTextField(
-                                      controller: _phoneController,
-                                      label: AppLocalizations.of(context)!.phoneNumber,
-                                      hint: AppLocalizations.of(context)!.enterPhoneNumber,
-                                      icon: Icons.phone_outlined),
-                                ],
-                              )
-                                  : Row(
-                                children: [
-                                  Expanded(
-                                    child: _buildTextField(
+                                isMobile
+                                    ? Column(
+                                  children: [
+                                    _buildTextField(
                                         controller: _emailController,
                                         label: AppLocalizations.of(context)!.emailAddressOptional,
                                         hint: AppLocalizations.of(context)!.enterEmail,
                                         icon: Icons.email_outlined),
-                                  ),
-                                  const SizedBox(width: 24),
-                                  Expanded(
-                                    child: _buildTextField(
+                                    const SizedBox(height: 24),
+                                    _buildTextField(
                                         controller: _phoneController,
                                         label: AppLocalizations.of(context)!.phoneNumber,
                                         hint: AppLocalizations.of(context)!.enterPhoneNumber,
                                         icon: Icons.phone_outlined),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                )
+                                    : Row(
+                                  children: [
+                                    Expanded(
+                                      child: _buildTextField(
+                                          controller: _emailController,
+                                          label: AppLocalizations.of(context)!.emailAddressOptional,
+                                          hint: AppLocalizations.of(context)!.enterEmail,
+                                          icon: Icons.email_outlined),
+                                    ),
+                                    const SizedBox(width: 24),
+                                    Expanded(
+                                      child: _buildTextField(
+                                          controller: _phoneController,
+                                          label: AppLocalizations.of(context)!.phoneNumber,
+                                          hint: AppLocalizations.of(context)!.enterPhoneNumber,
+                                          icon: Icons.phone_outlined),
+                                    ),
+                                  ],
+                                ),
 
-                              const SizedBox(height: 24),
-                              GestureDetector(
-                                onTap: _pickImages,
-                                child: Container(
-                                  height: 150,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFEFF6FF),
-                                    border: Border.all(color: const Color(0xFF2563EB)),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Center(
-                                    child: _selectedImages.isEmpty && _webImages.isEmpty
-                                        ? const Text(
-                                      "Tap to upload prescription",
-                                      style: TextStyle(color: Color(0xFF2563EB)),
-                                    )
-                                        : SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(children: imageWidgets),
+                                const SizedBox(height: 24),
+                                GestureDetector(
+                                  onTap: _pickImages,
+                                  child: Container(
+                                    height: 150,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFEFF6FF),
+                                      border: Border.all(color: const Color(0xFF2563EB)),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Center(
+                                      child: _selectedImages.isEmpty && _webImages.isEmpty
+                                          ? const Text(
+                                        "Tap to upload prescription",
+                                        style: TextStyle(color: Color(0xFF2563EB)),
+                                      )
+                                          : SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: List.generate(
+                                            kIsWeb ? _webImages.length : _selectedImages.length,
+                                                (index) {
+                                              final imageWidget = kIsWeb
+                                                  ? Image.memory(_webImages[index], width: 100, height: 100, fit: BoxFit.cover)
+                                                  : Image.file(_selectedImages[index], width: 100, height: 100, fit: BoxFit.cover);
+
+                                              return Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title: const Text("Choose an action"),
+                                                          content: const Text("Do you want to delete this image?"),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () => Navigator.pop(context),
+                                                              child: const Text("Cancel"),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  if (kIsWeb) {
+                                                                    _webImages.removeAt(index);
+                                                                  } else {
+                                                                    _selectedImages.removeAt(index);
+                                                                  }
+                                                                });
+                                                                Navigator.pop(context);
+                                                              },
+                                                              child: const Text("Delete", style: TextStyle(color: Colors.red)),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: imageWidget,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      )
+
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 32),
-                              _buildDropdownField(
-                                  label: AppLocalizations.of(context)!.medicineDuration,
-                                  hint: AppLocalizations.of(context)!.selectDuration,
-                                  items: durations,
-                                  value: _selectedDuration,
-                                  onChanged: (val) {
-                                    setState(() => _selectedDuration = val);
-                                  },
-                                  icon: Icons.calendar_month_outlined),
+                                const SizedBox(height: 32),
 
-                              const SizedBox(height: 32),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.calendar_month_outlined, color: Color(0xFF1E293B), size: 20),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          AppLocalizations.of(context)!.medicineDuration,
+                                          style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xFF646b75),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 12),
 
-                              _buildTextField(
-                                  controller: _instructionsController,
-                                  label: AppLocalizations.of(context)!.specialInstructionsOptional,
-                                  hint: AppLocalizations.of(context)!.addSpecialInstructions,
-                                  maxLines: 4),
+                                    // Conditional: show dropdown only if not "Other"
+                                    if (!showOtherDurationField)
+                                      DropdownButtonFormField<String>(
+                                        value: _selectedDuration,
+                                        hint: Text(
+                                          AppLocalizations.of(context)!.selectDuration,
+                                          style: TextStyle(color: Colors.grey[400]),
+                                        ),
+                                        decoration: InputDecoration(
+                                          constraints: const BoxConstraints(maxHeight: 38),
+                                          filled: true,
+                                          fillColor: const Color(0xFFf8fafc),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                            borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                            borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                            borderSide: const BorderSide(color: Color(0xFF2563EB)),
+                                          ),
+                                          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        ),
+                                        items: [
+                                          ...durations.map((d) => DropdownMenuItem<String>(value: d, child: Text(d))),
+                                          const DropdownMenuItem<String>(value: "Other", child: Text("Other")),
+                                        ],
+                                        onChanged: (val) {
+                                          setState(() {
+                                            if (val == "Other") {
+                                              showOtherDurationField = true;
+                                              _selectedDuration = null; // dropdown ko reset
+                                            } else {
+                                              _selectedDuration = val;
+                                            }
+                                          });
+                                        },
+                                      ),
 
-                              const SizedBox(height: 40),
+                                    // Show text field only if "Other" selected
+                                    if (showOtherDurationField)
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                            border: Border.all(color: AppColor.blueColor,width: 2)
 
-                              _buildSubmitButton(),
-                            ],
+                                          ),
+                                          child: TextField(
+                                            controller: _otherDurationController,
+                                            decoration: InputDecoration(
+                                              constraints: BoxConstraints(
+                                                maxHeight: 40
+                                              ),
+                                              filled: true,
+                                              fillColor: const Color(0xFFf8fafc),
+                                              hintText: "Enter duration",
+                                              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(12),
+                                                borderSide: BorderSide.none, // remove default border
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                  ],
+                                ),
+
+
+                                const SizedBox(height: 32),
+
+                                _buildTextField(
+                                    controller: _instructionsController,
+                                    label: AppLocalizations.of(context)!.specialInstructionsOptional,
+                                    hint: AppLocalizations.of(context)!.addSpecialInstructions,
+                                    maxLines: 4),
+
+                                const SizedBox(height: 40),
+
+                                _buildSubmitButton(),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -376,6 +579,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
       },
     );
   }
+  bool get isEditable => userId != null; // login hai tabhi editable
 
   Widget _buildTextField({
     required TextEditingController controller,
@@ -407,34 +611,93 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
         const SizedBox(height: 12),
         TextFormField(
           controller: controller,
+          readOnly: !isEditable, // 🔹 ye ensure kare editable hai ya nahi
           maxLines: maxLines,
           decoration: InputDecoration(
-            hintText: hint,
             constraints: BoxConstraints(
-              maxHeight: 38
+                maxHeight: 38
             ),
-            hintStyle: TextStyle(color: Colors.grey[400]),
+            hintText: hint,
             filled: true,
-            fillColor: const Color(0xFFf8fafc),
+            fillColor: isEditable ? const Color(0xFFf8fafc) : Colors.grey.shade100,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+           enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Color(0xFF2563EB)),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF2563EB)),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
-          validator: (value) => value!.isEmpty ? 'Field cannot be empty' : null,
-        ),
+
       ],
     );
   }
+
+  // Widget _buildTextField({
+  //   required TextEditingController controller,
+  //   required String label,
+  //   required String hint,
+  //   int maxLines = 1,
+  //   IconData? icon,
+  // }) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       if (label.isNotEmpty)
+  //         Row(
+  //           children: [
+  //             if (icon != null) ...[
+  //               Icon(icon, color: const Color(0xFF0F172A), size: 20),
+  //               const SizedBox(width: 8),
+  //             ],
+  //             Text(
+  //               label,
+  //               style: const TextStyle(
+  //                 fontSize: 15,
+  //                 fontWeight: FontWeight.w400,
+  //                 color: Color(0xFF646b75),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       const SizedBox(height: 12),
+  //       TextFormField(
+  //         controller: controller,
+  //         maxLines: maxLines,
+  //         decoration: InputDecoration(
+  //           hintText: hint,
+  //           constraints: BoxConstraints(
+  //             maxHeight: 38
+  //           ),
+  //           hintStyle: TextStyle(color: Colors.grey[400]),
+  //           filled: true,
+  //           fillColor: const Color(0xFFf8fafc),
+  //           border: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(12),
+  //             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+  //           ),
+  //           enabledBorder: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(12),
+  //             borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+  //           ),
+  //           focusedBorder: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(12),
+  //             borderSide: const BorderSide(color: Color(0xFF2563EB)),
+  //           ),
+  //           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  //         ),
+  //         validator: (value) => value!.isEmpty ? 'Field cannot be empty' : null,
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildDropdownField({
     required String label,
@@ -464,42 +727,58 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
           ],
         ),
         const SizedBox(height: 12),
-        DropdownButtonFormField<String>(
-          value: value,
-          hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
-          decoration: InputDecoration(
-            constraints: BoxConstraints(
-                maxHeight: 38
+        IgnorePointer(
+          ignoring: !isEditable,
+          child: DropdownButtonFormField<String>(
+            value: value,
+            hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
+            decoration: InputDecoration(
+              constraints: BoxConstraints(
+                  maxHeight: 38
+              ),
+              filled: true,
+              fillColor: const Color(0xFFf8fafc),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: Color(0xFF2563EB)),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
-            filled: true,
-            fillColor: const Color(0xFFf8fafc),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF2563EB)),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            items: items.map((String item) {
+              return DropdownMenuItem<String>(value: item, child: Text(item));
+            }).toList(),
+            onChanged: onChanged,
           ),
-          items: items.map((String item) {
-            return DropdownMenuItem<String>(value: item, child: Text(item));
-          }).toList(),
-          onChanged: onChanged,
         ),
       ],
     );
   }
 
+
   Widget _buildSubmitButton() => SizedBox(
     width: double.infinity,
     child: ElevatedButton(
       onPressed: () {
+        final createOrderViewModel = Provider.of<CreateOrderViewModel>(context,listen: false);
+        createOrderViewModel.createOrderApi(
+          _nameController.text,
+          _selectedCategory,
+          _addressController.text,
+          _phoneController.text,
+          _whatsappController.text,
+          _selectedDuration ?? _otherDurationController.text,
+          _instructionsController.text,
+          _selectedImages,
+          context,
+        );
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2563EB),
@@ -515,6 +794,40 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
       ),
     ),
   );
+
+
+  // Widget _buildSubmitButton() => SizedBox(
+  //   width: double.infinity,
+  //   child: ElevatedButton(
+  //     onPressed: isLoggedIn
+  //         ? () {
+  //       final createOrderViewModel = Provider.of<CreateOrderViewModel>(context, listen: false);
+  //       createOrderViewModel.createOrderApi(
+  //         _nameController.text,
+  //         _selectedCategory,
+  //         _addressController.text,
+  //         _phoneController.text,
+  //         _whatsappController.text,
+  //         _selectedDuration ?? _otherDurationController.text,
+  //         _instructionsController.text,
+  //         _selectedImages,
+  //         context,
+  //       );
+  //     }
+  //         : null, // 🔹 disable button if not logged in
+  //     style: ElevatedButton.styleFrom(
+  //       backgroundColor: const Color(0xFF2563EB),
+  //       foregroundColor: Colors.white,
+  //       padding: const EdgeInsets.symmetric(vertical: 14),
+  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  //       elevation: 0,
+  //     ),
+  //     child: Text(
+  //       AppLocalizations.of(context)!.submitOrder,
+  //       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+  //     ),
+  //   ),
+  // );
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);

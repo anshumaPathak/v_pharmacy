@@ -230,6 +230,11 @@
    "accept" : "Accept",
    "cancel" : "Cancel",
    "shippedTrack" : "Shipped! Track:",
-   "viewDetails" : "View Details"
+   "viewDetails" : "View Details",
+
+  "generalInquiry": "General Inquiry",
+  "orderIssue": "Order Issue",
+  "technicalSupport": "Technical Support",
+  "feedback": "Feedback"
 
 }
