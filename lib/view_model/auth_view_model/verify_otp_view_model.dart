@@ -119,8 +119,8 @@ class VerifyOtpViewModel with ChangeNotifier {
 
         final loginVM = Provider.of<LoginViewModel>(context, listen: false);
         final response = await loginVM.loginApi(context, phone);
-
-        // ✅ Agar register_status 0 hai ya login 404 error hua → Register popup
+       Navigator.pop(context);
+       Navigator.pop(context);
         if (response['register_status'] == 0 && context.mounted) {
           showDialog(
             context: context,

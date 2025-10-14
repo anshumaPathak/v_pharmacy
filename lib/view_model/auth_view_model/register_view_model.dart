@@ -101,7 +101,8 @@ class RegisterViewModel with ChangeNotifier {
 
         // 3️⃣ Safely use context
         if (context.mounted) {
-          Navigator.of(context, rootNavigator: true).pop(); // Close dialog
+          Navigator.of(context, rootNavigator: true).pop();
+          Navigator.pop(context);// Close dialog
           Utils.show(value['message'] ?? "User registered successfully", context);
 
           // 4️⃣ Call profile API now that user ID is saved
