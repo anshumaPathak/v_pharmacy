@@ -266,10 +266,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:v_pharmashing/res/const_color.dart';
 import 'package:v_pharmashing/utils/utils.dart';
 
 import '../l10n/app_localizations.dart';
 import '../view_model/auth_view_model/login_view_model.dart';
+import 'otp_screen.dart';
 
 class LoginDialog extends StatefulWidget {
   const LoginDialog({super.key});
@@ -291,15 +293,15 @@ class _LoginDialogState extends State<LoginDialog> {
   @override
   Widget build(BuildContext context) {
     final loginViewModel = Provider.of<LoginViewModel>(context);
-
     return MediaQuery.removeViewInsets(
       context: context,
-      removeBottom: true, // ✅ Prevent resize on keyboard open
+      removeBottom: true,
       child: Dialog(
+        backgroundColor: AppColor.whiteColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        child: SingleChildScrollView( // ✅ Allows scroll if content is too big
+        child: SingleChildScrollView(
           child: Container(
             width: 500,
             padding: const EdgeInsets.all(32),
@@ -391,10 +393,18 @@ class _LoginDialogState extends State<LoginDialog> {
                             "Please enter a valid 10-digit phone number", context);
                         return;
                       }
-
-                      final loginViewModel =
-                      Provider.of<LoginViewModel>(context, listen: false);
-                      loginViewModel.loginApi(context, phone);
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => OTPVerificationDialog(
+                          phoneNumber: phone.toString(),
+                          userId: "",
+                          isRegistered: false,
+                        ),
+                      );
+                      // final loginViewModel =
+                      // Provider.of<LoginViewModel>(context, listen: false);
+                      // loginViewModel.loginApi(context, phone);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF6B9EFF),
@@ -415,73 +425,73 @@ class _LoginDialogState extends State<LoginDialog> {
                 const SizedBox(height: 16),
 
                 // Demo Text
-                const Center(
-                  child: Text(
-                    'Demo: Use any phone number ending with 1234 for existing user',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12, color: Colors.black54),
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // WhatsApp/SMS Toggle
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _isWhatsApp = true;
-                        });
-                      },
-                      child: Row(
-                        children: [
-                          Radio<bool>(
-                            value: true,
-                            groupValue: _isWhatsApp,
-                            onChanged: (value) {
-                              setState(() {
-                                _isWhatsApp = value!;
-                              });
-                            },
-                            activeColor: Colors.black87,
-                          ),
-                          const Text(
-                            'WhatsApp',
-                            style: TextStyle(fontSize: 14, color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 24),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _isWhatsApp = false;
-                        });
-                      },
-                      child: Row(
-                        children: [
-                          Radio<bool>(
-                            value: false,
-                            groupValue: _isWhatsApp,
-                            onChanged: (value) {
-                              setState(() {
-                                _isWhatsApp = value!;
-                              });
-                            },
-                            activeColor: Colors.black87,
-                          ),
-                          const Text(
-                            'SMS',
-                            style: TextStyle(fontSize: 14, color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
+                // const Center(
+                //   child: Text(
+                //     'Demo: Use any phone number ending with 1234 for existing user',
+                //     textAlign: TextAlign.center,
+                //     style: TextStyle(fontSize: 12, color: Colors.black54),
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+                //
+                // // WhatsApp/SMS Toggle
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     InkWell(
+                //       onTap: () {
+                //         setState(() {
+                //           _isWhatsApp = true;
+                //         });
+                //       },
+                //       child: Row(
+                //         children: [
+                //           Radio<bool>(
+                //             value: true,
+                //             groupValue: _isWhatsApp,
+                //             onChanged: (value) {
+                //               setState(() {
+                //                 _isWhatsApp = value!;
+                //               });
+                //             },
+                //             activeColor: Colors.black87,
+                //           ),
+                //           const Text(
+                //             'WhatsApp',
+                //             style: TextStyle(fontSize: 14, color: Colors.black87),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     const SizedBox(width: 24),
+                //     InkWell(
+                //       onTap: () {
+                //         setState(() {
+                //           _isWhatsApp = false;
+                //         });
+                //       },
+                //       child: Row(
+                //         children: [
+                //           Radio<bool>(
+                //             value: false,
+                //             groupValue: _isWhatsApp,
+                //             onChanged: (value) {
+                //               setState(() {
+                //                 _isWhatsApp = value!;
+                //               });
+                //             },
+                //             activeColor: Colors.black87,
+                //           ),
+                //           const Text(
+                //             'SMS',
+                //             style: TextStyle(fontSize: 14, color: Colors.black87),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 16),
 
                 // Terms and Privacy
                 Center(

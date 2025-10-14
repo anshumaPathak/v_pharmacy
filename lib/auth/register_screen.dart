@@ -495,6 +495,9 @@ class _CompleteRegistrationDialogState
                         widget.phoneNumber,
                         context,
                       );
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,

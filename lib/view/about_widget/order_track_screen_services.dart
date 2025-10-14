@@ -1759,6 +1759,7 @@ import '../../l10n/app_localizations.dart';
 import '../../model/order_history_model.dart';
 import '../../res/const_color.dart';
 import '../../res/sizing_const.dart';
+import '../../view_model/user_view_model.dart';
 
 class YourOrdersScreen extends StatefulWidget {
   const YourOrdersScreen({super.key});
@@ -1772,15 +1773,22 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadUserId();
       final viewModel =
       Provider.of<OrderHistoryViewModel>(context, listen: false);
       viewModel.orderHistoryApi(context);
     });
   }
-
+  Future<void> _loadUserId() async {
+    final userViewModel = Provider.of<UserViewModel>(context, listen: false);
+    String? id = await userViewModel.getUser();
+    setState(() {
+      userId = id; // ab form editable hoga agar login hai
+    });
+  }
   bool _showOrderDetails = false;
   Data? _selectedOrder;
-
+  String? userId;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -1872,6 +1880,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                   //     ),
                   //   ),
                   // ),
+                  if (userId == null)
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
                     child: orders.isEmpty

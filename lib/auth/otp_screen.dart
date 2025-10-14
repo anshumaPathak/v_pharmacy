@@ -150,6 +150,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v_pharmashing/view_model/auth_view_model/send_otp_view_model.dart';
 import '../../view_model/auth_view_model/verify_otp_view_model.dart';
 import '../utils/utils.dart';
 import 'register_screen.dart';
@@ -192,20 +193,28 @@ class _OTPVerificationDialogState extends State<OTPVerificationDialog> {
     verifyOtpViewModel.verifyOtpApi(
       widget.phoneNumber,
       otp,
-      widget.userId,
-      widget.isRegistered,
+      // widget.userId,
+      // widget.isRegistered,
       context,
     );
+  }
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<SendOtpViewModel>(context, listen: false)
+          .sendOtpApi(widget.phoneNumber, context);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MediaQuery.removeViewInsets(
       context: context,
-      removeBottom: true, // ✅ Prevent resize when keyboard opens
+      removeBottom: true,
       child: Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: SingleChildScrollView( // ✅ Allows scrolling on small screens
+        child: SingleChildScrollView(
           child: Container(
             width: 500,
             padding: const EdgeInsets.all(32),
@@ -213,7 +222,6 @@ class _OTPVerificationDialogState extends State<OTPVerificationDialog> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header with close button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

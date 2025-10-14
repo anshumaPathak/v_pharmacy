@@ -1,570 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:v_pharmashing/generated/assets.dart';
-// import 'package:v_pharmashing/res/const_color.dart';
-// import 'package:v_pharmashing/res/sizing_const.dart';
-// import 'package:v_pharmashing/view_model/profile_view_model.dart';
-//
-// import '../auth/login_screen.dart';
-// import '../l10n/app_localizations.dart';
-// import '../view_model/language_view_model.dart';
-//
-// class TopBar extends StatefulWidget {
-//   final VoidCallback? onHomeTap;
-//   final VoidCallback? onServicesTap;
-//   final VoidCallback? onAboutTap;
-//   final VoidCallback? onContactTap;
-//   final int selectedIndex;
-//
-//   const TopBar({
-//     this.onHomeTap,
-//     this.onServicesTap,
-//     this.onAboutTap,
-//     this.onContactTap,
-//     super.key,
-//     required this.selectedIndex,
-//   });
-//
-//   @override
-//   State<TopBar> createState() => _TopBarState();
-// }
-//
-// class _TopBarState extends State<TopBar> {
-//   int selectedIndex = 0;
-//   String currentLang = "en";
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _loadSavedLanguage();
-//   }
-//
-//   void _loadSavedLanguage() async {
-//     final sp = await SharedPreferences.getInstance();
-//     String? savedLang = sp.getString('language_code');
-//     if (savedLang != null) {
-//       setState(() {
-//         currentLang = savedLang;
-//       });
-//       final languageVM = Provider.of<LanguageViewModel>(context, listen: false);
-//       languageVM.setLanguage(savedLang);
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final profileViewModel = Provider.of<ProfileViewModel>(context,listen: false);
-//     return Container(
-//       color: Colors.white,
-//       padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth * 0.03, vertical: 8),
-//       child: LayoutBuilder(
-//         builder: (context, constraints) {
-//           bool isMobile = constraints.maxWidth < 600;
-//
-//           Widget buildButton(String text, int index, VoidCallback? onTap) {
-//             return TextButton(
-//               onPressed: () {
-//                 setState(() {
-//                   selectedIndex = index;
-//                 });
-//                 if (onTap != null) onTap();
-//               },
-//               child: Text(
-//                 text,
-//                 style: TextStyle(
-//                   color: selectedIndex == index ? Colors.blue : Colors.black87,
-//                   fontWeight: selectedIndex == index ? FontWeight.bold : FontWeight.normal,
-//                   fontSize: 16,
-//                 ),
-//               ),
-//             );
-//           }
-//
-//           Widget contactInfo() {
-//             return Row(
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 Icon(Icons.phone, size: 20, color: Colors.black54),
-//                 SizedBox(width: 4),
-//                 Text("+91 9876543210", style: TextStyle(color: Colors.black87)),
-//                 SizedBox(width: 16),
-//                 Icon(Icons.chat_bubble_outline, size: 20, color: Colors.black87),
-//                 SizedBox(width: 4),
-//                 Text(AppLocalizations.of(context)!.whatsApp, style: TextStyle(color: Colors.black87)),
-//                 SizedBox(width: 16),
-//                 CircleAvatar(
-//                   radius: 20,
-//                   backgroundColor: AppColor.lightBlueColor,
-//                   child: PopupMenuButton<String>(
-//                     onSelected: (value) async {
-//                       final sp = await SharedPreferences.getInstance();
-//                       await sp.setString('language_code', value);
-//
-//                       final languageVM = Provider.of<LanguageViewModel>(context, listen: false);
-//                       languageVM.setLanguage(value);
-//
-//                       setState(() {
-//                         currentLang = value;
-//                       });
-//                     },
-//                     itemBuilder: (context) => [
-//                       CheckedPopupMenuItem(
-//                         value: "en",
-//                         checked: currentLang == "en",
-//                         child: Text("English"),
-//                       ),
-//                       CheckedPopupMenuItem(
-//                         value: "hi",
-//                         checked: currentLang == "hi",
-//                         child: Text("हिंदी"),
-//                       ),
-//                     ],
-//                     child: Text(
-//                       currentLang.toUpperCase(),
-//                       style: const TextStyle(
-//                         color: Colors.black87,
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 14,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             );
-//           }
-//
-//           Widget loginButton() {
-//             return ElevatedButton(
-//               onPressed: () {
-//                 showDialog(
-//                   context: context,
-//                   builder: (context) => const LoginDialog(),
-//                 );
-//               },
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: AppColor.blueColor,
-//                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-//               ),
-//               child: Text(
-//                 AppLocalizations.of(context)!.login,
-//                 style: const TextStyle(color: Colors.white),
-//               ),
-//             );
-//           }
-//
-//           return Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               SizedBox(
-//                 height: isMobile ? null : 60,
-//                 child: isMobile
-//                     ? Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     const LogoSection(),
-//                     Row(
-//                       children: [
-//                         // Language selector
-//                         CircleAvatar(
-//                           radius: 20,
-//                           backgroundColor: AppColor.lightBlueColor,
-//                           child: PopupMenuButton<String>(
-//                             onSelected: (value) async {
-//                               final sp = await SharedPreferences.getInstance();
-//                               await sp.setString('language_code', value);
-//
-//                               final languageVM = Provider.of<LanguageViewModel>(context, listen: false);
-//                               languageVM.setLanguage(value);
-//
-//                               setState(() {
-//                                 currentLang = value;
-//                               });
-//                             },
-//                             itemBuilder: (context) => [
-//                               CheckedPopupMenuItem(
-//                                 value: "en",
-//                                 checked: currentLang == "en",
-//                                 child: Text("English"),
-//                               ),
-//                               CheckedPopupMenuItem(
-//                                 value: "hi",
-//                                 checked: currentLang == "hi",
-//                                 child: Text("हिंदी"),
-//                               ),
-//                             ],
-//                             child: Text(
-//                               currentLang.toUpperCase(),
-//                               style: const TextStyle(
-//                                 color: Colors.black87,
-//                                 fontWeight: FontWeight.bold,
-//                                 fontSize: 14,
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                         const SizedBox(width: 8),
-//                         // Mobile menu icon
-//                         PopupMenuButton<int>(
-//                           icon: const Icon(Icons.menu, color: Colors.black87),
-//                           onSelected: (index) {
-//                             switch (index) {
-//                               case 0:
-//                                 widget.onHomeTap?.call();
-//                                 break;
-//                               case 1:
-//                                 widget.onServicesTap?.call();
-//                                 break;
-//                               case 2:
-//                                 widget.onAboutTap?.call();
-//                                 break;
-//                               case 3:
-//                                 widget.onContactTap?.call();
-//                                 break;
-//                               case 4:
-//                                 showDialog(
-//                                   context: context,
-//                                   builder: (context) => const LoginDialog(),
-//                                 );
-//                                 break;
-//                             }
-//                           },
-//                           itemBuilder: (context) => [
-//                             PopupMenuItem(value: 0, child: Text(AppLocalizations.of(context)!.home)),
-//                             PopupMenuItem(value: 1, child: Text(AppLocalizations.of(context)!.services)),
-//                             PopupMenuItem(value: 2, child: Text(AppLocalizations.of(context)!.about)),
-//                             PopupMenuItem(value: 3, child: Text(AppLocalizations.of(context)!.contact)),
-//                             PopupMenuItem(value: 4, child: Text(AppLocalizations.of(context)!.login)),
-//                           ],
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 )
-//                     : Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     const LogoSection(),
-//                     Row(
-//                       children: [
-//                         buildButton(AppLocalizations.of(context)!.home, 0, widget.onHomeTap),
-//                         buildButton(AppLocalizations.of(context)!.services, 1, widget.onServicesTap),
-//                         buildButton(AppLocalizations.of(context)!.about, 2, widget.onAboutTap),
-//                         buildButton(AppLocalizations.of(context)!.contact, 3, widget.onContactTap),
-//                         const SizedBox(width: 30),
-//                         contactInfo(),
-//                         const SizedBox(width: 16),
-//                         loginButton(),
-//                       ],
-//                     )
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-//
-// class LogoSection extends StatelessWidget {
-//   const LogoSection({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         Container(
-//           width: 70,
-//           height: 45,
-//           decoration: const BoxDecoration(shape: BoxShape.circle),
-//           child: Image.asset(
-//             Assets.assetsLogo,
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//         const SizedBox(width: 8),
-//         Text(
-//           AppLocalizations.of(context)!.vPharmacy,
-//           style: TextStyle(
-//             fontWeight: FontWeight.bold,
-//             fontSize: 20,
-//             color: Colors.black87,
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-//
-//
-//
-//
-//
-//
-//
-//
-// // import 'package:flutter/material.dart';
-// // import 'package:provider/provider.dart';
-// // import 'package:shared_preferences/shared_preferences.dart';
-// // import 'package:v_pharmashing/generated/assets.dart';
-// // import 'package:v_pharmashing/res/const_color.dart';
-// // import 'package:v_pharmashing/res/sizing_const.dart';
-// //
-// // import '../auth/login_screen.dart';
-// // import '../l10n/app_localizations.dart';
-// // import '../view_model/language_view_model.dart';
-// //
-// // class TopBar extends StatefulWidget {
-// //   final VoidCallback? onHomeTap;
-// //   final VoidCallback? onServicesTap;
-// //   final VoidCallback? onAboutTap;
-// //   final VoidCallback? onContactTap;
-// //   final int selectedIndex;
-// //
-// //   const TopBar({
-// //     this.onHomeTap,
-// //     this.onServicesTap,
-// //     this.onAboutTap,
-// //     this.onContactTap,
-// //     super.key,
-// //     required this.selectedIndex,
-// //   });
-// //
-// //   @override
-// //   State<TopBar> createState() => _TopBarState();
-// // }
-// //
-// // class _TopBarState extends State<TopBar> {
-// //   int selectedIndex = 0;
-// //   String currentLang = "en"; // default language
-// //   String? userName; // user name
-// //   bool isLoggedIn = false;
-// //
-// //   @override
-// //   void initState() {
-// //     super.initState();
-// //     _loadSavedLanguage();
-// //     _loadUserData();
-// //   }
-// //
-// //   void _loadSavedLanguage() async {
-// //     final sp = await SharedPreferences.getInstance();
-// //     String? savedLang = sp.getString('language_code');
-// //     if (savedLang != null) {
-// //       setState(() => currentLang = savedLang);
-// //       final languageVM = Provider.of<LanguageViewModel>(context, listen: false);
-// //       languageVM.setLanguage(savedLang);
-// //     }
-// //   }
-// //
-// //   void _loadUserData() async {
-// //     final sp = await SharedPreferences.getInstance();
-// //     String? name = sp.getString('user_name');
-// //     bool loggedIn = sp.getBool('is_logged_in') ?? false;
-// //
-// //     setState(() {
-// //       userName = name;
-// //       isLoggedIn = loggedIn;
-// //     });
-// //   }
-// //
-// //   void _logout() async {
-// //     final sp = await SharedPreferences.getInstance();
-// //     await sp.remove('user_name');
-// //     await sp.setBool('is_logged_in', false);
-// //
-// //     setState(() {
-// //       userName = null;
-// //       isLoggedIn = false;
-// //     });
-// //   }
-// //
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     Widget buildButton(String text, int index, VoidCallback? onTap) {
-// //       return TextButton(
-// //         onPressed: () {
-// //           setState(() {
-// //             selectedIndex = index;
-// //           });
-// //           if (onTap != null) onTap();
-// //         },
-// //         child: Text(
-// //           text,
-// //           style: TextStyle(
-// //             color: selectedIndex == index ? Colors.blue : Colors.black87,
-// //             fontWeight: selectedIndex == index ? FontWeight.bold : FontWeight.normal,
-// //             fontSize: 16,
-// //           ),
-// //         ),
-// //       );
-// //     }
-// //
-// //     Widget contactInfo() {
-// //       return Row(
-// //         mainAxisSize: MainAxisSize.min,
-// //         children: [
-// //           const Icon(Icons.phone, size: 20, color: Colors.black54),
-// //           const SizedBox(width: 4),
-// //           const Text("+91 9876543210", style: TextStyle(color: Colors.black87)),
-// //           const SizedBox(width: 16),
-// //           const Icon(Icons.chat_bubble_outline, size: 20, color: Colors.black87),
-// //           const SizedBox(width: 4),
-// //           Text(AppLocalizations.of(context)!.whatsApp, style: const TextStyle(color: Colors.black87)),
-// //           const SizedBox(width: 16),
-// //           CircleAvatar(
-// //             radius: 20,
-// //             backgroundColor: AppColor.lightBlueColor,
-// //             child: PopupMenuButton<String>(
-// //               onSelected: (value) async {
-// //                 final sp = await SharedPreferences.getInstance();
-// //                 await sp.setString('language_code', value);
-// //                 final languageVM = Provider.of<LanguageViewModel>(context, listen: false);
-// //                 languageVM.setLanguage(value);
-// //                 setState(() => currentLang = value);
-// //               },
-// //               itemBuilder: (context) => [
-// //                 CheckedPopupMenuItem(value: "en", checked: currentLang == "en", child: const Text("English")),
-// //                 CheckedPopupMenuItem(value: "hi", checked: currentLang == "hi", child: const Text("हिंदी")),
-// //               ],
-// //               child: Text(
-// //                 currentLang.toUpperCase(),
-// //                 style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 14),
-// //               ),
-// //             ),
-// //           ),
-// //         ],
-// //       );
-// //     }
-// //
-// //     Widget loginOrUserButton() {
-// //       if (isLoggedIn && userName != null) {
-// //         return Row(
-// //           children: [
-// //             Text(
-// //               "Hi, $userName",
-// //               style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
-// //             ),
-// //             const SizedBox(width: 8),
-// //             ElevatedButton(
-// //               onPressed: _logout,
-// //               style: ElevatedButton.styleFrom(
-// //                 backgroundColor: Colors.red,
-// //                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-// //               ),
-// //               child: const Text("Logout", style: TextStyle(color: Colors.white)),
-// //             ),
-// //           ],
-// //         );
-// //       } else {
-// //         return ElevatedButton(
-// //           onPressed: () {
-// //             showDialog(
-// //               context: context,
-// //               builder: (context) => const LoginDialog(),
-// //             ).then((value) => _loadUserData()); // refresh after login/registration
-// //           },
-// //           style: ElevatedButton.styleFrom(
-// //             backgroundColor: AppColor.blueColor,
-// //             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-// //           ),
-// //           child: Text(AppLocalizations.of(context)!.login, style: const TextStyle(color: Colors.white)),
-// //         );
-// //       }
-// //     }
-// //
-// //     return Container(
-// //       color: Colors.white,
-// //       padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth * 0.03, vertical: 8),
-// //       child: LayoutBuilder(
-// //         builder: (context, constraints) {
-// //           bool isMobile = constraints.maxWidth < 600;
-// //
-// //           return Row(
-// //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// //             children: [
-// //               const LogoSection(),
-// //               if (!isMobile)
-// //                 Row(
-// //                   children: [
-// //                     buildButton(AppLocalizations.of(context)!.home, 0, widget.onHomeTap),
-// //                     buildButton(AppLocalizations.of(context)!.services, 1, widget.onServicesTap),
-// //                     buildButton(AppLocalizations.of(context)!.about, 2, widget.onAboutTap),
-// //                     buildButton(AppLocalizations.of(context)!.contact, 3, widget.onContactTap),
-// //                     const SizedBox(width: 30),
-// //                     contactInfo(),
-// //                     const SizedBox(width: 16),
-// //                     loginOrUserButton(),
-// //                   ],
-// //                 )
-// //               else
-// //                 Row(
-// //                   children: [
-// //                     // Mobile menu
-// //                     PopupMenuButton<int>(
-// //                       icon: const Icon(Icons.menu, color: Colors.black87),
-// //                       onSelected: (index) {
-// //                         switch (index) {
-// //                           case 0:
-// //                             widget.onHomeTap?.call();
-// //                             break;
-// //                           case 1:
-// //                             widget.onServicesTap?.call();
-// //                             break;
-// //                           case 2:
-// //                             widget.onAboutTap?.call();
-// //                             break;
-// //                           case 3:
-// //                             widget.onContactTap?.call();
-// //                             break;
-// //                           case 4:
-// //                             loginOrUserButton();
-// //                             // loginOrUserButton().onPressed?.call();
-// //                             break;
-// //                         }
-// //                       },
-// //                       itemBuilder: (context) => [
-// //                         PopupMenuItem(value: 0, child: Text(AppLocalizations.of(context)!.home)),
-// //                         PopupMenuItem(value: 1, child: Text(AppLocalizations.of(context)!.services)),
-// //                         PopupMenuItem(value: 2, child: Text(AppLocalizations.of(context)!.about)),
-// //                         PopupMenuItem(value: 3, child: Text(AppLocalizations.of(context)!.contact)),
-// //                         PopupMenuItem(value: 4, child: Text(isLoggedIn ? "Logout" : AppLocalizations.of(context)!.login)),
-// //                       ],
-// //                     ),
-// //                   ],
-// //                 ),
-// //             ],
-// //           );
-// //         },
-// //       ),
-// //     );
-// //   }
-// // }
-// //
-// // class LogoSection extends StatelessWidget {
-// //   const LogoSection({super.key});
-// //
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Row(
-// //       children: [
-// //         Container(
-// //           width: 70,
-// //           height: 45,
-// //           decoration: const BoxDecoration(shape: BoxShape.circle),
-// //           child: Image.asset(Assets.assetsLogo, fit: BoxFit.cover),
-// //         ),
-// //         const SizedBox(width: 8),
-// //         Text(
-// //           AppLocalizations.of(context)!.vPharmacy,
-// //           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black87),
-// //         ),
-// //       ],
-// //     );
-// //   }
-// // }
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -575,6 +9,7 @@ import '../auth/login_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../view_model/language_view_model.dart';
 import '../view_model/profile_view_model.dart';
+import '../view_model/user_view_model.dart';
 
 class TopBar extends StatefulWidget {
   final VoidCallback? onHomeTap;
@@ -677,7 +112,50 @@ class _TopBarState extends State<TopBar> {
       );
     }
 
+    // Widget loginOrUserButton() {
+    //   if (profileVM.isLoggedIn && profileVM.userName != null) {
+    //     return Row(
+    //       children: [
+    //         Text(
+    //           "Hi, ${profileVM.userName}",
+    //           style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+    //         ),
+    //         const SizedBox(width: 8),
+    //         ElevatedButton(
+    //           onPressed: () => profileVM.logout(),
+    //           style: ElevatedButton.styleFrom(
+    //             backgroundColor: Colors.red,
+    //             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    //           ),
+    //           child: const Text("Logout", style: TextStyle(color: Colors.white)),
+    //         ),
+    //       ],
+    //     );
+    //   } else {
+    //     return ElevatedButton(
+    //       onPressed: () {
+    //         showDialog(
+    //           context: context,
+    //           builder: (context) => const LoginDialog(),
+    //         ).then((_) {
+    //           Provider.of<ProfileViewModel>(context, listen: false).profileApi(context);
+    //         });
+    //       },
+    //       style: ElevatedButton.styleFrom(
+    //         backgroundColor: AppColor.blueColor,
+    //         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    //       ),
+    //       child: Text(AppLocalizations.of(context)!.login, style: const TextStyle(color: Colors.white)),
+    //     );
+    //   }
+    // }
     Widget loginOrUserButton() {
+      final profileVM = Provider.of<ProfileViewModel>(context);
+
+      if (profileVM.loading) {
+        return const SizedBox();
+      }
+
       if (profileVM.isLoggedIn && profileVM.userName != null) {
         return Row(
           children: [
@@ -687,7 +165,35 @@ class _TopBarState extends State<TopBar> {
             ),
             const SizedBox(width: 8),
             ElevatedButton(
-              onPressed: () => profileVM.logout(),
+              onPressed: () async {
+                // Logout confirmation dialog
+                bool? confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Confirm Logout"),
+                    content: const Text("Are you sure you want to logout?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: const Text("OK"),
+                      ),
+                    ],
+                  ),
+                );
+
+                if (confirm == true) {
+                  // ✅ Clear user ID and logout
+                  await UserViewModel().remove();
+                  await profileVM.logout();
+
+                  // ✅ Force UI refresh to show login button
+                  setState(() {});
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -714,6 +220,7 @@ class _TopBarState extends State<TopBar> {
         );
       }
     }
+
 
     return Container(
       color: Colors.white,
