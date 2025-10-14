@@ -46,7 +46,7 @@ class OrderHistoryViewModel with ChangeNotifier {
         setModelData(orderModel);
 
         // Message show karna
-        Utils.show(orderModel.message ?? "", context);
+        // Utils.show(orderModel.message ?? "", context);
 
         // Order data print karna
         print("OrderHistory Data:");

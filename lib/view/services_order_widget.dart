@@ -52,6 +52,23 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
       userId = id; // ab form editable hoga agar login hai
     });
   }
+  void _resetForm() {
+    _formKey.currentState?.reset(); // Form fields reset
+    _nameController.clear();
+    _emailController.clear();
+    _phoneController.clear();
+    _addressController.clear();
+    _whatsappController.clear();
+    _alternateController.clear();
+    _instructionsController.clear();
+    _otherDurationController.clear();
+    _selectedCategory = null;
+    _selectedDuration = null;
+    showOtherDurationField = false;
+    _selectedImages.clear();
+    _webImages.clear();
+    setState(() {}); // UI update
+  }
 
 
   Future<void> _pickImages() async {
@@ -702,39 +719,37 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
       ],
     );
   }
+  void showApiPopup({
+    required BuildContext context,
+    required String title,
+    required String message,
+    bool isSuccess = true,
+    VoidCallback? onOk,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              if (onOk != null) onOk();
+            },
+            child: Text(
+              "OK",
+              style: TextStyle(color: isSuccess ? Colors.green : Colors.red),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
 
-  // Widget _buildSubmitButton() => SizedBox(
-  //   width: double.infinity,
-  //   child: ElevatedButton(
-  //     onPressed: () {
-  //       final createOrderViewModel = Provider.of<CreateOrderViewModel>(context,listen: false);
-  //       createOrderViewModel.createOrderApi(
-  //         _nameController.text,
-  //         _selectedCategory,
-  //         _addressController.text,
-  //         _phoneController.text,
-  //         _whatsappController.text,
-  //         _selectedDuration ?? _otherDurationController.text,
-  //         _instructionsController.text,
-  //         _selectedImages,
-  //         context,
-  //       );
-  //     },
-  //     style: ElevatedButton.styleFrom(
-  //       backgroundColor: const Color(0xFF2563EB),
-  //       foregroundColor: Colors.white,
-  //       padding: const EdgeInsets.symmetric(vertical: 14),
-  //       shape:
-  //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  //       elevation: 0,
-  //     ),
-  //     child: Text(
-  //       AppLocalizations.of(context)!.submitOrder,
-  //       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-  //     ),
-  //   ),
-  // );
+
   Widget _buildSubmitButton() => SizedBox(
     width: double.infinity,
     child: ElevatedButton(
@@ -788,6 +803,13 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
           _instructionsController.text,
           _selectedImages,
           context,
+        );
+        showApiPopup(
+          context: context,
+          title: "Order Placed!",
+          message: "Your order has been successfully placed.",
+          isSuccess: true,
+          onOk: _resetForm,
         );
       },
       style: ElevatedButton.styleFrom(

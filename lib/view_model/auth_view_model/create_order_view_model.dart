@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../repo/auth_repo.dart';
+import 'package:provider/provider.dart';
 import '../../repo/create_order_repo.dart';
 import '../../utils/utils.dart';
 import '../user_view_model.dart';
@@ -38,12 +36,11 @@ class CreateOrderViewModel with ChangeNotifier {
     try {
       final value = await _loginRepo.createOrderApi(data);
       if (value['success'] == true) {
-        UserViewModel userViewModel = UserViewModel();
-        userViewModel.saveUser(value['user_id'].toString());
-        Utils.show(value['message'], context);
-        // Navigator.pushNamed(context, RoutesName.navbar);
-
+        final userViewModel = Provider.of<UserViewModel>(context, listen: false);
         String? userId = await userViewModel.getUser();
+        // Utils.show(value['message'], context);
+
+        // String? userId = await userViewModel.getUser();
 
         print("User ID: $userId");
         // context.goNamed(RoutesName.navbar);

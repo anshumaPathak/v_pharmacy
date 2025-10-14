@@ -16,44 +16,6 @@ class LoginViewModel with ChangeNotifier {
     _loading = value;
     notifyListeners();
   }
-  // Future<void> loginApi(BuildContext context, dynamic phone) async {
-  //   void _showOTPDialog() {
-  //     showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (context) => OTPVerificationDialog(
-  //         phoneNumber: phone.toString(),
-  //       ),
-  //     );
-  //   }
-  //
-  //   setLoading(true);
-  //   final data = {"mobile": phone};
-  //   print("📞 Sending login API with data: $data");
-  //
-  //   await _loginRepo.loginApi(data).then((response) {
-  //     print("✅ Response: $response");
-  //
-  //     if (response['success'] == true) {
-  //       final message = response['message'] ?? "OTP sent successfully";
-  //
-  //       // ✅ Ensure dialog opens after UI is ready
-  //       Future.delayed(const Duration(milliseconds: 300), () {
-  //         if (context.mounted) _showOTPDialog();
-  //       });
-  //
-  //       Utils.show(message, context);
-  //       setLoading(false);
-  //     } else {
-  //       Utils.show(response['message'] ?? "Something went wrong", context);
-  //       setLoading(false);
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     setLoading(false);
-  //     debugPrint("🚨 Error in loginApi: $error");
-  //     Utils.show("Server error, please try again later", context);
-  //   });
-  // }
   Future<void> loginApi(BuildContext context, dynamic phone) async {
     setLoading(true);
     final data = {"mobile": phone};
@@ -65,7 +27,7 @@ class LoginViewModel with ChangeNotifier {
       setLoading(false);
 
       if (response['success'] == true) {
-        final message = response['message'] ?? "OTP sent successfully";
+        final message = "OTP sent successfully";
 
         // API se register_status aur userId fetch karein
         final isRegistered = response['register_status'] == 1;

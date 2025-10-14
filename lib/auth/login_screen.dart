@@ -1,3 +1,268 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:provider/provider.dart';
+// import 'package:v_pharmashing/utils/utils.dart';
+//
+// import '../l10n/app_localizations.dart';
+// import '../view_model/auth_view_model/login_view_model.dart';
+//
+// class LoginDialog extends StatefulWidget {
+//   const LoginDialog({super.key});
+//
+//   @override
+//   State<LoginDialog> createState() => _LoginDialogState();
+// }
+//
+// class _LoginDialogState extends State<LoginDialog> {
+//   final TextEditingController _phoneController = TextEditingController();
+//   bool _isWhatsApp = true;
+//
+//   @override
+//   void dispose() {
+//     _phoneController.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final loginViewModel = Provider.of<LoginViewModel>(context);
+//     return Dialog(
+//
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(16),
+//       ),
+//       child: Container(
+//         width: 500,
+//         padding: const EdgeInsets.all(32),
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // Header with close button
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                  Text(
+//                    AppLocalizations.of(context)!.login,
+//                   style: TextStyle(
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.black87,
+//                   ),
+//                 ),
+//                 IconButton(
+//                   icon: const Icon(Icons.close, color: Colors.black54),
+//                   onPressed: () => Navigator.of(context).pop(),
+//                 ),
+//               ],
+//             ),
+//             const SizedBox(height: 8),
+//              Text(
+//                AppLocalizations.of(context)!.enterPhoneNumberTo,
+//               style: TextStyle(
+//                 fontSize: 14,
+//                 color: Colors.black54,
+//               ),
+//             ),
+//             const SizedBox(height: 24),
+//
+//             // Phone Number Label
+//              Text(
+//                AppLocalizations.of(context)!.phoneNumber,
+//               style: TextStyle(
+//                 fontSize: 14,
+//                 fontWeight: FontWeight.w500,
+//                 color: Colors.black87,
+//               ),
+//             ),
+//             const SizedBox(height: 8),
+//             TextField(
+//               controller: _phoneController,
+//               keyboardType: TextInputType.phone,
+//               inputFormatters: [
+//                 FilteringTextInputFormatter.digitsOnly,
+//               ],
+//               maxLength: 10,
+//               decoration: InputDecoration(
+//                 counterText: "",
+//                 hintText: '+1-234-567-8900',
+//                 prefixIcon: const Icon(Icons.phone, color: Colors.black54, size: 20),
+//                 border: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(8),
+//                   borderSide: const BorderSide(color: Colors.blue, width: 2),
+//                 ),
+//                 enabledBorder: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(8),
+//                   borderSide: const BorderSide(color: Colors.blue, width: 2),
+//                 ),
+//                 focusedBorder: OutlineInputBorder(
+//                   borderRadius: BorderRadius.circular(8),
+//                   borderSide: const BorderSide(color: Colors.blue, width: 2),
+//                 ),
+//                 contentPadding: const EdgeInsets.symmetric(
+//                   horizontal: 16,
+//                   vertical: 8,
+//                 ),
+//               ),
+//             ),
+//             const SizedBox(height: 8),
+//              Text(
+//               "We'll send you an OTP to verify your number",
+//               style: TextStyle(
+//                 fontSize: 12,
+//                 color: Colors.black54,
+//               ),
+//             ),
+//             const SizedBox(height: 20),
+//             SizedBox(
+//               width: double.infinity,
+//               child: ElevatedButton(
+//                 onPressed: () async {
+//                   String phone = _phoneController.text.trim();
+//                   if (phone.length != 10) {
+//                     Utils.show("Please enter a valid 10-digit phone number", context);
+//                     return;
+//                   }
+//
+//                   // Phone number valid → call login API
+//                   final loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
+//                   loginViewModel.loginApi(context, phone);
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: const Color(0xFF6B9EFF),
+//                   padding: const EdgeInsets.symmetric(vertical: 14),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(8),
+//                   ),
+//                 ),
+//                 child: const Text(
+//                   'Send OTP',
+//                   style: TextStyle(
+//                     fontSize: 16,
+//                     fontWeight: FontWeight.w600,
+//                     color: Colors.white,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//
+//             const SizedBox(height: 16),
+//
+//             // Demo Text
+//             const Center(
+//               child: Text(
+//                 'Demo: Use any phone number ending with 1234 for existing user',
+//                 textAlign: TextAlign.center,
+//                 style: TextStyle(
+//                   fontSize: 12,
+//                   color: Colors.black54,
+//                 ),
+//               ),
+//             ),
+//             const SizedBox(height: 16),
+//
+//             // WhatsApp/SMS Toggle
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 InkWell(
+//                   onTap: () {
+//                     setState(() {
+//                       _isWhatsApp = true;
+//                     });
+//                   },
+//                   child: Row(
+//                     children: [
+//                       Radio<bool>(
+//                         value: true,
+//                         groupValue: _isWhatsApp,
+//                         onChanged: (value) {
+//                           setState(() {
+//                             _isWhatsApp = value!;
+//                           });
+//                         },
+//                         activeColor: Colors.black87,
+//                       ),
+//                       const Text(
+//                         'WhatsApp',
+//                         style: TextStyle(
+//                           fontSize: 14,
+//                           color: Colors.black87,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//                 const SizedBox(width: 24),
+//                 InkWell(
+//                   onTap: () {
+//                     setState(() {
+//                       _isWhatsApp = false;
+//                     });
+//                   },
+//                   child: Row(
+//                     children: [
+//                       Radio<bool>(
+//                         value: false,
+//                         groupValue: _isWhatsApp,
+//                         onChanged: (value) {
+//                           setState(() {
+//                             _isWhatsApp = value!;
+//                           });
+//                         },
+//                         activeColor: Colors.black87,
+//                       ),
+//                       const Text(
+//                         'SMS',
+//                         style: TextStyle(
+//                           fontSize: 14,
+//                           color: Colors.black87,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             const SizedBox(height: 16),
+//
+//             // Terms and Privacy
+//             Center(
+//               child: RichText(
+//                 textAlign: TextAlign.center,
+//                 text: const TextSpan(
+//                   style: TextStyle(
+//                     fontSize: 12,
+//                     color: Colors.black54,
+//                   ),
+//                   children: [
+//                     TextSpan(text: 'By continuing, you agree to our '),
+//                     TextSpan(
+//                       text: 'Terms of Service',
+//                       style: TextStyle(
+//                         color: Colors.blue,
+//                         decoration: TextDecoration.underline,
+//                       ),
+//                     ),
+//                     TextSpan(text: ' and '),
+//                     TextSpan(
+//                       text: 'Privacy Policy',
+//                       style: TextStyle(
+//                         color: Colors.blue,
+//                         decoration: TextDecoration.underline,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +270,6 @@ import 'package:v_pharmashing/utils/utils.dart';
 
 import '../l10n/app_localizations.dart';
 import '../view_model/auth_view_model/login_view_model.dart';
-import 'otp_screen.dart';
 
 class LoginDialog extends StatefulWidget {
   const LoginDialog({super.key});
@@ -23,278 +287,234 @@ class _LoginDialogState extends State<LoginDialog> {
     _phoneController.dispose();
     super.dispose();
   }
-  //
-  // void _showOTPDialog() {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (context) => OTPVerificationDialog(
-  //       phoneNumber: _phoneController.text,
-  //       isWhatsApp: _isWhatsApp,
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
     final loginViewModel = Provider.of<LoginViewModel>(context);
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Container(
-        width: 500,
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header with close button
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+    return MediaQuery.removeViewInsets(
+      context: context,
+      removeBottom: true, // ✅ Prevent resize on keyboard open
+      child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: SingleChildScrollView( // ✅ Allows scroll if content is too big
+          child: Container(
+            width: 500,
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Text(
-                   AppLocalizations.of(context)!.login,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                // Header with close button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.login,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.black54),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  AppLocalizations.of(context)!.enterPhoneNumberTo,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Phone Number Label
+                Text(
+                  AppLocalizations.of(context)!.phoneNumber,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.black54),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-             Text(
-               AppLocalizations.of(context)!.enterPhoneNumberTo,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black54,
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // Phone Number Label
-             Text(
-               AppLocalizations.of(context)!.phoneNumber,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              maxLength: 10,
-              decoration: InputDecoration(
-                counterText: "",
-                hintText: '+1-234-567-8900',
-                prefixIcon: const Icon(Icons.phone, color: Colors.black54, size: 20),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Colors.blue, width: 2),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Colors.blue, width: 2),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Colors.blue, width: 2),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-             Text(
-              "We'll send you an OTP to verify your number",
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black54,
-              ),
-            ),
-            const SizedBox(height: 20),
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: ElevatedButton(
-            //     onPressed: () async {
-            //       loginViewModel.loginApi(context, _phoneController.text);
-            //       // _showOTPDialog();
-            //     },
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: const Color(0xFF6B9EFF),
-            //       padding: const EdgeInsets.symmetric(vertical: 14),
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(8),
-            //       ),
-            //     ),
-            //     child: const Text(
-            //       'Send OTP',
-            //       style: TextStyle(
-            //         fontSize: 16,
-            //         fontWeight: FontWeight.w600,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () async {
-                  String phone = _phoneController.text.trim();
-                  if (phone.length != 10) {
-                    Utils.show("Please enter a valid 10-digit phone number", context);
-                    return;
-                  }
-
-                  // Phone number valid → call login API
-                  final loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
-                  loginViewModel.loginApi(context, phone);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6B9EFF),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  maxLength: 10,
+                  decoration: InputDecoration(
+                    counterText: "",
+                    hintText: '+1-234-567-8900',
+                    prefixIcon:
+                    const Icon(Icons.phone, color: Colors.black54, size: 20),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                   ),
                 ),
-                child: const Text(
-                  'Send OTP',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
+                const SizedBox(height: 8),
+                const Text(
+                  "We'll send you an OTP to verify your number",
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
                 ),
-              ),
-            ),
+                const SizedBox(height: 20),
 
-            const SizedBox(height: 16),
+                // Send OTP Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      String phone = _phoneController.text.trim();
+                      if (phone.length != 10) {
+                        Utils.show(
+                            "Please enter a valid 10-digit phone number", context);
+                        return;
+                      }
 
-            // Demo Text
-            const Center(
-              child: Text(
-                'Demo: Use any phone number ending with 1234 for existing user',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // WhatsApp/SMS Toggle
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      _isWhatsApp = true;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Radio<bool>(
-                        value: true,
-                        groupValue: _isWhatsApp,
-                        onChanged: (value) {
-                          setState(() {
-                            _isWhatsApp = value!;
-                          });
-                        },
-                        activeColor: Colors.black87,
-                      ),
-                      const Text(
-                        'WhatsApp',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 24),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      _isWhatsApp = false;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Radio<bool>(
-                        value: false,
-                        groupValue: _isWhatsApp,
-                        onChanged: (value) {
-                          setState(() {
-                            _isWhatsApp = value!;
-                          });
-                        },
-                        activeColor: Colors.black87,
-                      ),
-                      const Text(
-                        'SMS',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Terms and Privacy
-            Center(
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: const TextSpan(
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black54,
-                  ),
-                  children: [
-                    TextSpan(text: 'By continuing, you agree to our '),
-                    TextSpan(
-                      text: 'Terms of Service',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
+                      final loginViewModel =
+                      Provider.of<LoginViewModel>(context, listen: false);
+                      loginViewModel.loginApi(context, phone);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6B9EFF),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    TextSpan(text: ' and '),
-                    TextSpan(
-                      text: 'Privacy Policy',
+                    child: const Text(
+                      'Send OTP',
                       style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Demo Text
+                const Center(
+                  child: Text(
+                    'Demo: Use any phone number ending with 1234 for existing user',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // WhatsApp/SMS Toggle
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isWhatsApp = true;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Radio<bool>(
+                            value: true,
+                            groupValue: _isWhatsApp,
+                            onChanged: (value) {
+                              setState(() {
+                                _isWhatsApp = value!;
+                              });
+                            },
+                            activeColor: Colors.black87,
+                          ),
+                          const Text(
+                            'WhatsApp',
+                            style: TextStyle(fontSize: 14, color: Colors.black87),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isWhatsApp = false;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Radio<bool>(
+                            value: false,
+                            groupValue: _isWhatsApp,
+                            onChanged: (value) {
+                              setState(() {
+                                _isWhatsApp = value!;
+                              });
+                            },
+                            activeColor: Colors.black87,
+                          ),
+                          const Text(
+                            'SMS',
+                            style: TextStyle(fontSize: 14, color: Colors.black87),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
+                const SizedBox(height: 16),
+
+                // Terms and Privacy
+                Center(
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      style: TextStyle(fontSize: 12, color: Colors.black54),
+                      children: [
+                        TextSpan(text: 'By continuing, you agree to our '),
+                        TextSpan(
+                          text: 'Terms of Service',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        TextSpan(text: ' and '),
+                        TextSpan(
+                          text: 'Privacy Policy',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
-
