@@ -11,5 +11,4 @@ class ApiUrl {
   static const String orderHistory ="${baseUrl}/orders_history";
   static const String confirmOrder ="${baseUrl}/confirm_order";
   static const String contactUs ="${baseUrl}/contact_us";
-
 }

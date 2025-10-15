@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0de5859e-90c5-4715-aa13-44149ce3cb2c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/auth_view_model/register_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/auth_view_model/register_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/auth_view_model/verify_otp_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/auth_view_model/verify_otp_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/c49e888c9372d2f8fbca74ff068d4fa4.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/c49e888c9372d2f8fbca74ff068d4fa4.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/res/api_url.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/api_url.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,11 +102,6 @@
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart</url>
-          <line>934</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/view/services_order_widget.dart</url>
           <line>752</line>
           <option name="timeStamp" value="14" />
@@ -128,6 +125,11 @@
           <url>file://$PROJECT_DIR$/lib/view_model/auth_view_model/register_view_model.dart</url>
           <line>18</line>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart</url>
+          <line>92</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

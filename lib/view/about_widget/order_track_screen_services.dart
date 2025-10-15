@@ -132,49 +132,90 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                   if (userId == null)
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth*0.03,vertical: Sizes.screenHeight*0.03),
+                      width: isMobile
+                          ? MediaQuery.of(context).size.width * 0.9
+                          : 800,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.grey.withOpacity(0.3),
+                          width: 1,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:  [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:  [
+                              Text("Please"),
+                              SizedBox(height: Sizes.screenHeight*0.02,),
+                              Text(
+                                "login",
+                                style: TextStyle(
+                                  color: AppColor.blueColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(height: Sizes.screenHeight*0.02,),
+                              Text("to place an order"),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (userId != null)
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
                     child: orders.isEmpty
                         ? Center(
-                      child:  Padding(
-                        padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 60),
-                        child:  AbsorbPointer(
-                          // absorbing: userId != null,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth*0.03,vertical: Sizes.screenHeight*0.03),
-                            width: isMobile
-                                ? MediaQuery.of(context).size.width * 0.9
-                                : 800,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: Colors.grey.withOpacity(0.3),
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.08),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  [
-                                Text("Please"),
-                                SizedBox(height: Sizes.screenHeight*0.02,),
-                                Text(
-                                  "login",
-                                  style: TextStyle(
-                                    color: AppColor.blueColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(height: Sizes.screenHeight*0.02,),
-                                Text("to place an order"),
-                              ],
-                            ),
+                      child:  Container(
+                        padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth*0.03,vertical: Sizes.screenHeight*0.03),
+                        width: isMobile
+                            ? MediaQuery.of(context).size.width * 0.9
+                            : 800,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Colors.grey.withOpacity(0.3),
+                            width: 1,
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            Text("Please"),
+                            SizedBox(height: Sizes.screenHeight*0.02,),
+                            Text(
+                              "login",
+                              style: TextStyle(
+                                color: AppColor.blueColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(height: Sizes.screenHeight*0.02,),
+                            Text("to place an order"),
+                          ],
                         ),
                       ),
                     )
