@@ -11,4 +11,7 @@ class ApiUrl {
   static const String orderHistory ="${baseUrl}/orders_history";
   static const String confirmOrder ="${baseUrl}/confirm_order";
   static const String contactUs ="${baseUrl}/contact_us";
+  static const String privacyPolicy ="${baseUrl}/get_policy";
+  static const String rating ="${baseUrl}/giveRating";
+  static const String PharmacistRating ="${baseUrl}/give_pharmacist_rating";
 }

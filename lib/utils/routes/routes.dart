@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:v_pharmashing/utils/routes/routes_name.dart';
+import 'package:v_pharmashing/utils/widget/privacy_policy_screen.dart';
 import 'package:v_pharmashing/view/contact_screen.dart';
 import 'package:v_pharmashing/view/dashboard_screen.dart';
 
@@ -40,6 +41,16 @@ class AppRouter {
         name: RoutesName.servicesScreen,
         builder: (context, state) =>  ServicesScreen(),
       ),
+      GoRoute(
+        path: RoutesName.privacyPolicy,
+        name: RoutesName.privacyPolicy,
+        builder: (context, state) =>  PrivacyPolicyScreen(),
+      ),
+      // GoRoute(
+      //   path: RoutesName.servicesScreen,
+      //   name: RoutesName.servicesScreen,
+      //   builder: (context, state) =>  ServicesScreen(),
+      // ),
 
 
 

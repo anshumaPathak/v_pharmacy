@@ -5,9 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0de5859e-90c5-4715-aa13-44149ce3cb2c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/model/privacy_policy_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/repo/pharmacist_rating_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/repo/privacy_policy_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/repo/rating_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/widget/privacy_policy_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/widget/terms_condition_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/view_model/pharmacist_rating_view_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/view_model/privacy_policy_view_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/view_model/rating_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_graph.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/c49e888c9372d2f8fbca74ff068d4fa4.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/c49e888c9372d2f8fbca74ff068d4fa4.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/auth/register_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth/register_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/NOTICES" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/auth/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/auth/otp_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth/otp_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/model/order_history_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/order_history_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/res/api_url.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/api_url.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/res/top_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/top_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/routes/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/routes/routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/routes/routes_name.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/routes/routes_name.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/widget/footer_section.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/services_order_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/services_order_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view_model/auth_view_model/create_order_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/auth_view_model/create_order_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view_model/auth_view_model/login_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/auth_view_model/login_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view_model/auth_view_model/register_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/auth_view_model/register_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view_model/profile_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/profile_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,10 +117,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/res/top_bar.dart</url>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/view/about_widget/service_order_process.dart</url>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
@@ -101,22 +126,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/view/services_order_widget.dart</url>
-          <line>752</line>
+          <line>1269</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/view_model/auth_view_model/login_view_model.dart</url>
-          <line>86</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/view_model/auth_view_model/login_view_model.dart</url>
-          <line>98</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/auth/login_screen.dart</url>
-          <line>282</line>
+          <line>287</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
@@ -125,9 +140,19 @@
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/view/about_widget/order_track_screen_services.dart</url>
-          <line>92</line>
-          <option name="timeStamp" value="21" />
+          <url>file://$PROJECT_DIR$/lib/auth/login_screen.dart</url>
+          <line>430</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/model/order_history_model.dart</url>
+          <line>190</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/model/order_history_model.dart</url>
+          <line>243</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

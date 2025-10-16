@@ -263,11 +263,16 @@
 //   }
 // }
 //
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:v_pharmashing/res/const_color.dart';
+import 'package:v_pharmashing/utils/routes/routes_name.dart';
 import 'package:v_pharmashing/utils/utils.dart';
+import 'package:v_pharmashing/utils/widget/privacy_policy_screen.dart';
+import 'package:v_pharmashing/utils/widget/terms_condition_screen.dart';
 
 import '../l10n/app_localizations.dart';
 import '../view_model/auth_view_model/login_view_model.dart';
@@ -423,103 +428,72 @@ class _LoginDialogState extends State<LoginDialog> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Demo Text
-                // const Center(
-                //   child: Text(
-                //     'Demo: Use any phone number ending with 1234 for existing user',
+                // Center(
+                //   child: RichText(
                 //     textAlign: TextAlign.center,
-                //     style: TextStyle(fontSize: 12, color: Colors.black54),
+                //     text:  TextSpan(
+                //       style: TextStyle(fontSize: 12, color: Colors.black54),
+                //       children: [
+                //         TextSpan(text: 'By continuing, you agree to our '),
+                //         TextSpan(
+                //           text: 'Terms of Service',
+                //           style: TextStyle(
+                //             color: Colors.blue,
+                //             decoration: TextDecoration.underline,
+                //           ),
+                //         ),
+                //         TextSpan(text: ' and '),
+                //         TextSpan(
+                //           text: 'Privacy Policy',
+                //           style: TextStyle(
+                //             color: Colors.blue,
+                //             decoration: TextDecoration.underline,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
                 //   ),
                 // ),
-                // const SizedBox(height: 16),
-                //
-                // // WhatsApp/SMS Toggle
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     InkWell(
-                //       onTap: () {
-                //         setState(() {
-                //           _isWhatsApp = true;
-                //         });
-                //       },
-                //       child: Row(
-                //         children: [
-                //           Radio<bool>(
-                //             value: true,
-                //             groupValue: _isWhatsApp,
-                //             onChanged: (value) {
-                //               setState(() {
-                //                 _isWhatsApp = value!;
-                //               });
-                //             },
-                //             activeColor: Colors.black87,
-                //           ),
-                //           const Text(
-                //             'WhatsApp',
-                //             style: TextStyle(fontSize: 14, color: Colors.black87),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //     const SizedBox(width: 24),
-                //     InkWell(
-                //       onTap: () {
-                //         setState(() {
-                //           _isWhatsApp = false;
-                //         });
-                //       },
-                //       child: Row(
-                //         children: [
-                //           Radio<bool>(
-                //             value: false,
-                //             groupValue: _isWhatsApp,
-                //             onChanged: (value) {
-                //               setState(() {
-                //                 _isWhatsApp = value!;
-                //               });
-                //             },
-                //             activeColor: Colors.black87,
-                //           ),
-                //           const Text(
-                //             'SMS',
-                //             style: TextStyle(fontSize: 14, color: Colors.black87),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // const SizedBox(height: 16),
-
-                // Terms and Privacy
                 Center(
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
-                      style: TextStyle(fontSize: 12, color: Colors.black54),
+                    text: TextSpan(
+                      style: const TextStyle(fontSize: 12, color: Colors.black54),
                       children: [
-                        TextSpan(text: 'By continuing, you agree to our '),
+                        const TextSpan(text: 'By continuing, you agree to our '),
                         TextSpan(
                           text: 'Terms of Service',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
                           ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                            // context.push(RoutesName.privacyPolicy);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const TermsConditionScreen(),
+                                ),
+                              );
+                            },
                         ),
-                        TextSpan(text: ' and '),
+                        const TextSpan(text: ' and '),
                         TextSpan(
                           text: 'Privacy Policy',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
                           ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              context.push(RoutesName.privacyPolicy);
+                            },
                         ),
                       ],
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),

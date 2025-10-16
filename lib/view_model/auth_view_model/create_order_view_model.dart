@@ -48,7 +48,7 @@ class CreateOrderViewModel with ChangeNotifier {
 
         // Navigator.pushNamed(context, RoutesName.navbar);
       } else {
-        print("Error Message: ${value['message']}");
+        print(" ${value['message']}");
         if (value['message'] == "Email already exists") {
           Utils.show("Email has already been taken", context);
         } else {

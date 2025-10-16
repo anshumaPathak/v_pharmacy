@@ -15,7 +15,10 @@ import 'package:v_pharmashing/view_model/confirm_order_view_model.dart';
 import 'package:v_pharmashing/view_model/contact_us_view_model.dart';
 import 'package:v_pharmashing/view_model/language_view_model.dart';
 import 'package:v_pharmashing/view_model/order_history_view_model.dart';
+import 'package:v_pharmashing/view_model/pharmacist_rating_view_model.dart';
+import 'package:v_pharmashing/view_model/privacy_policy_view_model.dart';
 import 'package:v_pharmashing/view_model/profile_view_model.dart';
+import 'package:v_pharmashing/view_model/rating_view_model.dart';
 import 'package:v_pharmashing/view_model/user_view_model.dart';
 
 import 'l10n/app_localizations.dart';
@@ -54,6 +57,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OrderHistoryViewModel(),),
         ChangeNotifierProvider(create: (_) => ConfirmOrderViewModel(),),
         ChangeNotifierProvider(create: (_) => ContactUsViewModel(),),
+        ChangeNotifierProvider(create: (_) => PrivacyPolicyViewModel(),),
+        ChangeNotifierProvider(create: (_) => RatingViewModel(),),
+        ChangeNotifierProvider(create: (_) => PharmacistRatingViewModel(),),
       ],
       child: Consumer<LanguageViewModel>(
         builder: (context, languageVM, child) {

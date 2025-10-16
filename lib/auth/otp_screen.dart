@@ -149,6 +149,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/send_otp_view_model.dart';
 import '../../view_model/auth_view_model/verify_otp_view_model.dart';
@@ -243,6 +244,9 @@ class _OTPVerificationDialogState extends State<OTPVerificationDialog> {
                   controller: _otpController,
                   keyboardType: TextInputType.number,
                   maxLength: 4,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   decoration: InputDecoration(
                     hintText: 'Enter 4-digit OTP',
                     counterText: '',

@@ -84,9 +84,9 @@ class RegisterViewModel with ChangeNotifier {
 
     try {
       final value = await _loginRepo.registerApi(data);
-      print("Register Response: $value"); // ✅ This will now always print
+      print("Register Response: $value");
 
-      if (value['id'] != null) { // check for 'id' directly
+      if (value['id'] != null) {
         final userId = value['id'].toString();
 
         // 1️⃣ Save user ID
