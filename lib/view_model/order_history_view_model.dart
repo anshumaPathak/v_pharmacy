@@ -95,7 +95,7 @@ class OrderHistoryViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> orderHistoryApi(BuildContext context) async {
+  Future<void> orderHistoryApi(dynamic limit,dynamic offset,BuildContext context) async {
     final userViewModel = Provider.of<UserViewModel>(context, listen: false);
     String? userId = await userViewModel.getUser();
 
@@ -105,7 +105,11 @@ class OrderHistoryViewModel with ChangeNotifier {
     }
 
     setLoading(true);
-    Map<String, dynamic> data = {"user_id": userId};
+    Map<String, dynamic> data = {
+      "user_id": userId,
+      "limit":limit,
+      "offset":offset
+    };
     print("OrderHistory API Call: $data");
 
     try {

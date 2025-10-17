@@ -298,7 +298,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
 
           const SizedBox(height: 40),
           ServiceOrderProcess(),
-          const SizedBox(height: 40),
+          // const SizedBox(height: 40),
         ],
       ),
     );

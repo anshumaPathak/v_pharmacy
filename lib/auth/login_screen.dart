@@ -359,7 +359,7 @@ class _LoginDialogState extends State<LoginDialog> {
                   maxLength: 10,
                   decoration: InputDecoration(
                     counterText: "",
-                    hintText: '+1-234-567-8900',
+                    hintText: '+91-234-567-8900',
                     prefixIcon:
                     const Icon(Icons.phone, color: Colors.black54, size: 20),
                     border: OutlineInputBorder(

@@ -121,66 +121,29 @@ class VerifyOtpViewModel with ChangeNotifier {
         final response = await loginVM.loginApi(context, phone);
        Navigator.pop(context);
        Navigator.pop(context);
-        if (response['register_status'] == 0 && context.mounted) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-          );
-        }
+        // if (response['register_status'] == 0) {
+        //   showDialog(
+        //     context: context,
+        //     barrierDismissible: false,
+        //     builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
+        //   );
+        // }
       } else {
-        Utils.show(value['msg'] ?? "OTP Verification failed", context);
+        // Utils.show(value['msg'] ?? "OTP Verification failed", context);
       }
     } catch (error) {
       setLoading(false);
       Utils.show("Something went wrong", context);
 
       // Agar koi unexpected error bhi aaye → Register popup
-      if (context.mounted) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-        );
-      }
+      // if (context.mounted) {
+      //   showDialog(
+      //     context: context,
+      //     barrierDismissible: false,
+      //     builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
+      //   );
+      // }
     }
   }
 
-  // Future<void> verifyOtpApi(
-  //     String phone,
-  //     String otp,
-  //     String userId,
-  //     bool isRegistered,
-  //     BuildContext context,
-  //     ) async {
-  //   setLoading(true);
-  //
-  //   try {
-  //     final value = await _loginRepo.verifyOtpApi(phone, otp);
-  //     setLoading(false);
-  //
-  //     if (value['error'].toString() == "200") {
-  //       Utils.show(value['msg'] ?? "OTP Verified", context);
-  //
-  //       // OTP verified → call login API
-  //       final loginVM = Provider.of<LoginViewModel>(context, listen: false);
-  //       final response = await loginVM.loginApi(context, phone);
-  //
-  //       // ✅ If mobile not registered → show register popup
-  //       if (response['register_status'] == 0 && context.mounted) {
-  //         showDialog(
-  //           context: context,
-  //           barrierDismissible: false,
-  //           builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-  //         );
-  //       }
-  //     } else {
-  //       // OTP verification failed
-  //       Utils.show(value['msg'] ?? "OTP Verification failed", context);
-  //     }
-  //   } catch (error) {
-  //     setLoading(false);
-  //     Utils.show("Something went wrong", context);
-  //   }
-  // }
 }

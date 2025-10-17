@@ -38,6 +38,7 @@ class CreateOrderViewModel with ChangeNotifier {
       if (value['success'] == true) {
         final userViewModel = Provider.of<UserViewModel>(context, listen: false);
         String? userId = await userViewModel.getUser();
+
         // Utils.show(value['message'], context);
 
         // String? userId = await userViewModel.getUser();

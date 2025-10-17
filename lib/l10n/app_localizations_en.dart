@@ -285,7 +285,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailAddress => 'Email Address';
 
   @override
-  String get phoneNumber => 'Phone Number *';
+  String get phoneNumber => 'Whatsapp Number *';
 
   @override
   String get category => 'Category:';
@@ -438,7 +438,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterEmail => 'your.email@example.com';
 
   @override
-  String get enterPhoneNumber => '+1-234-567-8900';
+  String get enterPhoneNumber => '+91-234-567-8900';
 
   @override
   String get whatsappNumber => 'WhatsApp Number *';
@@ -453,7 +453,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alternateContactNumber => 'Alternate Contact Number';
 
   @override
-  String get enterAlternateContact => '+1-234-567-8900';
+  String get enterAlternateContact => '+91-234-567-8900';
 
   @override
   String get medicineDuration => 'Medicine Duration *';

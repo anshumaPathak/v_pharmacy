@@ -420,12 +420,14 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:v_pharmashing/res/const_color.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
 import '../l10n/app_localizations.dart';
 import '../res/top_bar.dart';
 import '../utils/widget/dash_board_data.dart';
 import '../utils/widget/featured_card.dart';
+import '../view_model/profile_view_model.dart';
 import 'about_us_screen.dart';
 import 'contact_screen.dart';
 import 'services_screen.dart';
@@ -444,7 +446,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
       activeSection = section;
     });
   }
+  @override
+  void initState() {
+    super.initState();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // initial profile fetch
+       Provider.of<ProfileViewModel>(context, listen: false)
+          .profileApi(context);
+    });
+  }
   int _getSelectedIndex() {
     switch (activeSection) {
       case "home":

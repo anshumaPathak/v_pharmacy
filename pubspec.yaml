@@ -32,6 +32,7 @@ dependencies:
   provider:
   flutter_html:
   flutter_rating_bar:
+  url_launcher:
   dotted_border: ^3.1.0
   fluttertoast:
   image_picker:

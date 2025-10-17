@@ -100,8 +100,9 @@ class RegisterViewModel with ChangeNotifier {
         await sp.setBool('is_logged_in', true);
 
         // 3️⃣ Safely use context
-        if (context.mounted) {
-          Navigator.of(context, rootNavigator: true).pop();
+
+          // Navigator.of(context, rootNavigator: true).pop();
+          // Navigator.pop(context);// Close dialog
           Navigator.pop(context);// Close dialog
           Utils.show(value['message'] ?? "User registered successfully", context);
 
@@ -114,7 +115,7 @@ class RegisterViewModel with ChangeNotifier {
           } else {
             print("🚨 User ID not found. Cannot call profile API.");
           }
-        }
+
 
       } else {
         final errorMsg = (value['message'] == "Email already exists")

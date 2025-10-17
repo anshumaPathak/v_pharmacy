@@ -292,6 +292,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/register_view_model.dart';
 
+import '../res/const_color.dart';
+
 class CompleteRegistrationDialog extends StatefulWidget {
   final String phoneNumber;
 
@@ -323,6 +325,7 @@ class _CompleteRegistrationDialogState
       context: context,
       removeBottom: true, // ✅ Prevent resize when keyboard opens
       child: Dialog(
+        backgroundColor: AppColor.whiteColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -334,14 +337,13 @@ class _CompleteRegistrationDialogState
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header with close button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'Complete Registration',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),

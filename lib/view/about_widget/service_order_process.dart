@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v_pharmashing/res/launcher.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_model/user_view_model.dart';
 
@@ -122,7 +123,7 @@ class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                  // Add WhatsApp support action
+                 Launcher.launchWhatsApp(context, "9580366204");
                 },
                 icon: const Icon(Icons.chat_bubble_outline),
                 label: Text(AppLocalizations.of(context)!.whatsappSupport),
@@ -140,7 +141,7 @@ class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
               ),
               OutlinedButton.icon(
                 onPressed: () {
-                  // Add call support action
+                  Launcher.launchDialPad(context, "9580366204");
                 },
                 icon: const Icon(Icons.phone_outlined),
                 label: Text(AppLocalizations.of(context)!.callSupport),

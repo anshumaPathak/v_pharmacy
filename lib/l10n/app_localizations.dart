@@ -650,7 +650,7 @@ abstract class AppLocalizations {
   /// No description provided for @phoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'Phone Number *'**
+  /// **'Whatsapp Number *'**
   String get phoneNumber;
 
   /// No description provided for @category.
@@ -956,7 +956,7 @@ abstract class AppLocalizations {
   /// No description provided for @enterPhoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'+1-234-567-8900'**
+  /// **'+91-234-567-8900'**
   String get enterPhoneNumber;
 
   /// No description provided for @whatsappNumber.
@@ -986,7 +986,7 @@ abstract class AppLocalizations {
   /// No description provided for @enterAlternateContact.
   ///
   /// In en, this message translates to:
-  /// **'+1-234-567-8900'**
+  /// **'+91-234-567-8900'**
   String get enterAlternateContact;
 
   /// No description provided for @medicineDuration.

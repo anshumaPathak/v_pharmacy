@@ -194,13 +194,13 @@ class LoginViewModel with ChangeNotifier {
       } else if (response['register_status'] == 0) {
         Utils.show(response['message'] ?? "Mobile not registered", context);
 
-        if (context.mounted) {
-          await showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-          );
-        }
+        // if (context.mounted) {
+        //   await showDialog(
+        //     context: context,
+        //     barrierDismissible: false,
+        //     builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
+        //   );
+        // }
       }
 
       return response;

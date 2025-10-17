@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:v_pharmashing/res/launcher.dart';
 import 'package:v_pharmashing/view_model/confirm_order_view_model.dart';
 import 'package:v_pharmashing/view_model/order_history_view_model.dart';
 import 'package:v_pharmashing/view_model/pharmacist_rating_view_model.dart';
@@ -19,17 +19,30 @@ class YourOrdersScreen extends StatefulWidget {
   @override
   State<YourOrdersScreen> createState() => _YourOrdersScreenState();
 }
+
 class _YourOrdersScreenState extends State<YourOrdersScreen> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadUserId();
-      final viewModel =
-      Provider.of<OrderHistoryViewModel>(context, listen: false);
-      viewModel.orderHistoryApi(context);
+      final viewModel = Provider.of<OrderHistoryViewModel>(
+        context,
+        listen: false,
+      );
+// Initially limit 4, offset 0
+      viewModel.orderHistoryApi(_limit, 0, context);
+
+      // final viewModel = Provider.of<OrderHistoryViewModel>(
+      //   context,
+      //   listen: false,
+      // );
+      // viewModel.orderHistoryApi(context);
     });
   }
+  int _limit = 4; // show 4 orders by default
+  bool _showAll = false; // tracks if all orders are shown
+  int _displayedCount = 4;
   Future<void> _loadUserId() async {
     final userViewModel = Provider.of<UserViewModel>(context, listen: false);
     String? id = await userViewModel.getUser();
@@ -37,20 +50,27 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
       userId = id;
     });
   }
+
   bool _showOrderDetails = false;
   Data? _selectedOrder;
   String? userId;
   @override
   Widget build(BuildContext context) {
+
     return LayoutBuilder(
       builder: (context, constraints) {
         bool isMobile = constraints.maxWidth < 800;
         final orderVM = Provider.of<OrderHistoryViewModel>(context);
         final orders = orderVM.orderHistoryModel?.data ?? [];
-
+        // final displayedOrders = _showAll ? orders : orders.take(_limit).toList();
+        print("Orders length: ${orders.length}, Limit: $_limit");
+        final displayedOrders = orders.take(_displayedCount).toList();
         return Stack(
           children: [
             SingleChildScrollView(
+              physics: _showOrderDetails
+                  ? const NeverScrollableScrollPhysics() // popup open → background scroll disable
+                  : const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   // Header
@@ -92,50 +112,16 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                   ),
 
                   const SizedBox(height: 40),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
-                  //   child: orders.isEmpty
-                  //       ? const Center(
-                  //     child: Padding(
-                  //       padding: EdgeInsets.all(40),
-                  //       child: Text(
-                  //         'No orders found',
-                  //         style: TextStyle(
-                  //           fontSize: 16,
-                  //           color: Colors.grey,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   )
-                  //       : isMobile
-                  //       ? Column(
-                  //     children: orders
-                  //         .map((order) => Padding(
-                  //       padding: const EdgeInsets.only(bottom: 20),
-                  //       child: _buildOrderCard(order),
-                  //     ))
-                  //         .toList(),
-                  //   )
-                  //       : IntrinsicHeight(
-                  //     child: Row(
-                  //       crossAxisAlignment: CrossAxisAlignment.stretch,
-                  //       children: orders
-                  //           .map((order) => Expanded(
-                  //         child: Padding(
-                  //           padding: const EdgeInsets.symmetric(
-                  //               horizontal: 10),
-                  //           child: _buildOrderCard(order),
-                  //         ),
-                  //       ))
-                  //           .toList(),
-                  //     ),
-                  //   ),
-                  // ),
                   if (userId == null)
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobile ? 16 : 60,
+                      ),
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: Sizes.screenWidth*0.03,vertical: Sizes.screenHeight*0.03),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Sizes.screenWidth * 0.03,
+                          vertical: Sizes.screenHeight * 0.03,
+                        ),
                         width: isMobile
                             ? MediaQuery.of(context).size.width * 0.9
                             : 800,
@@ -156,12 +142,12 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
+                          children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  [
+                              children: [
                                 Text("Please"),
-                                SizedBox(height: Sizes.screenHeight*0.02,),
+                                SizedBox(height: Sizes.screenHeight * 0.02),
                                 Text(
                                   "login",
                                   style: TextStyle(
@@ -169,7 +155,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                SizedBox(height: Sizes.screenHeight*0.02,),
+                                SizedBox(height: Sizes.screenHeight * 0.02),
                                 Text("to place an order"),
                               ],
                             ),
@@ -178,42 +164,159 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                       ),
                     ),
                   if (userId != null)
-
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(
+                    //     horizontal: isMobile ? 16 : 60,
+                    //   ),
+                    //   child: orders.isEmpty
+                    //       ? Column(
+                    //           crossAxisAlignment: CrossAxisAlignment.start,
+                    //           children: const [
+                    //             Center(
+                    //               child: Text(
+                    //                 '👋 Welcome! You don’t have any orders yet.Please create your first order to start tracking it.',
+                    //                 style: TextStyle(
+                    //                   fontSize: 16,
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         )
+                    //   :isMobile
+                    //       ? Column(
+                    //     children: displayedOrders
+                    //         .map(
+                    //           (order) => Padding(
+                    //         padding: const EdgeInsets.only(bottom: 20),
+                    //         child: _buildOrderCard(order),
+                    //       ),
+                    //     )
+                    //         .toList(),
+                    //   )
+                    //       : Wrap(
+                    //     spacing: 20,
+                    //     runSpacing: 20,
+                    //     children: displayedOrders
+                    //         .map(
+                    //           (order) => SizedBox(
+                    //         width: MediaQuery.of(context).size.width / 2 - 80,
+                    //         child: _buildOrderCard(order),
+                    //       ),
+                    //     )
+                    //         .toList(),
+                    //   ),
+                    //
+                    //   // : isMobile
+                    //       // ? Column(
+                    //       //     children: orders
+                    //       //         .map(
+                    //       //           (order) => Padding(
+                    //       //             padding: const EdgeInsets.only(
+                    //       //               bottom: 20,
+                    //       //             ),
+                    //       //             child: _buildOrderCard(order),
+                    //       //           ),
+                    //       //         )
+                    //       //         .toList(),
+                    //       //   )
+                    //       // : Wrap(
+                    //       //     spacing: 20,
+                    //       //     runSpacing: 20,
+                    //       //     children: orders
+                    //       //         .map(
+                    //       //           (order) => SizedBox(
+                    //       //             width:
+                    //       //                 MediaQuery.of(context).size.width /
+                    //       //                     2 -
+                    //       //                 80,
+                    //       //             child: _buildOrderCard(order),
+                    //       //           ),
+                    //       //         )
+                    //       //         .toList(),
+                    //       //   ),
+                    // ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
-                      child: orders.isEmpty
-                          ? Center(
-                        child:  Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
+                      child: Column(
+                        children: [
+                          orders.isEmpty
+                              ? Center(
+                            child: Text(
+                              '👋 Welcome! You don’t have any orders yet. Please create your first order to start tracking it.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
+                              : isMobile
+                              ? Column(
+                            children: displayedOrders
+                                .map(
+                                  (order) => Padding(
+                                padding: const EdgeInsets.only(bottom: 20),
+                                child: _buildOrderCard(order),
+                              ),
+                            )
+                                .toList(),
+                          )
+                              : Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: displayedOrders
+                                .map(
+                                  (order) => SizedBox(
+                                width: MediaQuery.of(context).size.width / 2 - 80,
+                                child: _buildOrderCard(order),
+                              ),
+                            )
+                                .toList(),
+                          ),
 
-                          ],
-                        ),
-                      )
-                          : isMobile
-                          ? Column(
-                        children: orders
-                            .map((order) => Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: _buildOrderCard(order),
-                        ))
-                            .toList(),
-                      )
-                          : GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing: 20,
-                          childAspectRatio: 1, // adjust height
-                        ),
-                        itemCount: orders.length,
-                        itemBuilder: (context, index) {
-                          return _buildOrderCard(orders[index]);
-                        },
+                          // ✅ Show More / Show Less button
+
+                          if (_displayedCount < orders.length)
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _displayedCount += 4; // 4 aur load karo
+                                  if (_displayedCount > orders.length) {
+                                    _displayedCount = orders.length;
+                                  }
+                                });
+                              },
+                              child: Text(
+                                _displayedCount >= orders.length ? "Show Less" : "Show More",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.blueColor,
+                                ),
+                              ),
+                            ),
+
+                          if (_displayedCount >= orders.length)
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _displayedCount = 4; // Reset to default
+                                });
+                              },
+                              child: const Text(
+                                "Show Less",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.blueColor,
+                                ),
+                              ),
+                            ),
+
+                        ],
                       ),
                     ),
+
 
                   const SizedBox(height: 80),
                 ],
@@ -293,14 +396,19 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Order Date:',
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                    Text(
+                      'Order Date:',
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                    ),
                     const SizedBox(height: 4),
-                    Text(_formatDate(order.createdAt.toString()),
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF1E293B))),
+                    Text(
+                      _formatDate(order.createdAt.toString()),
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1E293B),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -308,14 +416,19 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context)!.duration,
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                    Text(
+                      AppLocalizations.of(context)!.duration,
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                    ),
                     const SizedBox(height: 4),
-                    Text(order.medicineDuration ?? 'N/A',
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF1E293B))),
+                    Text(
+                      order.medicineDuration ?? 'N/A',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1E293B),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -330,8 +443,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.finalPrice,
-                    style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                Text(
+                  AppLocalizations.of(context)!.finalPrice,
+                  style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                ),
                 const SizedBox(height: 4),
                 Text(
                   '₹${order.summary!.finalAmount}',
@@ -348,139 +463,106 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
           const SizedBox(height: 16),
 
           // Medicines - Fixed empty list handling
-          Text(AppLocalizations.of(context)!.medicines,
-              style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+          Text(
+            AppLocalizations.of(context)!.medicines,
+            style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+          ),
           const SizedBox(height: 8),
           (order.medicines == null || order.medicines!.isEmpty)
               ? Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF1F5F9),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: const Text(
-              'No medicines listed',
-              style: TextStyle(
-                fontSize: 13,
-                color: Color(0xFF475569),
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          )
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const Text(
+                    'No medicines listed',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xFF475569),
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                )
               : ExpansionTile(
-            title: const Text(
-              "Medicines",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            children: order.medicines!.map((m) {
-              double price = double.tryParse(m.price.toString()) ?? 0.0;
-              double discount = double.tryParse(m.discountPrice.toString()) ?? 0.0;
-              int quantity = m.quantity ?? 0;
-              double totalPrice = (price - discount) * quantity;
-
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.4),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${m.quantity ?? 0} x ${m.medicineName ?? 'N/A'}',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF1E293B),
+                  title: const Text(
+                    "Medicines",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                  ),
+                  children: order.medicines!.map((m) {
+                    double price = double.tryParse(m.price.toString()) ?? 0.0;
+                    double discount =
+                        double.tryParse(m.discountPrice.toString()) ?? 0.0;
+                    int quantity = m.quantity ?? 0;
+                    // double totalPrice = (price - discount) * quantity;
+                    double totalPrice =
+                        double.tryParse(m.totalPrice.toString()) ?? 0.0;
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Price: ₹$price',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF475569),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
                           ),
-                        ),
-                        Text(
-                          'Discount: ₹$discount',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.green,
-                            fontWeight: FontWeight.w500,
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${m.quantity ?? 0} x ${m.medicineName ?? 'N/A'}',
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF1E293B),
+                            ),
                           ),
-                        ),
-                        Text(
-                          'Total: ₹$totalPrice',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF0284C7),
-                            fontWeight: FontWeight.w600,
+                          const SizedBox(height: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Price: ₹$price',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF475569),
+                                ),
+                              ),
+                              Text(
+                                'Discount: ₹$discount',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                'Total: ₹$totalPrice',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF0284C7),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    );
+                  }).toList(),
                 ),
-              );
-            }).toList(),
-          ),
 
-
-          // (order.medicines == null || order.medicines!.isEmpty)
-          //     ? Container(
-          //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          //   decoration: BoxDecoration(
-          //     color: const Color(0xFFF1F5F9),
-          //     borderRadius: BorderRadius.circular(6),
-          //   ),
-          //   child: const Text(
-          //     'No medicines listed',
-          //     style: TextStyle(
-          //       fontSize: 13,
-          //       color: Color(0xFF475569),
-          //       fontStyle: FontStyle.italic,
-          //     ),
-          //   ),
-          // )
-          //     : Wrap(
-          //   spacing: 8,
-          //   runSpacing: 8,
-          //   children: order.medicines!
-          //       .map((m) => Container(
-          //     padding: const EdgeInsets.symmetric(
-          //         horizontal: 12, vertical: 6),
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xFFF1F5F9),
-          //       borderRadius: BorderRadius.circular(6),
-          //     ),
-          //     child: Text(
-          //       '${m.quantity ?? 0} x ${m.medicineName ?? 'N/A'}',
-          //       style: const TextStyle(
-          //         fontSize: 13,
-          //         color: Color(0xFF475569),
-          //       ),
-          //     ),
-          //   ))
-          //       .toList(),
-          // ),
-
-          // Price Confirmation Section - Fixed
           if (order.status == 1 &&
               order.summary?.original != null &&
               order.summary!.original!.isNotEmpty &&
@@ -548,9 +630,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                       Text(
                         'Final:',
                         style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey[800]),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[800],
+                        ),
                       ),
                       Text(
                         '₹${order.summary!.finalAmount}',
@@ -568,7 +651,11 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                            final confirmOrderViewModel = Provider.of<ConfirmOrderViewModel>(context, listen: false);
+                            final confirmOrderViewModel =
+                                Provider.of<ConfirmOrderViewModel>(
+                                  context,
+                                  listen: false,
+                                );
                             await confirmOrderViewModel.confirmOrderApi(
                               order.id,
                               "2",
@@ -584,7 +671,8 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             elevation: 0,
                           ),
                           child: Text(
@@ -597,10 +685,14 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () async {
-                            final confirmOrderViewModel = Provider.of<ConfirmOrderViewModel>(context, listen: false);
+                            final confirmOrderViewModel =
+                                Provider.of<ConfirmOrderViewModel>(
+                                  context,
+                                  listen: false,
+                                );
                             await confirmOrderViewModel.confirmOrderApi(
                               order.id,
-                             "5",
+                              "5",
                               context,
                             );
 
@@ -610,19 +702,25 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            side: const BorderSide(color: Colors.redAccent, width: 1.5),
+                            side: const BorderSide(
+                              color: Colors.redAccent,
+                              width: 1.5,
+                            ),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.cancel,
-                            style: const TextStyle(color: Colors.redAccent, fontSize: 14),
+                            style: const TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),
@@ -644,11 +742,15 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     side: BorderSide(color: Colors.grey[400]!),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.viewDetails,
-                    style: const TextStyle(fontSize: 14, color: Color(0xFF475569)),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF475569),
+                    ),
                   ),
                 ),
               ),
@@ -656,17 +758,20 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    // Add WhatsApp functionality here
+                    Launcher.launchWhatsApp(context, order.whatsappNumber);
                   },
                   icon: const Icon(Icons.chat_bubble_outline, size: 16),
-                  label: Text(AppLocalizations.of(context)!.whatsApp,
-                      style: const TextStyle(fontSize: 14)),
+                  label: Text(
+                    AppLocalizations.of(context)!.whatsApp,
+                    style: const TextStyle(fontSize: 14),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF10B981),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     elevation: 0,
                   ),
                 ),
@@ -770,7 +875,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.receipt_long, color: Color(0xFF3B82F6)),
+                        const Icon(
+                          Icons.receipt_long,
+                          color: Color(0xFF3B82F6),
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -805,21 +913,21 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                           // Customer & Order Info
                           isMobile
                               ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildInfoSection(),
-                              const SizedBox(height: 24),
-                              _buildDeliverySection(),
-                            ],
-                          )
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    _buildInfoSection(),
+                                    const SizedBox(height: 24),
+                                    _buildDeliverySection(),
+                                  ],
+                                )
                               : Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(child: _buildInfoSection()),
-                              const SizedBox(width: 40),
-                              Expanded(child: _buildDeliverySection()),
-                            ],
-                          ),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(child: _buildInfoSection()),
+                                    const SizedBox(width: 40),
+                                    Expanded(child: _buildDeliverySection()),
+                                  ],
+                                ),
 
                           const SizedBox(height: 24),
 
@@ -834,40 +942,46 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                           ),
                           const SizedBox(height: 12),
                           (selectedOrder.medicines == null ||
-                              selectedOrder.medicines!.isEmpty)
+                                  selectedOrder.medicines!.isEmpty)
                               ? const Text(
-                            'No medicines listed',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          )
+                                  'No medicines listed',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                )
                               : Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: selectedOrder.medicines!
-                                .map((m) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFEFF6FF),
-                                borderRadius:
-                                BorderRadius.circular(8),
-                                border: Border.all(
-                                    color: const Color(0xFFDBEAFE)),
-                              ),
-                              child: Text(
-                                '${m.quantity ?? 0} x ${m.medicineName ?? 'N/A'}',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF1E40AF),
+                                  spacing: 8,
+                                  runSpacing: 8,
+                                  children: selectedOrder.medicines!
+                                      .map(
+                                        (m) => Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 14,
+                                            vertical: 8,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFEFF6FF),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            border: Border.all(
+                                              color: const Color(0xFFDBEAFE),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            '${m.quantity ?? 0} x ${m.medicineName ?? 'N/A'}',
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xFF1E40AF),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
-                              ),
-                            ))
-                                .toList(),
-                          ),
                         ],
                       ),
                     ),
@@ -888,8 +1002,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context)!.customer,
-            style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+        Text(
+          AppLocalizations.of(context)!.customer,
+          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+        ),
         const SizedBox(height: 4),
         Text(
           selectedOrder.fullName ?? "N/A",
@@ -900,8 +1016,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
           ),
         ),
         const SizedBox(height: 16),
-        Text(AppLocalizations.of(context)!.category,
-            style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+        Text(
+          AppLocalizations.of(context)!.category,
+          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+        ),
         const SizedBox(height: 4),
         Text(
           selectedOrder.diseaseCategory ?? "N/A",
@@ -912,8 +1030,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
           ),
         ),
         const SizedBox(height: 16),
-        Text(AppLocalizations.of(context)!.duration,
-            style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+        Text(
+          AppLocalizations.of(context)!.duration,
+          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+        ),
         const SizedBox(height: 4),
         Text(
           selectedOrder.medicineDuration ?? "N/A",
@@ -924,8 +1044,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
           ),
         ),
         const SizedBox(height: 16),
-        Text(AppLocalizations.of(context)!.whatsApp,
-            style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+        Text(
+          AppLocalizations.of(context)!.whatsApp,
+          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+        ),
         const SizedBox(height: 4),
         Text(
           selectedOrder.whatsappNumber ?? "N/A",
@@ -938,6 +1060,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
       ],
     );
   }
+
   Widget _buildDeliverySection() {
     if (_selectedOrder == null) return const SizedBox.shrink();
 
@@ -1041,7 +1164,11 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
             ),
             child: const Text(
               'Rate Order',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
@@ -1061,16 +1188,23 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
             ),
             child: const Text(
               'Pharmacist Rating ',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
-
       ],
     );
   }
+
   void _showPharmacistRatingDialog(Data order) {
-    final pharmacistRatingViewModel = Provider.of<PharmacistRatingViewModel>(context, listen: false);
+    final pharmacistRatingViewModel = Provider.of<PharmacistRatingViewModel>(
+      context,
+      listen: false,
+    );
     double _rating = 0;
     TextEditingController _descController = TextEditingController();
 
@@ -1106,10 +1240,8 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                     itemSize: 50,
                     unratedColor: Colors.grey[300],
                     itemPadding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    itemBuilder: (context, _) => const Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
+                    itemBuilder: (context, _) =>
+                        const Icon(Icons.star, color: Colors.amber),
                     onRatingUpdate: (rating) {
                       setState(() {
                         _rating = rating;
@@ -1155,11 +1287,12 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
               ElevatedButton(
                 onPressed: () {
                   pharmacistRatingViewModel.pharmacistRatingApi(
-                      order.pharmacistId,
-                      order.id,
-                      _rating,
-                      _descController.text,
-                      context);
+                    order.pharmacistId,
+                    order.id,
+                    _rating,
+                    _descController.text,
+                    context,
+                  );
 
                   // Navigator.pop(context);
                   // TODO: Send _rating & _descController.text to backend
@@ -1186,7 +1319,10 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
   }
 
   void _showRatingDialog(Data order) {
-    final ratingViewModel = Provider.of<RatingViewModel>(context, listen: false);
+    final ratingViewModel = Provider.of<RatingViewModel>(
+      context,
+      listen: false,
+    );
     double _rating = 0;
     TextEditingController _descController = TextEditingController();
 
@@ -1222,10 +1358,8 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                     itemSize: 50,
                     unratedColor: Colors.grey[300],
                     itemPadding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    itemBuilder: (context, _) => const Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
+                    itemBuilder: (context, _) =>
+                        const Icon(Icons.star, color: Colors.amber),
                     onRatingUpdate: (rating) {
                       setState(() {
                         _rating = rating;
@@ -1271,11 +1405,12 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
               ElevatedButton(
                 onPressed: () {
                   ratingViewModel.ratingApi(
-                      order.deliveryPartnerId,
-                      order.id,
-                      _rating,
-                      _descController.text,
-                      context);
+                    order.deliveryPartnerId,
+                    order.id,
+                    _rating,
+                    _descController.text,
+                    context,
+                  );
                   Navigator.pop(context);
                   // TODO: Send _rating & _descController.text to backend
                   // print("User rated: $_rating");
@@ -1299,4 +1434,5 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
       },
     );
   }
+
 }
