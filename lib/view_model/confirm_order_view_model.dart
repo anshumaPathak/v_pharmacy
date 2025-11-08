@@ -21,7 +21,7 @@ class ConfirmOrderViewModel with ChangeNotifier {
     final userViewModel = Provider.of<UserViewModel>(context, listen: false);
     String? userId = await userViewModel.getUser();
 
-    print("Fetched userId: $userId"); // for debugging
+    // print("Fetched userId: $userId"); // for debugging
 
     setLoading(true);
     Map<String, dynamic> data = {
@@ -36,14 +36,14 @@ class ConfirmOrderViewModel with ChangeNotifier {
       if (value['success'] == true) {
         Utils.show(value['message'], context);
 
-        print("API Success: ${value['message']}");
-        print("User ID after confirm: $userId");
+        // print("API Success: ${value['message']}");
+        // print("User ID after confirm: $userId");
       } else {
         Utils.show(value['message'], context);
       }
     } catch (error) {
       if (kDebugMode) {
-        print('Error: $error');
+        // print('Error: $error');
       }
       Utils.show("Something went wrong. Please try again later.", context);
     } finally {

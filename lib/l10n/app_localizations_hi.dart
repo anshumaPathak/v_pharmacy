@@ -21,7 +21,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get home => 'होम';
 
   @override
-  String get services => 'सर्विसेज़';
+  String get services => 'सेवाएंं';
 
   @override
   String get about => 'हमारे बारे में';
@@ -57,7 +57,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get whyChooseVPharmacy => 'V फ़ार्मेसी क्यों चुनें';
 
   @override
-  String get wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices => 'हर दवा पर 15% की छूठ महीने में 3 बार फ्री फार्मासिस्ट विजिट आपके घर पर  सुगर, बीपी, ऑक्सीजन इत्यादि जाँच फ्री डाइट चार्ट और योगा गाइडेंस';
+  String get wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices => 'हर दवा पर 15% की छूठ महीने में 3 बार फ्री फार्मासिस्ट विजिट आपके घर पर  सुगर, बीपी, ऑक्सीजन इत्यादि जाँच फ्री डाइट चार्ट और योगा गाइडेंस,\n✅ 100% असली और प्रमाणित दवाएँ\n✅ लाइसेंस प्राप्त फार्मासिस्ट और विशेषज्ञ\n✅ घर पर मुफ्त हेल्थ चेकअप\n✅ 1 दिन में तेज़ डिलीवरी\n✅ ₹500 से ऊपर के ऑर्डर पर फ्री डिलीवरी\n✅ भरोसेमंद सेवा और सस्ती कीमतें';
 
   @override
   String get happyCustomers => 'संतुष्ट ग्राहक';
@@ -78,13 +78,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get joinThousandsOfSatisfiedCustomersWhoTrustMediCareForTheirHealthcareNeeds => 'उन हजारों संतुष्ट ग्राहकों में शामिल हों जो अपनी स्वास्थ्य आवश्यकताओं के लिए MediCare पर भरोसा करते हैं';
 
   @override
-  String get yourTrusted => 'आपका भरोसेमंद';
+  String get yourTrusted => 'वी फार्मेसी';
 
   @override
-  String get medicinePartner => 'दवा साथी';
+  String get medicinePartner => 'क्रोनिक केयर में आपका साथी';
 
   @override
-  String get orderVerifiedMedicinesTrackDeliver => 'सत्यापित दवाइयाँ ऑर्डर करें, डिलीवरी को रियल-टाइम में ट्रैक करें और हमारी पेशेवर स्वास्थ्य सेवा प्लेटफ़ॉर्म के साथ प्रामाणिकता सुनिश्चित करें।';
+  String get orderVerifiedMedicinesTrackDeliver => 'आपका स्वास्थ्य सिर्फ़ दवा से ज़्यादा का हकदार है।\nवी फ़ार्मेसी में, हम आपको पुरानी बीमारियों की पूरी देखभाल आपके दरवाज़े पर ही उपलब्ध कराते हैं।';
 
   @override
   String get learnMore => 'और जानें';
@@ -189,7 +189,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get regularCustomer => 'नियमित ग्राहक';
 
   @override
-  String get mediCareHasBeenALifesaverFastDeliveryGenuine => 'V Pharmacy जीवन रक्षक साबित हुआ है! तेज़ डिलीवरी, असली दवाइयाँ और उत्कृष्ट ग्राहक सहायता।';
+  String get mediCareHasBeenALifesaverFastDeliveryGenuine => 'V Pharmacy ने मेरी डायबिटीज़ संभालना बहुत आसान बना दिया। डॉक्टर घर आते हैं और दवा हमेशा समय पर मिलती है।';
 
   @override
   String get drMichaelChen => 'डॉ. माइकल चेन';
@@ -198,7 +198,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get healthcareProfessional => 'स्वास्थ्य सेवा विशेषज्ञ';
 
   @override
-  String get iRecommendMediCareToMyPatients => 'मैं अपने मरीजों को V Pharmacy की सिफारिश करता हूँ। उनका सत्यापन सिस्टम दवा की प्रामाणिकता सुनिश्चित करता है।';
+  String get iRecommendMediCareToMyPatients => 'फ्री हेल्थ चेकअप और इतनी तेज़ डिलीवरी — वाकई शानदार सेवा।';
 
   @override
   String get emilyRodriguez => 'एमिली रोड्रिगेज़';
@@ -207,10 +207,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get satisfiedCustomer => 'संतुष्ट ग्राहक';
 
   @override
-  String get theTrackingSystemIsAmazing => 'ट्रैकिंग सिस्टम शानदार है। मुझे हमेशा पता रहता है कि मेरी दवाइयाँ कब पहुंचेंगी।';
+  String get theTrackingSystemIsAmazing => 'ऑर्डर किया और अगले ही दिन दवा घर पर मिल गई। सब कुछ असली और सही पैकिंग में!';
 
   @override
-  String get weAreALeadingHealthcarePlatformDedicatedToProvidingSafe => 'हम एक प्रमुख स्वास्थ्य प्लेटफ़ॉर्म हैं जो सुरक्षित, विश्वसनीय और सुलभ दवा ऑर्डरिंग और सत्यापन सेवाएँ प्रदान करने के लिए समर्पित हैं। हमारा मिशन रोगियों और गुणवत्तापूर्ण स्वास्थ्य सेवाओं के बीच की खाई को पाटना है।';
+  String get weAreALeadingHealthcarePlatformDedicatedToProvidingSafe => 'हम एक प्रमुख स्वास्थ्य प्लेटफ़ॉर्म हैं जो सुरक्षित, विश्वसनीय और सुलभ दवा ऑर्डरिंग और सत्यापन सेवाएँ प्रदान करने के लिए समर्पित हैं। हमारा मिशन रोगियों और गुणवत्तापूर्ण स्वास्थ्य सेवाओं के बीच की खाई को पाटना है। हम डायबिटीज़, ब्लड प्रेशर, थायरॉइड, हार्ट डिज़ीज़, अस्थमा, और आर्थराइटिस जैसी बीमारियों के इलाज में विशेषज्ञ हैं। हमारी टीम आपको देती है — सही दवाइयाँ, समय पर डिलीवरी, और लगातार हेल्थ मॉनिटरिंग। “हम सिर्फ दवाएँ नहीं, बल्कि देखभाल और विश्वास पहुँचाते हैं।”';
 
   @override
   String get yearsExperience => 'वर्षों का अनुभव';
@@ -495,22 +495,19 @@ class AppLocalizationsHi extends AppLocalizations {
   String get categoryMentalHealth => 'मानसिक स्वास्थ्य';
 
   @override
-  String get duration1to7Days => '1-7 दिन';
+  String get duration7Days => '7 days';
 
   @override
-  String get duration1to2Weeks => '1-2 सप्ताह';
+  String get duration15Days => '15 days';
 
   @override
-  String get duration2to4Weeks => '2-4 सप्ताह';
+  String get duration30Days => '30 days';
 
   @override
-  String get duration1to3Months => '1-3 महीने';
+  String get duration60Days => '60 days';
 
   @override
-  String get duration3to6Months => '3-6 महीने';
-
-  @override
-  String get duration6PlusMonths => '6+ महीने';
+  String get duration90Days => '90 days';
 
   @override
   String get orderProcess => 'ऑर्डर प्रक्रिया';
@@ -649,4 +646,214 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get feedback => 'प्रतिक्रिया';
+
+  @override
+  String get orderNow => 'ऑर्डर करें';
+
+  @override
+  String get privacyPolicyTitle => 'गोपनीयता नीति';
+
+  @override
+  String get privacyPolicyHeading => 'V Pharmacy की गोपनीयता नीति';
+
+  @override
+  String get privacyPolicyIntro => 'V Pharmacy में आपकी गोपनीयता हमारी सर्वोच्च प्राथमिकता है। हम आपकी व्यक्तिगत जानकारी की सुरक्षा के लिए प्रतिबद्ध हैं जब आप हमारी वेबसाइट https://vpharmacy.in का उपयोग करते हैं। यह गोपनीयता नीति बताती है कि हम आपकी जानकारी कैसे एकत्र करते हैं, उपयोग करते हैं और सुरक्षित रखते हैं।';
+
+  @override
+  String get informationWeCollectTitle => 'हम कौन सी जानकारी एकत्र करते हैं';
+
+  @override
+  String get informationWeCollect => ' नाम\n ईमेल पता\n मोबाइल नंबर\n डिलीवरी पता (यदि आवश्यक हो)\n सेवा उपयोग के दौरान दी गई अन्य जानकारी\n ब्राउज़र प्रकार और संस्करण\n डिवाइस और ऑपरेटिंग सिस्टम की जानकारी\n वेबसाइट पर देखे गए पेज और बिताया गया समय\n IP पता';
+
+  @override
+  String get howWeUseInfoTitle => 'हम आपकी जानकारी का उपयोग कैसे करते हैं';
+
+  @override
+  String get howWeUseInfo => '- आपकी दवाइयों के ऑर्डर को प्रोसेस और प्रबंधित करने के लिए\n आपकी पूछताछ और अनुरोधों का जवाब देने के लिए\n ऑर्डर की स्थिति के अपडेट देने के लिए\n वेबसाइट और उपयोग अनुभव को बेहतर बनाने के लिए\n\nहम कोई भी भुगतान या वित्तीय जानकारी संग्रहीत नहीं करते।';
+
+  @override
+  String get cookiesTitle => 'कुकीज़ और ट्रैकिंग तकनीकें';
+
+  @override
+  String get cookiesDetails => '- आपके ब्राउज़िंग अनुभव को बेहतर बनाने के लिए\n आपकी पसंद याद रखने के लिए\n वेबसाइट प्रदर्शन और उपयोग की निगरानी के लिए';
+
+  @override
+  String get dataSharingTitle => 'डेटा शेयरिंग और तृतीय-पक्ष सेवाएं';
+
+  @override
+  String get dataSharingDetails => 'हम आपकी जानकारी को किसी तीसरे पक्ष के साथ साझा, बेच या व्यापार नहीं करते।';
+
+  @override
+  String get dataSecurityTitle => 'डेटा सुरक्षा';
+
+  @override
+  String get dataSecurityDetails => 'हम आपकी जानकारी को सुरक्षित रखने के लिए आवश्यक तकनीकी और संगठनात्मक उपाय अपनाते हैं।';
+
+  @override
+  String get userRightsTitle => 'आपके अधिकार';
+
+  @override
+  String get userRights => '- व्यक्तिगत जानकारी तक पहुंच का अनुरोध करें\n गलत जानकारी को सुधारने का अनुरोध करें\n अपने डेटा को हटाने का अनुरोध करें';
+
+  @override
+  String get consentTitle => 'सहमति';
+
+  @override
+  String get consentDetails => 'हमारी वेबसाइट का उपयोग करके, आप अपनी जानकारी के संग्रह और उपयोग के लिए सहमति देते हैं।';
+
+  @override
+  String get contactTitle => ' पूछताछ के लिए संपर्क करें';
+
+  @override
+  String get contactDetails => 'ईमेल: vikaspharmacy11@gmail.com\nफ़ोन: 9580366204';
+
+  @override
+  String get changesTitle => 'गोपनीयता नीति में परिवर्तन';
+
+  @override
+  String get changesDetails => 'हम समय-समय पर इस गोपनीयता नीति को अपडेट कर सकते हैं।';
+
+  @override
+  String get termsTitle => 'नियम और शर्तें';
+
+  @override
+  String get termsHeading => 'V Pharmacy के नियम और शर्तें';
+
+  @override
+  String get termsIntro => 'https://vpharmacy.in में आपका स्वागत है। इस वेबसाइट का उपयोग करने पर आप निम्नलिखित नियमों और शर्तों से सहमत होते हैं।';
+
+  @override
+  String get acceptanceTitle => 'शर्तों की स्वीकृति';
+
+  @override
+  String get acceptanceDetails => 'V Pharmacy तक पहुँच कर, आप इन नियमों और सभी लागू कानूनों से बंधे रहने के लिए सहमत होते हैं।';
+
+  @override
+  String get servicesTitle => 'प्रदान की जाने वाली सेवाएं';
+
+  @override
+  String get servicesDetails => 'दवाइयों का ऑर्डर: हमारी वेबसाइट फॉर्म के माध्यम से अपनी दवा का ऑर्डर सबमिट करें।\n ऑर्डर ट्रैक करें: अपनी दवा के ऑर्डर की स्थिति जांचें।\n दवा सत्यापित करें: खरीदने से पहले दवाओं की प्रामाणिकता सत्यापित करें।\n\nहम ऑनलाइन भुगतान सेवाएं प्रदान नहीं करते; सभी लेनदेन आवश्यक होने पर ऑफलाइन पूरे किए जाते हैं।';
+
+  @override
+  String get userObligationsTitle => 'उपयोगकर्ता की जिम्मेदारियां';
+
+  @override
+  String get userObligationsDetails => '- फॉर्म भरते समय सटीक और पूर्ण जानकारी प्रदान करें।\n वेबसाइट या उसकी सेवाओं का दुरुपयोग न करें।\n हानिकारक, अवैध या भ्रामक सामग्री अपलोड करने से बचें।';
+
+  @override
+  String get intellectualTitle => ' बौद्धिक संपदा अधिकार';
+
+  @override
+  String get intellectualDetails => 'इस वेबसाइट पर उपलब्ध सभी सामग्री, जैसे पाठ, छवियाँ, लोगो, ग्राफिक्स और सॉफ्टवेयर, V Pharmacy की संपत्ति है और भारतीय व अंतर्राष्ट्रीय कॉपीराइट कानूनों के तहत संरक्षित है।';
+
+  @override
+  String get liabilityTitle => ' दायित्व की सीमा';
+
+  @override
+  String get liabilityDetails => 'V Pharmacy इस वेबसाइट के उपयोग से उत्पन्न किसी भी प्रत्यक्ष, अप्रत्यक्ष, आकस्मिक या परिणामी क्षति के लिए उत्तरदायी नहीं है।';
+
+  @override
+  String get linksTitle => ' बाहरी लिंक';
+
+  @override
+  String get linksDetails => 'हमारी वेबसाइट में तृतीय-पक्ष वेबसाइटों के लिंक शामिल हो सकते हैं। V Pharmacy इन बाहरी वेबसाइटों की सामग्री, नीतियों या प्रथाओं के लिए जिम्मेदार नहीं है।';
+
+  @override
+  String get termsContactDetails => 'ईमेल: vikaspharmacy11@gmail.com\nफ़ोन: 9580366204';
+
+  @override
+  String get modificationsTitle => ' संशोधन';
+
+  @override
+  String get modificationsDetails => 'हम किसी भी समय इन नियमों और शर्तों में परिवर्तन करने का अधिकार सुरक्षित रखते हैं।';
+
+  @override
+  String get governingLawTitle => ' लागू कानून';
+
+  @override
+  String get governingLawDetails => 'ये नियम और शर्तें भारत के कानूनों द्वारा शासित हैं।';
+
+  @override
+  String get disclaimerTitle => 'अस्वीकरण';
+
+  @override
+  String get disclaimerIntro => 'https://vpharmacy.in पर प्रदान की गई जानकारी केवल सामान्य सूचना के उद्देश्य से है।';
+
+  @override
+  String get medicalInfoHeading => 'चिकित्सीय जानकारी अस्वीकरण';
+
+  @override
+  String get medicalInfoContent => 'V Pharmacy दवाओं, उनके उपयोग और सत्यापन के बारे में जानकारी प्रदान करता है। यह जानकारी किसी पेशेवर चिकित्सा सलाह, निदान या उपचार का विकल्प नहीं है। किसी भी दवा को शुरू करने, बदलने या बंद करने से पहले हमेशा एक योग्य स्वास्थ्य विशेषज्ञ से परामर्श करें।';
+
+  @override
+  String get accuracyHeading => 'जानकारी की सटीकता';
+
+  @override
+  String get accuracyContent => 'हम सटीक और नवीनतम जानकारी प्रदान करने का प्रयास करते हैं। हालाँकि, V Pharmacy वेबसाइट पर दी गई जानकारी की पूर्णता, विश्वसनीयता या सटीकता की गारंटी नहीं देता।';
+
+  @override
+  String get externalLinksHeading => 'बाहरी लिंक अस्वीकरण';
+
+  @override
+  String get externalLinksContent => 'हमारी वेबसाइट में तृतीय-पक्ष वेबसाइटों के लिंक हो सकते हैं। V Pharmacy इन वेबसाइटों की सामग्री, गोपनीयता नीतियों या प्रथाओं के लिए ज़िम्मेदार नहीं है।';
+
+  @override
+  String get liabilityHeading => 'दायित्व की सीमा';
+
+  @override
+  String get liabilityContent => 'V Pharmacy और उसकी टीम इस वेबसाइट के उपयोग या इसकी सामग्री पर निर्भर रहने से उत्पन्न किसी भी हानि, चोट या क्षति के लिए उत्तरदायी नहीं हैं।';
+
+  @override
+  String get endUserHeading => 'अंतिम उपयोगकर्ता की ज़िम्मेदारी';
+
+  @override
+  String get endUserContent => 'उपयोगकर्ता वेबसाइट पर दी गई जानकारी का जिम्मेदारी से उपयोग करें। चिकित्सा या स्वास्थ्य संबंधी निर्णयों के लिए केवल वेबसाइट पर निर्भर न रहें।';
+
+  @override
+  String get contactHeading => 'संपर्क करें';
+
+  @override
+  String get contactContent => 'ईमेल: vikaspharmacy11@gmail.com\nफोन: 9580366204';
+
+  @override
+  String get blog => 'ब्लॉग';
+
+  @override
+  String get latestArticles => 'नवीनतम लेख';
+
+  @override
+  String get techUpdates => 'तकनीकी अपडेट';
+
+  @override
+  String get lifestyleTips => 'जीवनशैली सुझाव';
+
+  @override
+  String get alternateNumber => 'वैकल्पिक नंबर';
+
+  @override
+  String get tapToUploadPrescription => 'प्रिस्क्रिप्शन अपलोड करने के लिए टैप करें';
+
+  @override
+  String get toPlaceAnOrder => 'कोई ऑर्डर करने के लिए';
+
+  @override
+  String get welcomeYouDontHaveAnyOrdersYet => 'Welcome! You dont have any orders yet. Please create your first order to start tracking it.';
+
+  @override
+  String get loadMoreOrders => 'अधिक ऑर्डर लोड करें';
+
+  @override
+  String get comingSoon => 'जल्द आ रहा है';
+
+  @override
+  String get enterDescription => 'विवरण दर्ज करें';
+
+  @override
+  String get confirmLogout => 'लॉगआउट की पुष्टि करें';
+
+  @override
+  String get areYouSureYouWantToLogout => 'क्या आप लॉग आउट करना चाहते हैं';
+
+  @override
+  String get oK => 'ठीक है';
 }

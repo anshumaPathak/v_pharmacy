@@ -38,7 +38,7 @@ class PharmacistRatingViewModel with ChangeNotifier {
       "review": review,
     };
 
-    print("Data sent to API: $data");
+    // print("Data sent to API: $data");
 
     try {
       final response = await _loginRepo.pharmacistRatingApi(data);

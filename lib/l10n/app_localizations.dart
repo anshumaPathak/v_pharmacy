@@ -128,7 +128,7 @@ abstract class AppLocalizations {
   /// No description provided for @about.
   ///
   /// In en, this message translates to:
-  /// **'About'**
+  /// **'About Us'**
   String get about;
 
   /// No description provided for @contact.
@@ -194,7 +194,7 @@ abstract class AppLocalizations {
   /// No description provided for @wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices.
   ///
   /// In en, this message translates to:
-  /// **'We prioritize your health and safety with our trusted and reliable services'**
+  /// **'We prioritize your health and safety with our trusted and reliable services,\n✅ 100% Genuine Medicines\n✅ Licensed Pharmacists & Certified Specialists\n✅ Free Home Health Checkups\n✅ 1-Day Fast Delivery\n✅ Free Delivery Above ₹500\n✅ Affordable Pricing & Continuous Support'**
   String get wePrioritizeYourHealthAndSafetyWithOurTrustedAndReliableServices;
 
   /// No description provided for @happyCustomers.
@@ -236,19 +236,19 @@ abstract class AppLocalizations {
   /// No description provided for @yourTrusted.
   ///
   /// In en, this message translates to:
-  /// **'Your Trusted'**
+  /// **'V Pharmacy'**
   String get yourTrusted;
 
   /// No description provided for @medicinePartner.
   ///
   /// In en, this message translates to:
-  /// **'Medicine Partner'**
+  /// **'Your Partner in Chronic Care'**
   String get medicinePartner;
 
   /// No description provided for @orderVerifiedMedicinesTrackDeliver.
   ///
   /// In en, this message translates to:
-  /// **'Order verified medicines, track deliveries in real-time,and ensure authenticity with our professional healthcare platform.'**
+  /// **'Your health deserves more than just medicine.At V Pharmacy, we bring you complete care for chronic diseases — right to your doorstep.'**
   String get orderVerifiedMedicinesTrackDeliver;
 
   /// No description provided for @learnMore.
@@ -458,7 +458,7 @@ abstract class AppLocalizations {
   /// No description provided for @mediCareHasBeenALifesaverFastDeliveryGenuine.
   ///
   /// In en, this message translates to:
-  /// **'MediCare has been a lifesaver! Fast delivery, genuine medicines, and excellent customer support.'**
+  /// **'V Pharmacy makes managing my diabetes simple. They deliver fast, and their doctors actually care.'**
   String get mediCareHasBeenALifesaverFastDeliveryGenuine;
 
   /// No description provided for @drMichaelChen.
@@ -476,7 +476,7 @@ abstract class AppLocalizations {
   /// No description provided for @iRecommendMediCareToMyPatients.
   ///
   /// In en, this message translates to:
-  /// **'I recommend MediCare to my patients. Their verification system ensures medicine authenticity.'**
+  /// **'The home visits and quick delivery are amazing. It feels like a hospital came home!'**
   String get iRecommendMediCareToMyPatients;
 
   /// No description provided for @emilyRodriguez.
@@ -494,13 +494,13 @@ abstract class AppLocalizations {
   /// No description provided for @theTrackingSystemIsAmazing.
   ///
   /// In en, this message translates to:
-  /// **'The tracking system is amazing. I always know exactly when my medicines will arrive.'**
+  /// **'Best experience ever — fast, reliable, and genuinely caring staff'**
   String get theTrackingSystemIsAmazing;
 
   /// No description provided for @weAreALeadingHealthcarePlatformDedicatedToProvidingSafe.
   ///
   /// In en, this message translates to:
-  /// **'We are a leading healthcare platform dedicated to providing safe, reliable, and accessible medicine ordering and verification services. Our mission is to bridge the gap between patients and quality healthcare.'**
+  /// **'We are a leading healthcare platform dedicated to providing safe, reliable, and accessible medicine ordering and verification services. Our mission is to bridge the gap between patients and quality healthcare.We specialize in managing chronic diseases such as diabetes, hypertension, thyroid disorders, heart conditions, asthma, and arthritis.Our team of certified pharmacists and healthcare professionals ensures you get the right medicines, on-time delivery, and continuous health monitoring.“We don’t just deliver medicines — we deliver care, comfort, and confidence.”'**
   String get weAreALeadingHealthcarePlatformDedicatedToProvidingSafe;
 
   /// No description provided for @yearsExperience.
@@ -650,7 +650,7 @@ abstract class AppLocalizations {
   /// No description provided for @phoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'Whatsapp Number *'**
+  /// **'Phone Number'**
   String get phoneNumber;
 
   /// No description provided for @category.
@@ -1067,41 +1067,35 @@ abstract class AppLocalizations {
   /// **'Mental Health'**
   String get categoryMentalHealth;
 
-  /// No description provided for @duration1to7Days.
+  /// No description provided for @duration7Days.
   ///
   /// In en, this message translates to:
-  /// **'1-7 days'**
-  String get duration1to7Days;
+  /// **'7 days'**
+  String get duration7Days;
 
-  /// No description provided for @duration1to2Weeks.
+  /// No description provided for @duration15Days.
   ///
   /// In en, this message translates to:
-  /// **'1-2 weeks'**
-  String get duration1to2Weeks;
+  /// **'15 days'**
+  String get duration15Days;
 
-  /// No description provided for @duration2to4Weeks.
+  /// No description provided for @duration30Days.
   ///
   /// In en, this message translates to:
-  /// **'2-4 weeks'**
-  String get duration2to4Weeks;
+  /// **'30 days'**
+  String get duration30Days;
 
-  /// No description provided for @duration1to3Months.
+  /// No description provided for @duration60Days.
   ///
   /// In en, this message translates to:
-  /// **'1-3 months'**
-  String get duration1to3Months;
+  /// **'60 days'**
+  String get duration60Days;
 
-  /// No description provided for @duration3to6Months.
+  /// No description provided for @duration90Days.
   ///
   /// In en, this message translates to:
-  /// **'3-6 months'**
-  String get duration3to6Months;
-
-  /// No description provided for @duration6PlusMonths.
-  ///
-  /// In en, this message translates to:
-  /// **'6+ months'**
-  String get duration6PlusMonths;
+  /// **'90 days'**
+  String get duration90Days;
 
   /// No description provided for @orderProcess.
   ///
@@ -1378,6 +1372,426 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Feedback'**
   String get feedback;
+
+  /// No description provided for @orderNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Now'**
+  String get orderNow;
+
+  /// No description provided for @privacyPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicyTitle;
+
+  /// No description provided for @privacyPolicyHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy for V Pharmacy'**
+  String get privacyPolicyHeading;
+
+  /// No description provided for @privacyPolicyIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'At V Pharmacy, your privacy is our top priority. We are committed to protecting the personal information you share with us when using our website https://vpharmacy.in. This Privacy Policy explains how we collect, use, and safeguard your information.'**
+  String get privacyPolicyIntro;
+
+  /// No description provided for @informationWeCollectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Information We Collect'**
+  String get informationWeCollectTitle;
+
+  /// No description provided for @informationWeCollect.
+  ///
+  /// In en, this message translates to:
+  /// **' Name\n Email address\n Mobile number\n Delivery address (if required)\n Any other details you provide while using our services\nBrowser type and version\n Operating system and device information\n Pages visited and time spent on the website\n IP address'**
+  String get informationWeCollect;
+
+  /// No description provided for @howWeUseInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How We Use Your Information'**
+  String get howWeUseInfoTitle;
+
+  /// No description provided for @howWeUseInfo.
+  ///
+  /// In en, this message translates to:
+  /// **' Processing and managing your medicine orders\n Responding to your queries and requests\n Providing updates on your order status\n Improving our website and overall user experience\n\nWe do not collect or store any payment details or sensitive financial information.'**
+  String get howWeUseInfo;
+
+  /// No description provided for @cookiesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cookies and Tracking Technologies'**
+  String get cookiesTitle;
+
+  /// No description provided for @cookiesDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Enhance your browsing experience\n Remember your preferences\n Monitor website performance and usage'**
+  String get cookiesDetails;
+
+  /// No description provided for @dataSharingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Sharing and Third-Party Services'**
+  String get dataSharingTitle;
+
+  /// No description provided for @dataSharingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'We respect your privacy and do not sell, trade, or share your personal information with third parties.'**
+  String get dataSharingDetails;
+
+  /// No description provided for @dataSecurityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Security'**
+  String get dataSecurityTitle;
+
+  /// No description provided for @dataSecurityDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'We implement reasonable technical and organizational measures to protect your information.'**
+  String get dataSecurityDetails;
+
+  /// No description provided for @userRightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Rights'**
+  String get userRightsTitle;
+
+  /// No description provided for @userRights.
+  ///
+  /// In en, this message translates to:
+  /// **'- Request access to personal information\n Request correction of inaccurate information\n Request deletion of your data'**
+  String get userRights;
+
+  /// No description provided for @consentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Consent'**
+  String get consentTitle;
+
+  /// No description provided for @consentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'By using our website and submitting forms, you consent to the collection and use of your information.'**
+  String get consentDetails;
+
+  /// No description provided for @contactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact for Inquiries'**
+  String get contactTitle;
+
+  /// No description provided for @contactDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Email: vikaspharmacy11@gmail.com\nPhone: 9580366204'**
+  String get contactDetails;
+
+  /// No description provided for @changesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes to Privacy Policy'**
+  String get changesTitle;
+
+  /// No description provided for @changesDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'We may update this Privacy Policy from time to time.'**
+  String get changesDetails;
+
+  /// No description provided for @termsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions'**
+  String get termsTitle;
+
+  /// No description provided for @termsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions for V Pharmacy'**
+  String get termsHeading;
+
+  /// No description provided for @termsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to https://vpharmacy.in. By using this website, you agree to comply with the following Terms & Conditions.'**
+  String get termsIntro;
+
+  /// No description provided for @acceptanceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Acceptance of Terms'**
+  String get acceptanceTitle;
+
+  /// No description provided for @acceptanceDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'By accessing V Pharmacy, you agree to be bound by these Terms & Conditions and all applicable laws.'**
+  String get acceptanceDetails;
+
+  /// No description provided for @servicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Services Provided'**
+  String get servicesTitle;
+
+  /// No description provided for @servicesDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Medicine: Submit your medicine orders through our website form.\n Track Order: Check the status of your medicine order.\n Verify Medicine: Verify the authenticity of medicines before purchase.\n\nWe do not provide online payment services; all transactions are completed offline if required.'**
+  String get servicesDetails;
+
+  /// No description provided for @userObligationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' User Obligations'**
+  String get userObligationsTitle;
+
+  /// No description provided for @userObligationsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'- Provide accurate and complete information while filling forms.\n Not misuse the website or its services.\n Avoid uploading harmful, illegal, or misleading content.'**
+  String get userObligationsDetails;
+
+  /// No description provided for @intellectualTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Intellectual Property'**
+  String get intellectualTitle;
+
+  /// No description provided for @intellectualDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'All content, including text, images, logos, graphics, and software on this website, is owned by V Pharmacy and protected under Indian and international copyright laws.'**
+  String get intellectualDetails;
+
+  /// No description provided for @liabilityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Limitation of Liability'**
+  String get liabilityTitle;
+
+  /// No description provided for @liabilityDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'V Pharmacy is not liable for any direct, indirect, incidental, or consequential damages arising from the use of this website.'**
+  String get liabilityDetails;
+
+  /// No description provided for @linksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'External Links'**
+  String get linksTitle;
+
+  /// No description provided for @linksDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Our website may include links to third-party websites. V Pharmacy is not responsible for the content, policies, or practices of these external websites.'**
+  String get linksDetails;
+
+  /// No description provided for @termsContactDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Email: vikaspharmacy11@gmail.com\nPhone: 9580366204'**
+  String get termsContactDetails;
+
+  /// No description provided for @modificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Modifications'**
+  String get modificationsTitle;
+
+  /// No description provided for @modificationsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'We reserve the right to modify these Terms & Conditions at any time.'**
+  String get modificationsDetails;
+
+  /// No description provided for @governingLawTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Governing Law'**
+  String get governingLawTitle;
+
+  /// No description provided for @governingLawDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'These Terms & Conditions are governed by the laws of India.'**
+  String get governingLawDetails;
+
+  /// No description provided for @disclaimerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Disclaimer'**
+  String get disclaimerTitle;
+
+  /// No description provided for @disclaimerIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'The information provided on https://vpharmacy.in is for general informational purposes only.'**
+  String get disclaimerIntro;
+
+  /// No description provided for @medicalInfoHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical Information Disclaimer'**
+  String get medicalInfoHeading;
+
+  /// No description provided for @medicalInfoContent.
+  ///
+  /// In en, this message translates to:
+  /// **'V Pharmacy provides information about medicines, their uses, and verification. This information is not intended to replace professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional before starting, changing, or stopping any medication.'**
+  String get medicalInfoContent;
+
+  /// No description provided for @accuracyHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Accuracy of Information'**
+  String get accuracyHeading;
+
+  /// No description provided for @accuracyContent.
+  ///
+  /// In en, this message translates to:
+  /// **'We strive to provide accurate and up-to-date information. However, V Pharmacy does not guarantee the completeness, reliability, or accuracy of the information on the website.'**
+  String get accuracyContent;
+
+  /// No description provided for @externalLinksHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'External Links Disclaimer'**
+  String get externalLinksHeading;
+
+  /// No description provided for @externalLinksContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Our website may contain links to third-party websites. V Pharmacy is not responsible for the content, privacy policies, or practices of these websites.'**
+  String get externalLinksContent;
+
+  /// No description provided for @liabilityHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Limitation of Liability'**
+  String get liabilityHeading;
+
+  /// No description provided for @liabilityContent.
+  ///
+  /// In en, this message translates to:
+  /// **'V Pharmacy and its team are not responsible for any loss, injury, or damage arising directly or indirectly from using this website or relying on its content.'**
+  String get liabilityContent;
+
+  /// No description provided for @endUserHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'End-User Responsibility'**
+  String get endUserHeading;
+
+  /// No description provided for @endUserContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Users are responsible for using the information provided on the website responsibly. Do not rely solely on the website for medical or health decisions.'**
+  String get endUserContent;
+
+  /// No description provided for @contactHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact for Inquiries'**
+  String get contactHeading;
+
+  /// No description provided for @contactContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Email: vikaspharmacy11@gmail.com\nPhone: 9580366204'**
+  String get contactContent;
+
+  /// No description provided for @blog.
+  ///
+  /// In en, this message translates to:
+  /// **'Blog'**
+  String get blog;
+
+  /// No description provided for @latestArticles.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest Articles'**
+  String get latestArticles;
+
+  /// No description provided for @techUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Tech Updates'**
+  String get techUpdates;
+
+  /// No description provided for @lifestyleTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifestyle Tips'**
+  String get lifestyleTips;
+
+  /// No description provided for @alternateNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Alternate Number'**
+  String get alternateNumber;
+
+  /// No description provided for @tapToUploadPrescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to upload prescription'**
+  String get tapToUploadPrescription;
+
+  /// No description provided for @toPlaceAnOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'to place an order'**
+  String get toPlaceAnOrder;
+
+  /// No description provided for @welcomeYouDontHaveAnyOrdersYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome! You dont have any orders yet. Please create your first order to start tracking it.'**
+  String get welcomeYouDontHaveAnyOrdersYet;
+
+  /// No description provided for @loadMoreOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More Orders'**
+  String get loadMoreOrders;
+
+  /// No description provided for @comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get comingSoon;
+
+  /// No description provided for @enterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter description'**
+  String get enterDescription;
+
+  /// No description provided for @confirmLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Logout'**
+  String get confirmLogout;
+
+  /// No description provided for @areYouSureYouWantToLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout'**
+  String get areYouSureYouWantToLogout;
+
+  /// No description provided for @oK.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get oK;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

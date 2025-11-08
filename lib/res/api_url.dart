@@ -14,4 +14,8 @@ class ApiUrl {
   static const String privacyPolicy ="${baseUrl}/get_policy";
   static const String rating ="${baseUrl}/giveRating";
   static const String PharmacistRating ="${baseUrl}/give_pharmacist_rating";
+  static const String diseaseCategories ="${baseUrl}/disease-categories";
+  static const String adminContactDetail ="${baseUrl}/admin_contact";
+  static const String blog ="${baseUrl}/getBlogs";
+  static const String seoRank ="${baseUrl}/increase_seo_rank";
 }

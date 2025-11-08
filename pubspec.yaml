@@ -30,11 +30,16 @@ dependencies:
   go_router:
   shared_preferences:
   provider:
-  flutter_html:
+#  flutter_html:
   flutter_rating_bar:
   url_launcher:
+  dio:
   dotted_border: ^3.1.0
+  flutter_html:
+  google_maps_flutter_web:
+  flutter_widget_from_html:
   fluttertoast:
+  universal_html:
   image_picker:
   intl:
   flutter_localizations:
@@ -59,4 +64,5 @@ flutter:
 
   assets:
     - assets/
+    - assets/map.png
 

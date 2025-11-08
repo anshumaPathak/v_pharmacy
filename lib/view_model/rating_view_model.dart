@@ -84,7 +84,7 @@ class RatingViewModel with ChangeNotifier {
       "review": review,
     };
 
-    print("Data sent to API: $data");
+    // print("Data sent to API: $data");
 
     try {
       final response = await _loginRepo.ratingApi(data);
@@ -107,9 +107,8 @@ class RatingViewModel with ChangeNotifier {
         Utils.show(response['message'] ?? "You have already rated this delivery boy for this order.", context);
       }
     } catch (error) {
-      print('❌ Error occurred during ratingApi: $error');
+      // print('❌ Error occurred during ratingApi: $error');
 
-      // 🟠 Extract status code and message from error string (for 409 & 201)
       String errorMessage = "You have already rated this delivery boy for this order.";
       final errorStr = error.toString();
 

@@ -181,9 +181,9 @@ class Data {
   dynamic prescriptionFile;
   dynamic specialInstructions;
   dynamic status;
-  DateTime? estimatedDeliveryDate;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  dynamic estimatedDeliveryDate;
+  dynamic createdAt;
+  dynamic updatedAt;
   List<Medicines>? medicines;
   Summary? summary;
   int? deliveryPartnerId;

@@ -11,7 +11,7 @@ class PharmacistRepository {
   Future<dynamic> pharmacistRatingApi(dynamic data) async {
     try {
       dynamic response = await _apiServices.getPostApiResponse(ApiUrl.PharmacistRating, data);
-      debugPrint("✅ API Raw Response: ${jsonEncode(response)}");
+      // debugPrint("✅ API Raw Response: ${jsonEncode(response)}");
       return (response);
     } catch (e) {
       debugPrint('❌ Error occurred during pharmacistRatingApi: $e');

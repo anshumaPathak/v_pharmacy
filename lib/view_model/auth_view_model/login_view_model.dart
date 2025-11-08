@@ -206,7 +206,7 @@ class LoginViewModel with ChangeNotifier {
       return response;
     } catch (error) {
       setLoading(false);
-      print("🚨 Login error: $error");
+      // print("🚨 Login error: $error");
 
       // ✅ Handle 403 blocked account error
       if (error.toString().contains('403') || error.toString().contains('RequestForbidden')) {

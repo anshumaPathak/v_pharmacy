@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:v_pharmashing/res/launcher.dart';
 import '../../l10n/app_localizations.dart';
+import '../../view_model/admin_contact_view_model.dart';
 import '../../view_model/user_view_model.dart';
 
 class ServiceOrderProcess extends StatefulWidget {
@@ -13,7 +15,17 @@ class ServiceOrderProcess extends StatefulWidget {
 
 class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final adminContactViewModel =
+      Provider.of<AdminContactViewModel>(context, listen: false);
+      adminContactViewModel.adminContactApi();
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+
     return LayoutBuilder(
       builder: (context, constraints) {
         bool isMobile = constraints.maxWidth < 700;
@@ -89,6 +101,8 @@ class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
   }
 
   Widget _buildHelpSection(bool isMobile) {
+    final adminVM = Provider.of<AdminContactViewModel>(context);
+    final contact = adminVM.adminContactModel?.data;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(isMobile ? 24 : 40),
@@ -122,8 +136,13 @@ class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
             alignment: WrapAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: () {
-                 Launcher.launchWhatsApp(context, "9580366204");
+                onPressed: () async {
+                  if (contact?.whatsappNumber != null) {
+                    final whatsappUrl =
+                    Uri.parse("https://wa.me/91${contact!.whatsappNumber}");
+                    await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
+                  }
+                 // Launcher.launchWhatsApp(context, "9580366204");
                 },
                 icon: const Icon(Icons.chat_bubble_outline),
                 label: Text(AppLocalizations.of(context)!.whatsappSupport),
@@ -163,7 +182,7 @@ class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
           Column(
             children: [
               Text(
-                '${AppLocalizations.of(context)!.whatsappNumber}: +1-234-567-8900',
+                '${AppLocalizations.of(context)!.whatsappNumber}: ${contact!.whatsappNumber.toString()}',
                 style: const TextStyle(
                   fontSize: 14,
                   color: Color(0xff64748b),
@@ -172,7 +191,7 @@ class _ServiceOrderProcessState extends State<ServiceOrderProcess> {
 
               const SizedBox(height: 4),
               Text(
-                AppLocalizations.of(context)!.phoneNumber,
+                '${AppLocalizations.of(context)!.phoneNumber}: ${contact!.alternateNumber.toString()}',
                 style: const TextStyle(
                   fontSize: 14,
                   color: Color(0xff64748b),

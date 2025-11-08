@@ -11,7 +11,7 @@ class AuthRepository {
 // Login Api
   Future<dynamic> loginApi(dynamic data) async {
     try {
-      print(data);
+      // print(data);
       dynamic response =
       await _apiServices.getPostApiResponse(ApiUrl.login, data);
       return response;
@@ -24,7 +24,7 @@ class AuthRepository {
 
   }
   Future<dynamic> verifyOtpApi(dynamic phone,dynamic otp ) async {
-    print("fcgdsghhsfjbskeflnl$phone");
+    // print("fcgdsghhsfjbskeflnl$phone");
     try {
       dynamic response =
       await _apiServices.getGetApiResponse('${ApiUrl.verifyOtp}$phone&otp=$otp');
@@ -37,7 +37,7 @@ class AuthRepository {
     }
   }
   Future<dynamic> sendOtpApi(dynamic mobile,) async {
-    print("gfhjfkhljkgjkld $mobile");
+    // print("gfhjfkhljkgjkld $mobile");
     try {
       dynamic response =
       await _apiServices.getGetApiResponse('${ApiUrl.sendOtp}$mobile');
@@ -54,7 +54,7 @@ class AuthRepository {
 //
 // Register Api
   Future<dynamic> registerApi(dynamic data) async {
-    print("pagal $data");
+    // print("pagal $data");
     try {
       print(data);
       dynamic response =

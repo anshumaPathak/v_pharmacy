@@ -6,19 +6,23 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
 import 'package:v_pharmashing/utils/routes/routes.dart';
+import 'package:v_pharmashing/view_model/admin_contact_view_model.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/create_order_view_model.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/login_view_model.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/register_view_model.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/send_otp_view_model.dart';
 import 'package:v_pharmashing/view_model/auth_view_model/verify_otp_view_model.dart';
+import 'package:v_pharmashing/view_model/blog_view_model.dart';
 import 'package:v_pharmashing/view_model/confirm_order_view_model.dart';
 import 'package:v_pharmashing/view_model/contact_us_view_model.dart';
+import 'package:v_pharmashing/view_model/diases_category_view_model.dart';
 import 'package:v_pharmashing/view_model/language_view_model.dart';
 import 'package:v_pharmashing/view_model/order_history_view_model.dart';
 import 'package:v_pharmashing/view_model/pharmacist_rating_view_model.dart';
 import 'package:v_pharmashing/view_model/privacy_policy_view_model.dart';
 import 'package:v_pharmashing/view_model/profile_view_model.dart';
 import 'package:v_pharmashing/view_model/rating_view_model.dart';
+import 'package:v_pharmashing/view_model/seo_rank_view_model.dart';
 import 'package:v_pharmashing/view_model/user_view_model.dart';
 
 import 'l10n/app_localizations.dart';
@@ -60,12 +64,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PrivacyPolicyViewModel(),),
         ChangeNotifierProvider(create: (_) => RatingViewModel(),),
         ChangeNotifierProvider(create: (_) => PharmacistRatingViewModel(),),
+        ChangeNotifierProvider(create: (_) => DisasesCategoryViewModel(),),
+        ChangeNotifierProvider(create: (_) => AdminContactViewModel(),),
+        ChangeNotifierProvider(create: (_) => BlogViewModel(),),
+        ChangeNotifierProvider(create: (_) => SeoRankViewModel(),),
       ],
       child: Consumer<LanguageViewModel>(
         builder: (context, languageVM, child) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            title: 'V PharmaShing',
+            title: 'V Pharmacy',
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,

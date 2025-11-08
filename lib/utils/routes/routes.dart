@@ -4,10 +4,8 @@ import 'package:v_pharmashing/utils/routes/routes_name.dart';
 import 'package:v_pharmashing/utils/widget/privacy_policy_screen.dart';
 import 'package:v_pharmashing/view/contact_screen.dart';
 import 'package:v_pharmashing/view/dashboard_screen.dart';
-
 import '../../view/about_us_screen.dart';
 import '../../view/services_screen.dart';
-
 
 class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -16,11 +14,6 @@ class AppRouter {
 
     initialLocation: RoutesName.dashboardScreen,
     routes: [
-      // GoRoute(
-      //   path: RoutesName.splash,
-      //   name: RoutesName.splash,
-      //   builder: (context, state) => const SplashScreen(),
-      // ),
       GoRoute(
         path: RoutesName.dashboardScreen,
         name: RoutesName.dashboardScreen,

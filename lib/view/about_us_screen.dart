@@ -630,14 +630,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            TextSpan(
-              text: 'V Pharmacy',
-              style: TextStyle(
-                color: Color(0xFF2563EB),
-                fontSize: 40,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+
           ],
         ),
       ),
@@ -681,7 +674,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   Widget _smallBox(String value, String text) => Container(
     height: 130,
-    padding: const EdgeInsets.all(25),
+    padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(12),
@@ -798,37 +791,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       ],
     ),
   );
-
-  // Widget _certCard(IconData icon, String title) => Container(
-  //   padding: const EdgeInsets.all(32),
-  //   decoration: BoxDecoration(
-  //     border: Border.all(color: const Color(0xFFE2E8F0)),
-  //     borderRadius: BorderRadius.circular(12),
-  //     color: Colors.white,
-  //   ),
-  //   child: Column(
-  //     children: [
-  //       Container(
-  //         width: 80,
-  //         height: 80,
-  //         decoration: const BoxDecoration(
-  //           color: Color(0xFFDEEBFF),
-  //           shape: BoxShape.circle,
-  //         ),
-  //         child: Icon(icon, color: const Color(0xFF2563EB), size: 40),
-  //       ),
-  //       const SizedBox(height: 20),
-  //       Text(
-  //         title,
-  //         style: const TextStyle(
-  //           fontSize: 20,
-  //           fontWeight: FontWeight.w600,
-  //           color: Colors.black,
-  //         ),
-  //       ),
-  //     ],
-  //   ),
-  // );
   Widget _certCard(IconData icon, String title, {required double width, required double height}) => Container(
     width: width,      // same width
     height: height,    // same height
@@ -947,60 +909,4 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       ),
     );
   }
-
-  // Widget _testimonialCard({
-  //   required String name,
-  //   required String role,
-  //   required String quote,
-  // }) {
-  //   return Container(
-  //     padding: const EdgeInsets.all(24),
-  //     margin: const EdgeInsets.symmetric(vertical: 10),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(12),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.black.withOpacity(0.05),
-  //           blurRadius: 8,
-  //           offset: const Offset(0, 4),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Row(
-  //           children: List.generate(
-  //             5,
-  //             (index) => const Icon(Icons.star, color: Colors.amber, size: 20),
-  //           ),
-  //         ),
-  //         const SizedBox(height: 12),
-  //         Text(
-  //           '"$quote"',
-  //           style: const TextStyle(
-  //             fontSize: 16,
-  //             fontStyle: FontStyle.italic,
-  //             color: Color(0xFF334155),
-  //             height: 1.5,
-  //           ),
-  //         ),
-  //         const SizedBox(height: 20),
-  //         Text(
-  //           name,
-  //           style: const TextStyle(
-  //             fontWeight: FontWeight.w700,
-  //             fontSize: 16,
-  //             color: Colors.black,
-  //           ),
-  //         ),
-  //         Text(
-  //           role,
-  //           style: const TextStyle(fontSize: 14, color: Color(0xFF64748B)),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

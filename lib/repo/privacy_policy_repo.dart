@@ -10,9 +10,9 @@ class PrivacyPolicyRepository {
 
   Future<dynamic> privacyPolicyApi(dynamic data) async {
     try {
-      debugPrint("📤 Request Body: ${jsonEncode(data)}");
+      // debugPrint("📤 Request Body: ${jsonEncode(data)}");
       dynamic response = await _apiServices.getPostApiResponse(ApiUrl.privacyPolicy, data);
-      debugPrint("✅ API Raw Response: ${jsonEncode(response)}");
+      // debugPrint("✅ API Raw Response: ${jsonEncode(response)}");
       return (response);
     } catch (e) {
       debugPrint('❌ Error occurred during privacyPolicyApi: $e');

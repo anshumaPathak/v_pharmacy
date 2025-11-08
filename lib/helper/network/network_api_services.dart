@@ -15,7 +15,7 @@ class NetworkApiServices extends BaseApiServices {
           .get(Uri.parse(url))
           .timeout(const Duration(seconds: 10));
       if (kDebugMode) {
-        print('Api Url : $url');
+        // print('Api Url : $url');
       }
       responseJson = returnRequest(response);
     } on SocketException {
@@ -36,7 +36,7 @@ class NetworkApiServices extends BaseApiServices {
               body: jsonEncode(data))
           .timeout(const Duration(seconds: 10));
       if (kDebugMode) {
-        print('Api Url : $url');
+        // print('Api Url : $url');
       }
       responseJson = returnRequest(response);
     } on SocketException {
@@ -65,8 +65,8 @@ class NetworkApiServices extends BaseApiServices {
   // }
   dynamic returnRequest(http.Response response) {
     if (kDebugMode) {
-      print('Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
+      // print('Status Code: ${response.statusCode}');
+      // print('Response Body: ${response.body}');
     }
 
     switch (response.statusCode) {

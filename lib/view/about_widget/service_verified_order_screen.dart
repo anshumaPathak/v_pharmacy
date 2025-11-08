@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:v_pharmashing/res/const_color.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class ServiceVerifiedOrderScreen extends StatefulWidget {
   const ServiceVerifiedOrderScreen({super.key});
 
@@ -52,7 +54,7 @@ class _ServiceVerifiedOrderScreenState
               ),
               SizedBox(height: screenWidth * 0.05),
               Text(
-                "Coming Soon",
+                AppLocalizations.of(context)!.comingSoon,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: screenWidth * 0.06,

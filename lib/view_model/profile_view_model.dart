@@ -63,7 +63,7 @@ class ProfileViewModel with ChangeNotifier {
     String? userId = await userViewModel.getUser();
 
     if (userId == null || userId.isEmpty) {
-      print("🚨 User ID not found. Cannot call profile API.");
+      // print("🚨 User ID not found. Cannot call profile API.");
       _isLoggedIn = false;
       _userName = null;
       notifyListeners();
@@ -72,7 +72,7 @@ class ProfileViewModel with ChangeNotifier {
 
     setLoading(true);
     Map<String, dynamic> data = {"user_id": userId};
-    print("Profile API Call: $data");
+    // print("Profile API Call: $data");
 
     try {
       final value = await _profileRepo.profileApi(data);

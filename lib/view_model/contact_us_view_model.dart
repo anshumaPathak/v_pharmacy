@@ -27,14 +27,14 @@ class ContactUsViewModel with ChangeNotifier {
       "subject":subject,
       "message":message
     };
-    print("Data sent to API: $data");
+    // print("Data sent to API: $data");
 
     try {
       final value = await _loginRepo.contactUsApi(data);
       if (value['success'] == true) {
         Utils.show(value['message'], context);
 
-        print("API Success: ${value['message']}");
+        // print("API Success: ${value['message']}");
       } else {
         Utils.show(value['message'], context);
       }
