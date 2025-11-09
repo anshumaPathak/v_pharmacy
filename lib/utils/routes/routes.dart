@@ -419,7 +419,7 @@ class AppRouter {
 
       GoRoute(
         path: '/blog/:slug',
-        name: '/blog/:slug',
+        name: 'blogDetail',
         builder: (context, state) {
           final slug = state.pathParameters['slug'] ?? '';
           final data = state.extra as Map<String, dynamic>? ?? {};
