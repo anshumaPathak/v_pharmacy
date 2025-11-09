@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0de5859e-90c5-4715-aa13-44149ce3cb2c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/model/blog_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/blog_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/repo/blog_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repo/blog_repo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/res/api_url.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/api_url.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/res/footer_section.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/footer_section.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/routes/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/routes/routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/routes/routes_name.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/routes/routes_name.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/blog_detail_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/blog_detail_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/blog_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/blog_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/dashboard_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/dashboard_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view_model/blog_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view_model/blog_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/c49e888c9372d2f8fbca74ff068d4fa4.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/c49e888c9372d2f8fbca74ff068d4fa4.cache.dill.track.dill" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
