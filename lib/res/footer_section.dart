@@ -410,6 +410,7 @@
 // }
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:v_pharmashing/generated/assets.dart';
@@ -514,16 +515,24 @@ class _FooterSectionState extends State<FooterSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _hoverableText(
-              label: AppLocalizations.of(context)!.about,
-              onTap: () {
-                setState(() => selectedIndex = 2);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) =>
-                      const DashboardScreen(initialSection: "about")),
-                );
-              }),
+            label: AppLocalizations.of(context)!.about,
+            onTap: () {
+              setState(() => selectedIndex = 2);
+              context.go('/about'); // ✅ GoRouter navigation
+            },
+          ),
+
+          // _hoverableText(
+          //     label: AppLocalizations.of(context)!.about,
+          //     onTap: () {
+          //       setState(() => selectedIndex = 2);
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (_) =>
+          //             const DashboardScreen(initialSection: "about")),
+          //       );
+          //     }),
           const SizedBox(height: 8),
           _hoverableText(
             label: AppLocalizations.of(context)!.privacyPolicyTitle,

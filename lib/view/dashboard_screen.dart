@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart' show GoRouterState, GoRouter;
 import 'package:provider/provider.dart';
 import 'package:v_pharmashing/res/const_color.dart';
 import 'package:v_pharmashing/res/sizing_const.dart';
@@ -8,6 +9,7 @@ import 'package:v_pharmashing/view/blog_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../res/footer_section.dart';
 import '../res/top_bar.dart';
+import '../utils/routes/routes.dart';
 import '../utils/widget/dash_board_data.dart';
 import '../utils/widget/featured_card.dart';
 import '../view_model/admin_contact_view_model.dart';
@@ -17,8 +19,10 @@ import 'contact_screen.dart';
 import 'services_screen.dart';
 import 'dart:html' as html;
 class DashboardScreen extends StatefulWidget {
-  final String initialSection;
-  const DashboardScreen({super.key, this.initialSection = "home"});
+  // final String initialSection;
+  final String? initialSection;
+  final String? initialSubSection;
+  const DashboardScreen({super.key, this.initialSection = "home", this.initialSubSection});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -28,103 +32,211 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int selectedIndex = 0;
   String activeSection = "home";
   String? activeSubSection;
-  // void _changeSection(String section) {
+
+  // void _changeSection(String section, {String? subSection}) {
   //   setState(() {
   //     activeSection = section;
-  //     if (section == "home") selectedIndex = 0;
+  //     activeSubSection = subSection; // 👈 store inner section
   //     if (section == "services") selectedIndex = 1;
-  //     if (section == "about") selectedIndex = 2;
-  //     if (section == "contact") selectedIndex = 3;
-  //     if (section == "blog") selectedIndex = 4;
+  //     else if (section == "about") selectedIndex = 2;
+  //     else if (section == "contact") selectedIndex = 3;
+  //     else if (section == "blog") selectedIndex = 4;
+  //     else selectedIndex = 0;
   //   });
   // }
+
   void _changeSection(String section, {String? subSection}) {
     setState(() {
       activeSection = section;
-      activeSubSection = subSection; // 👈 store inner section
-      if (section == "services") selectedIndex = 1;
+      activeSubSection = subSection;
+
+      if (section == "home") selectedIndex = 0;
+      else if (section == "services") selectedIndex = 1;
       else if (section == "about") selectedIndex = 2;
       else if (section == "contact") selectedIndex = 3;
       else if (section == "blog") selectedIndex = 4;
-      else selectedIndex = 0;
     });
+
+    // ✅ Build clean route path
+    String path = "/$section";
+
+    // If sub-section exists, append it
+    if (subSection != null && subSection.isNotEmpty) {
+      path += "/$subSection";
+    }
+
+    // ✅ Navigate without query parameters
+    GoRouter.of(context).go(path);
   }
-  @override
+
+
+  // void _changeSection(String section, {String? subSection}) {
+  //   setState(() {
+  //     activeSection = section;
+  //     activeSubSection = subSection;
+  //
+  //     if (section == "home") selectedIndex = 0;
+  //     else if (section == "services") selectedIndex = 1;
+  //     else if (section == "about") selectedIndex = 2;
+  //     else if (section == "contact") selectedIndex = 3;
+  //     else if (section == "blog") selectedIndex = 4;
+  //   });
+  //
+  //   // ✅ Only include query param if it's not null
+  //   final queryParams = <String, String>{};
+  //   if (section.isNotEmpty) queryParams['section'] = section;
+  //   if (subSection != null) queryParams['subSection'] = subSection;
+  //
+  //   final uri = Uri(
+  //     path: RoutesName.dashboardScreen,
+  //     queryParameters: queryParams.isNotEmpty ? queryParams : null,
+  //   );
+  //
+  //   GoRouter.of(context).go(uri.toString());
+  // }
 
   @override
   void initState() {
     super.initState();
 
-    // 🔹 Initial section setup
+    // 🔹 Default initial section
     activeSection = widget.initialSection ?? "home";
-    if (widget.initialSection == "home") selectedIndex = 0;
-    else if (widget.initialSection == "services") selectedIndex = 1;
-    else if (widget.initialSection == "about") selectedIndex = 2;
-    else if (widget.initialSection == "contact") selectedIndex = 3;
-    else if (widget.initialSection == "blog") selectedIndex = 4;
+    if (activeSection == "home") selectedIndex = 0;
+    else if (activeSection == "services") selectedIndex = 1;
+    else if (activeSection == "about") selectedIndex = 2;
+    else if (activeSection == "contact") selectedIndex = 3;
+    else if (activeSection == "blog") selectedIndex = 4;
 
-    // 🔹 Web back button handling
-    if (kIsWeb) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        html.window.onPopState.listen((event) async {
-          if (!mounted) return;
-
-          // 👇 agar home ke alawa kisi aur page par ho
-          if (selectedIndex != 0) {
-            setState(() {
-              selectedIndex = 0;
-              activeSection = "home";
-            });
-            // push state to prevent browser back loop
-            html.window.history.pushState(null, '', html.window.location.href);
-            return;
-          }
-
-          // 👇 agar already home par ho — show exit dialog
-          bool? shouldExit = await showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              title: const Text("Exit Website"),
-              content: const Text("Are you sure you want to leave this website?"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text("No", style: TextStyle(color: Colors.grey)),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text("Yes", style: TextStyle(color: Colors.red)),
-                ),
-              ],
-            ),
-          );
-
-          if (shouldExit == true) {
-            html.window.history.back(); // exit from website
-          } else {
-            // stay on same page
-            html.window.history.pushState(null, '', html.window.location.href);
-          }
-        });
-
-        // prevent initial trigger
-        html.window.history.pushState(null, '', html.window.location.href);
-      });
-    }
-
-    // 🔹 Call API after first frame render
+    // 🔹 Web back button + GoRouter query parameters safely
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        final adminContactViewModel =
-        Provider.of<AdminContactViewModel>(context, listen: false);
-        adminContactViewModel.adminContactApi();
-        Provider.of<ProfileViewModel>(context, listen: false).profileApi(context);
+      // ✅ Read GoRouter query parameters safely
+      final params = GoRouterState.of(context).uri.queryParameters;
+      setState(() {
+        activeSection = params['section'] ?? activeSection;
+        activeSubSection = params['subSection'];
+        if (activeSection == "home") selectedIndex = 0;
+        else if (activeSection == "services") selectedIndex = 1;
+        else if (activeSection == "about") selectedIndex = 2;
+        else if (activeSection == "contact") selectedIndex = 3;
+        else if (activeSection == "blog") selectedIndex = 4;
+      });
+
+      // 🔹 Web back button handling
+      if (kIsWeb) {
+        html.window.onPopState.listen((event) {
+          final params = Uri.parse(html.window.location.href).queryParameters;
+          setState(() {
+            activeSection = params['section'] ?? 'home';
+            activeSubSection = params['subSection'];
+            if (activeSection == "home") selectedIndex = 0;
+            else if (activeSection == "services") selectedIndex = 1;
+            else if (activeSection == "about") selectedIndex = 2;
+            else if (activeSection == "contact") selectedIndex = 3;
+            else if (activeSection == "blog") selectedIndex = 4;
+          });
+        });
       }
+
+      // 🔹 Call APIs safely
+      final adminContactViewModel =
+      Provider.of<AdminContactViewModel>(context, listen: false);
+      adminContactViewModel.adminContactApi();
+
+      final profileVM = Provider.of<ProfileViewModel>(context, listen: false);
+      profileVM.profileApi(context);
     });
   }
+
+  // void initState() {
+  //   super.initState();
+  //
+  //   // 🔹 Initial section setup
+  //   activeSection = widget.initialSection ?? "home";
+  //   if (widget.initialSection == "home") selectedIndex = 0;
+  //   else if (widget.initialSection == "services") selectedIndex = 1;
+  //   else if (widget.initialSection == "about") selectedIndex = 2;
+  //   else if (widget.initialSection == "contact") selectedIndex = 3;
+  //   else if (widget.initialSection == "blog") selectedIndex = 4;
+  //   final params = GoRouterState.of(context).uri.queryParameters;
+  //   activeSection = params['section'] ?? "home";
+  //   activeSubSection = params['subSection'];
+  //   // 🔹 Web back button handling
+  //   // if (kIsWeb) {
+  //   //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //   //     html.window.onPopState.listen((event) async {
+  //   //       if (!mounted) return;
+  //   //
+  //   //       // 👇 agar home ke alawa kisi aur page par ho
+  //   //       if (selectedIndex != 0) {
+  //   //         setState(() {
+  //   //           selectedIndex = 0;
+  //   //           activeSection = "home";
+  //   //         });
+  //   //         // push state to prevent browser back loop
+  //   //         html.window.history.pushState(null, '', html.window.location.href);
+  //   //         return;
+  //   //       }
+  //   //
+  //   //       // 👇 agar already home par ho — show exit dialog
+  //   //       bool? shouldExit = await showDialog(
+  //   //         context: context,
+  //   //         builder: (context) => AlertDialog(
+  //   //           shape: RoundedRectangleBorder(
+  //   //             borderRadius: BorderRadius.circular(12),
+  //   //           ),
+  //   //           title: const Text("Exit Website"),
+  //   //           content: const Text("Are you sure you want to leave this website?"),
+  //   //           actions: [
+  //   //             TextButton(
+  //   //               onPressed: () => Navigator.of(context).pop(false),
+  //   //               child: const Text("No", style: TextStyle(color: Colors.grey)),
+  //   //             ),
+  //   //             TextButton(
+  //   //               onPressed: () => Navigator.of(context).pop(true),
+  //   //               child: const Text("Yes", style: TextStyle(color: Colors.red)),
+  //   //             ),
+  //   //           ],
+  //   //         ),
+  //   //       );
+  //   //
+  //   //       if (shouldExit == true) {
+  //   //         html.window.history.back(); // exit from website
+  //   //       } else {
+  //   //         // stay on same page
+  //   //         html.window.history.pushState(null, '', html.window.location.href);
+  //   //       }
+  //   //     });
+  //   //
+  //   //     // prevent initial trigger
+  //   //     html.window.history.pushState(null, '', html.window.location.href);
+  //   //   });
+  //   // }
+  //   if (kIsWeb) {
+  //     WidgetsBinding.instance.addPostFrameCallback((_) {
+  //       html.window.onPopState.listen((event) {
+  //         final params = Uri.parse(html.window.location.href).queryParameters;
+  //         setState(() {
+  //           activeSection = params['section'] ?? 'home';
+  //           activeSubSection = params['subSection'];
+  //           if (activeSection == "home") selectedIndex = 0;
+  //           else if (activeSection == "services") selectedIndex = 1;
+  //           else if (activeSection == "about") selectedIndex = 2;
+  //           else if (activeSection == "contact") selectedIndex = 3;
+  //           else if (activeSection == "blog") selectedIndex = 4;
+  //         });
+  //       });
+  //     });
+  //   }
+  //   // 🔹 Call API after first frame render
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     if (mounted) {
+  //       final adminContactViewModel =
+  //       Provider.of<AdminContactViewModel>(context, listen: false);
+  //       adminContactViewModel.adminContactApi();
+  //       Provider.of<ProfileViewModel>(context, listen: false).profileApi(context);
+  //     }
+  //   });
+  // }
 
 
 
