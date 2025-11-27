@@ -1,9 +1,9 @@
-//https://vpharmacy.codescarts.com/userapi/
+//https://root.vpharmacy.in/userapi/
 class ApiUrl {
-  static const String baseUrl = "https://vpharmacy.codescarts.com/userapi/user";
+  static const String baseUrl = "https://root.vpharmacy.in/userapi/user";
   static const String login = "$baseUrl/login";
   static const String sendOtp = "https://otp.fctechteam.org/send_otp.php?"
-      "mode=test&digit=4&mobile=";
+      "mode=live&digit=4&mobile=";
   static const String verifyOtp ="https://otp.fctechteam.org/verifyotp.php?mobile=";
   static const String register ="${baseUrl}/register";
   static const String createOrder ="${baseUrl}/create_order";
@@ -18,4 +18,5 @@ class ApiUrl {
   static const String adminContactDetail ="${baseUrl}/admin_contact";
   static const String blog ="${baseUrl}/Blogs";
   static const String seoRank ="${baseUrl}/increase_seo_rank";
+  static const String otpCount ="${baseUrl}/decrease_otp";
 }

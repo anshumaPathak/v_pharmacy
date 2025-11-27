@@ -183,7 +183,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get realExperiencesFromOurValuedCustomers => 'हमारे मूल्यवान ग्राहकों के वास्तविक अनुभव';
 
   @override
-  String get sarahJohnson => 'सारा जॉनसन';
+  String get sarahJohnson => 'दिनेश राय(लटवा चट्टी)';
 
   @override
   String get regularCustomer => 'नियमित ग्राहक';
@@ -192,7 +192,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get mediCareHasBeenALifesaverFastDeliveryGenuine => 'V Pharmacy ने मेरी डायबिटीज़ संभालना बहुत आसान बना दिया। डॉक्टर घर आते हैं और दवा हमेशा समय पर मिलती है।';
 
   @override
-  String get drMichaelChen => 'डॉ. माइकल चेन';
+  String get drMichaelChen => 'दीपक श्रीवास्तव(त्रय सुजान)';
 
   @override
   String get healthcareProfessional => 'स्वास्थ्य सेवा विशेषज्ञ';
@@ -201,7 +201,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get iRecommendMediCareToMyPatients => 'फ्री हेल्थ चेकअप और इतनी तेज़ डिलीवरी — वाकई शानदार सेवा।';
 
   @override
-  String get emilyRodriguez => 'एमिली रोड्रिगेज़';
+  String get emilyRodriguez => 'धुनमुन यादव (भुलिया)';
 
   @override
   String get satisfiedCustomer => 'संतुष्ट ग्राहक';

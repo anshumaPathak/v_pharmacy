@@ -1146,23 +1146,34 @@ class _LoginDialogState extends State<LoginDialog> {
                 focusNode: _phoneFocus,
                 keyboardType: TextInputType.phone,
                 maxLength: 10,
+                // inputFormatters: [
+                //   FilteringTextInputFormatter.digitsOnly,
+                //   LengthLimitingTextInputFormatter(10),
+                //   TextInputFormatter.withFunction((oldValue, newValue) {
+                //     final text = newValue.text;
+                //     final sameDigitPattern = RegExp(r'^(\d)\1{0,9}$');
+                //     final validStart = RegExp(r'^[6-9]');
+                //     if (text.isEmpty) return newValue;
+                //     if (!validStart.hasMatch(text[0])) return oldValue;
+                //     return newValue;
+                //   }),
+                // ],
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(10),
                   TextInputFormatter.withFunction((oldValue, newValue) {
-                    // सिर्फ digits allow और invalid patterns को reject करो
                     final text = newValue.text;
-                    final sameDigitPattern = RegExp(r'^(\d)\1{0,9}$');
-                    final validStart = RegExp(r'^[6-9]');
                     if (text.isEmpty) return newValue;
-                    // अगर invalid start digit है (1-5)
-                    if (!validStart.hasMatch(text[0])) return oldValue;
-                    // अगर सारे एक जैसे अंक हैं (0000000 / 1111111)
-                    if (sameDigitPattern.hasMatch(text) &&
-                        text.length > 1) return oldValue;
+
+                    // Must start with 6-9
+                    if (!RegExp(r'^[6-9]').hasMatch(text[0])) return oldValue;
+
+                    // Allow double numbers anywhere after the first digit
+                    // (i.e., no restriction, so just return newValue)
                     return newValue;
                   }),
                 ],
+
                 onSubmitted: (_) {
                   if (!_isLoading) _submitForm();
                 },

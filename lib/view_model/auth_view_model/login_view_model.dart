@@ -86,75 +86,6 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<Map<String, dynamic>> loginApi(BuildContext context, String phone) async {
-  //   setLoading(true);
-  //   final data = {"mobile": phone};
-  //
-  //   try {
-  //     final response = await _loginRepo.loginApi(data);
-  //     setLoading(false);
-  //
-  //     // ✅ Check if user is blocked by admin (status: 0)
-  //     if (response['status'] == 0) {
-  //       if (context.mounted) {
-  //         showDialog(
-  //           context: context,
-  //           barrierDismissible: false,
-  //           builder: (_) => AlertDialog(
-  //             title: const Text('Account Blocked'),
-  //             content: Text(response['message'] ?? 'Your account has been blocked by admin'),
-  //             actions: [
-  //               TextButton(
-  //                 onPressed: () => Navigator.of(context).pop(),
-  //                 child: const Text('OK'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //       return response;
-  //     }
-  //
-  //     // ✅ Agar user registered hai
-  //     if (response['register_status'] == 1) {
-  //       Utils.show(response['message'] ?? "Login successful", context);
-  //
-  //       // ✅ Save user ID for future API calls
-  //       final userId = response['id']?.toString();
-  //       if (userId != null && userId.isNotEmpty) {
-  //         await UserViewModel().saveUser(userId);
-  //       }
-  //     }
-  //     // ✅ Agar user registered nahi hai
-  //     else if (response['register_status'] == 0) {
-  //       Utils.show(response['message'] ?? "Mobile not registered", context);
-  //
-  //       // ✅ Show register popup
-  //       if (context.mounted) {
-  //         showDialog(
-  //           context: context,
-  //           barrierDismissible: false,
-  //           builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-  //         );
-  //       }
-  //     }
-  //
-  //     return response;
-  //   } catch (error) {
-  //     setLoading(false);
-  //     print("🚨 Login error: $error");
-  //
-  //     if (context.mounted) {
-  //       showDialog(
-  //         context: context,
-  //         barrierDismissible: false,
-  //         builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-  //       );
-  //     }
-  //
-  //     return {"register_status": 0, "message": "Mobile not registered"};
-  //   }
-  // }
   Future<Map<String, dynamic>> loginApi(BuildContext context, String phone) async {
     setLoading(true);
     final data = {"mobile": phone};
@@ -194,13 +125,6 @@ class LoginViewModel with ChangeNotifier {
       } else if (response['register_status'] == 0) {
         Utils.show(response['message'] ?? "Mobile not registered", context);
 
-        // if (context.mounted) {
-        //   await showDialog(
-        //     context: context,
-        //     barrierDismissible: false,
-        //     builder: (_) => CompleteRegistrationDialog(phoneNumber: phone),
-        //   );
-        // }
       }
 
       return response;

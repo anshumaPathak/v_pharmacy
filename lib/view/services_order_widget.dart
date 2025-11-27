@@ -950,10 +950,18 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
         const SizedBox(height: 12),
         IgnorePointer(
           ignoring: !isEditable,
-          child: DropdownButtonFormField<String>(
+          child:
+          DropdownButtonFormField<String>(
             dropdownColor: Colors.white,
             value: value,
-            hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
+            hint: Text(
+              hint,
+              style: TextStyle(color: Colors.grey[400]),
+              overflow: TextOverflow.ellipsis, // ← adds "..."
+              maxLines: 1,                        // ← ensures single line
+            ),
+
+            // hint: Text(hint, style: TextStyle(color: Colors.grey[400])),
             decoration: InputDecoration(
               constraints: BoxConstraints(
                   maxHeight: 38
@@ -973,7 +981,7 @@ class _OrderMedicineScreenState extends State<OrderMedicineScreen> {
                 borderSide: const BorderSide(color: Color(0xFF2563EB)),
               ),
               contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             ),
             items: items
                 .map((String item) =>

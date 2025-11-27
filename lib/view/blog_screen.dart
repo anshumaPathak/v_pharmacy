@@ -29,10 +29,8 @@ class _BlogScreenState extends State<BlogScreen> {
     super.didChangeDependencies();
     final languageViewModel = Provider.of<LanguageViewModel>(context);
 
-    if (!_isFirstLoad &&
-        languageViewModel.languageCode != null &&
-        languageViewModel.languageCode != currentLang) {
-      currentLang = languageViewModel.languageCode!;
+    if (!_isFirstLoad && languageViewModel.languageCode != currentLang) {
+      currentLang = languageViewModel.languageCode;
       _loadLanguageAndFetchBlogs();
     }
 
@@ -59,10 +57,11 @@ class _BlogScreenState extends State<BlogScreen> {
       final seoDescription = firstBlog.seoDiscription?.isNotEmpty == true
           ? firstBlog.seoDiscription!
           : "Explore health and wellness blogs on V Pharmacy.";
-      final seoTags = firstBlog.seoTag?.split(",") ??
+      final seoTags =
+          firstBlog.seoTag?.split(",") ??
           ["health", "wellness", "medicine", "v pharmacy", "blogs"];
       final imageUrl =
-          "https://vpharmacy.codescarts.com/public/uploads/${firstBlog.image}";
+          "https://root.vpharmacy.in/public/uploads/${firstBlog.image}";
 
       html.document.title = seoTitle;
       SeoHelper.updateSeoTags(
@@ -83,16 +82,18 @@ class _BlogScreenState extends State<BlogScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final blogModel = Provider.of<BlogViewModel>(context).blogModel;
+    final blogViewModel = Provider.of<BlogViewModel>(context);
+    final blogModel = blogViewModel.blogModel;
+    final blogs = blogModel?.data ?? [];
     final width = MediaQuery.of(context).size.width;
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (Provider.of<BlogViewModel>(context).loading) {
+        if (blogViewModel.loading) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (blogModel?.data == null || blogModel!.data!.isEmpty) {
+        if (blogs.isEmpty) {
           return const Padding(
             padding: EdgeInsets.all(40),
             child: Text(
@@ -113,11 +114,11 @@ class _BlogScreenState extends State<BlogScreen> {
                 crossAxisCount: getCrossAxisCount(width),
                 mainAxisSpacing: 35,
                 crossAxisSpacing: 35,
-                mainAxisExtent: 300,
+                mainAxisExtent: 320,
               ),
-              itemCount: blogModel!.data!.length,
+              itemCount: blogs.length,
               itemBuilder: (context, index) {
-                final blog = blogModel.data![index];
+                final blog = blogs[index];
                 bool isHovered = false;
 
                 return StatefulBuilder(
@@ -128,7 +129,7 @@ class _BlogScreenState extends State<BlogScreen> {
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
                         transform: isHovered
-                            ? (Matrix4.identity()..scale(1.05))
+                            ? (Matrix4.identity()..scale(1.01))
                             : Matrix4.identity(),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -136,7 +137,8 @@ class _BlogScreenState extends State<BlogScreen> {
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(
-                                  isHovered ? 0.25 : 0.1),
+                                isHovered ? 0.25 : 0.1,
+                              ),
                               blurRadius: isHovered ? 20 : 10,
                               offset: const Offset(4, 6),
                             ),
@@ -145,15 +147,31 @@ class _BlogScreenState extends State<BlogScreen> {
                         child: InkWell(
                           borderRadius: BorderRadius.circular(16),
                           onTap: () {
-                            context.pushNamed(
-                              'blogDetail',
-                              pathParameters: {'slug': blog.slug ?? ''},
-                              extra: {
-                                'title': blog.title ?? '',
-                                'image': "https://vpharmacy.codescarts.com/public/uploads/${blog.image ?? ''}",
-                                'description': blog.description ?? '',
-                              },
-                            );
+                            print("onTap");
+                            print(blog.slug);
+                            if (blog.slug != null) {
+                              final slug = blog.slug ?? '';
+                              context.go('/blog/${Uri.encodeComponent(slug)}');
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Details not available"),
+                                ),
+                              );
+                            }
+                            // final slug = blog.slug ?? '';
+                            // context.go('/blog/${Uri.encodeComponent(slug)}');
+                            // final slug = blog.slug ?? '';
+                            // context.pushNamed(
+                            //   'blogDetail',
+                            //   pathParameters: {'slug': slug},
+                            //   extra: {
+                            //     'title': blog.title ?? '',
+                            //     'image':
+                            //         "https://root.vpharmacy.in/public/uploads/${blog.image ?? ""}",
+                            //     'description': blog.description ?? '',
+                            //   },
+                            // );
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,16 +181,19 @@ class _BlogScreenState extends State<BlogScreen> {
                                   top: Radius.circular(16),
                                 ),
                                 child: Image.network(
-                                  "https://vpharmacy.codescarts.com/public/uploads/${blog.image ?? ""}",
-                                  height: 160,
+                                  "https://root.vpharmacy.in/public/uploads/${blog.image ?? ""}",
+                                  height: 200,
                                   width: double.infinity,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Container(
                                         height: 160,
                                         width: double.infinity,
                                         color: Colors.grey.shade300,
-                                        child: const Icon(Icons.image, size: 40),
+                                        child: const Icon(
+                                          Icons.image,
+                                          size: 40,
+                                        ),
                                       ),
                                 ),
                               ),
@@ -180,8 +201,7 @@ class _BlogScreenState extends State<BlogScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         blog.title ?? "",
@@ -197,10 +217,9 @@ class _BlogScreenState extends State<BlogScreen> {
                                       const SizedBox(height: 6),
                                       Text(
                                         (blog.description ?? "")
-                                            .replaceAll(
-                                            RegExp(r'<[^>]*>'), ' ')
+                                            .replaceAll(RegExp(r'<[^>]*>'), ' ')
                                             .trim(),
-                                        maxLines: 4,
+                                        maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           fontSize: 12,
@@ -208,10 +227,85 @@ class _BlogScreenState extends State<BlogScreen> {
                                           height: 1.4,
                                         ),
                                       ),
+                                      const Spacer(),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            if (blog.slug != null) {
+                                              final slug = blog.slug!;
+                                              context.go('/blog/${Uri.encodeComponent(slug)}');
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text("Details not available"),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min, // button width only as much as content
+                                            children: const [
+                                              Text(
+                                                "View More",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.blue,
+                                                ),
+                                              ),
+                                              SizedBox(width: 4), // spacing between text and arrow
+                                              Icon(
+                                                Icons.arrow_forward,
+                                                size: 14,
+                                                color: Colors.blue,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      // Align(
+                                      //   alignment: Alignment.center,
+                                      //   child: Container(
+                                      //     height: 35,
+                                      //     // margin: const EdgeInsets.only(top: 5),
+                                      //     // padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                                      //     decoration: BoxDecoration(
+                                      //       color: Colors.blue.shade50, // background color
+                                      //       borderRadius: BorderRadius.circular(8),
+                                      //       border: Border.all(color: Colors.blue.shade200),
+                                      //     ),
+                                      //     child: TextButton(
+                                      //       onPressed: () {
+                                      //         if (blog.slug != null) {
+                                      //           final slug = blog.slug!;
+                                      //           context.go('/blog/${Uri.encodeComponent(slug)}');
+                                      //         } else {
+                                      //           ScaffoldMessenger.of(context).showSnackBar(
+                                      //             const SnackBar(
+                                      //               content: Text("Details not available"),
+                                      //             ),
+                                      //           );
+                                      //         }
+                                      //       },
+                                      //       child: const Text(
+                                      //         "View More",
+                                      //         style: TextStyle(
+                                      //           fontSize: 12,
+                                      //           fontWeight: FontWeight.bold,
+                                      //           color: Colors.blue,
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // )
+
+
                                     ],
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ),

@@ -18,6 +18,7 @@ import 'package:v_pharmashing/view_model/contact_us_view_model.dart';
 import 'package:v_pharmashing/view_model/diases_category_view_model.dart';
 import 'package:v_pharmashing/view_model/language_view_model.dart';
 import 'package:v_pharmashing/view_model/order_history_view_model.dart';
+import 'package:v_pharmashing/view_model/otp_count_view_model.dart';
 import 'package:v_pharmashing/view_model/pharmacist_rating_view_model.dart';
 import 'package:v_pharmashing/view_model/privacy_policy_view_model.dart';
 import 'package:v_pharmashing/view_model/profile_view_model.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AdminContactViewModel(),),
         ChangeNotifierProvider(create: (_) => BlogViewModel(),),
         ChangeNotifierProvider(create: (_) => SeoRankViewModel(),),
+        ChangeNotifierProvider(create: (_) => OtpCountViewModel(),),
       ],
       child: Consumer<LanguageViewModel>(
         builder: (context, languageVM, child) {

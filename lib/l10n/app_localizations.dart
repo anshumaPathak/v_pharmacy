@@ -446,7 +446,7 @@ abstract class AppLocalizations {
   /// No description provided for @sarahJohnson.
   ///
   /// In en, this message translates to:
-  /// **'Sarah Johnson'**
+  /// **'Dinesh Rai(Latwa Chatti)'**
   String get sarahJohnson;
 
   /// No description provided for @regularCustomer.
@@ -464,7 +464,7 @@ abstract class AppLocalizations {
   /// No description provided for @drMichaelChen.
   ///
   /// In en, this message translates to:
-  /// **'Dr. Michael Chen'**
+  /// **'Deepak Srivastava(Traya Sujan)'**
   String get drMichaelChen;
 
   /// No description provided for @healthcareProfessional.
@@ -482,7 +482,7 @@ abstract class AppLocalizations {
   /// No description provided for @emilyRodriguez.
   ///
   /// In en, this message translates to:
-  /// **'Emily Rodriguez'**
+  /// **'Dhunmun Yadav (Bhuliya)'**
   String get emilyRodriguez;
 
   /// No description provided for @satisfiedCustomer.

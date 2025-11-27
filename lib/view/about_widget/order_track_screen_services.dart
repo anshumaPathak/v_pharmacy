@@ -474,24 +474,6 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Final:',
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                      ),
-                      Text(
-                        '₹${order.summary!.finalAmount}',
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF10B981),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
                         'Discount:',
                         style: TextStyle(fontSize: 13, color: Colors.grey[600]),
                       ),
@@ -513,6 +495,24 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                           ),
                         );
                       }),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Final:',
+                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                      ),
+                      Text(
+                        '₹${order.summary!.finalAmount}',
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF10B981),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -596,29 +596,6 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
             ),
           ],
 
-          // if (order.summary?.finalAmount != null &&
-          //     order.summary!.finalAmount!.isNotEmpty &&
-          //     order.summary!.finalAmount != '0.00') ...[
-          //   const SizedBox(height: 16),
-          //   Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       Text(
-          //         AppLocalizations.of(context)!.finalPrice,
-          //         style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-          //       ),
-          //       const SizedBox(height: 4),
-          //       Text(
-          //         '₹${order.summary!.finalAmount}',
-          //         style: const TextStyle(
-          //           fontSize: 18,
-          //           fontWeight: FontWeight.bold,
-          //           color: Color(0xFF10B981),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ],
 
           const SizedBox(height: 16),
 
@@ -699,13 +676,14 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                                 ),
                               ),
                               Text(
-                                'Discount: ₹$discount',
+                                'Discount: $discount%',  // ← % added at the end
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.green,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
+
                               Text(
                                 'Total: ₹$totalPrice',
                                 style: const TextStyle(
@@ -722,168 +700,168 @@ class _YourOrdersScreenState extends State<YourOrdersScreen> {
                   }).toList(),
                 ),
 
-          if (order.status == 1 &&
-              order.summary?.original != null &&
-              order.summary!.original!.isNotEmpty &&
-              order.summary!.original != '0.00') ...[
-            const SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFFEFF6FF),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFDBEAFE)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.priceConfirmationRequired,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      color: Colors.blue[900],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Original:',
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                      ),
-                      Text(
-                        '₹${order.summary!.original}',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.discount,
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                      ),
-                      Text(
-                        '-₹${order.summary!.discount}',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Final:',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
-                        ),
-                      ),
-                      Text(
-                        '₹${order.summary!.finalAmount}',
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF10B981),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            final confirmOrderViewModel =
-                                Provider.of<ConfirmOrderViewModel>(
-                                  context,
-                                  listen: false,
-                                );
-                            await confirmOrderViewModel.confirmOrderApi(
-                              order.id,
-                              "2",
-                              context,
-                            );
-
-                            setState(() {
-                              order.status = 2;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF10B981),
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            elevation: 0,
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.accept,
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () async {
-                            final confirmOrderViewModel =
-                                Provider.of<ConfirmOrderViewModel>(
-                                  context,
-                                  listen: false,
-                                );
-                            await confirmOrderViewModel.confirmOrderApi(
-                              order.id,
-                              "5",
-                              context,
-                            );
-
-                            setState(() {
-                              order.status = 5;
-                            });
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            side: const BorderSide(
-                              color: Colors.redAccent,
-                              width: 1.5,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.cancel,
-                            style: const TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+          // if (order.status == 1 &&
+          //     order.summary?.original != null &&
+          //     order.summary!.original!.isNotEmpty &&
+          //     order.summary!.original != '0.00') ...[
+          //   const SizedBox(height: 16),
+          //   Container(
+          //     width: double.infinity,
+          //     padding: const EdgeInsets.all(16),
+          //     decoration: BoxDecoration(
+          //       color: const Color(0xFFEFF6FF),
+          //       borderRadius: BorderRadius.circular(12),
+          //       border: Border.all(color: const Color(0xFFDBEAFE)),
+          //     ),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Text(
+          //           AppLocalizations.of(context)!.priceConfirmationRequired,
+          //           style: TextStyle(
+          //             fontWeight: FontWeight.bold,
+          //             fontSize: 14,
+          //             color: Colors.blue[900],
+          //           ),
+          //         ),
+          //         const SizedBox(height: 12),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Text(
+          //               'Original:',
+          //               style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+          //             ),
+          //             Text(
+          //               '₹${order.summary!.original}',
+          //               style: const TextStyle(
+          //                 fontSize: 13,
+          //                 color: Colors.grey,
+          //                 decoration: TextDecoration.lineThrough,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         const SizedBox(height: 4),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Text(
+          //               AppLocalizations.of(context)!.discount,
+          //               style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+          //             ),
+          //             Text(
+          //               '-₹${order.summary!.discount}',
+          //               style: const TextStyle(
+          //                 fontSize: 13,
+          //                 color: Colors.redAccent,
+          //                 fontWeight: FontWeight.w600,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         const SizedBox(height: 4),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Text(
+          //               'Final:',
+          //               style: TextStyle(
+          //                 fontSize: 13,
+          //                 fontWeight: FontWeight.w600,
+          //                 color: Colors.grey[800],
+          //               ),
+          //             ),
+          //             Text(
+          //               '₹${order.summary!.finalAmount}',
+          //               style: const TextStyle(
+          //                 fontSize: 15,
+          //                 fontWeight: FontWeight.bold,
+          //                 color: Color(0xFF10B981),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         const SizedBox(height: 16),
+          //         Row(
+          //           children: [
+          //             Expanded(
+          //               child: ElevatedButton(
+          //                 onPressed: () async {
+          //                   final confirmOrderViewModel =
+          //                       Provider.of<ConfirmOrderViewModel>(
+          //                         context,
+          //                         listen: false,
+          //                       );
+          //                   await confirmOrderViewModel.confirmOrderApi(
+          //                     order.id,
+          //                     "2",
+          //                     context,
+          //                   );
+          //
+          //                   setState(() {
+          //                     order.status = 2;
+          //                   });
+          //                 },
+          //                 style: ElevatedButton.styleFrom(
+          //                   backgroundColor: const Color(0xFF10B981),
+          //                   foregroundColor: Colors.white,
+          //                   padding: const EdgeInsets.symmetric(vertical: 12),
+          //                   shape: RoundedRectangleBorder(
+          //                     borderRadius: BorderRadius.circular(8),
+          //                   ),
+          //                   elevation: 0,
+          //                 ),
+          //                 child: Text(
+          //                   AppLocalizations.of(context)!.accept,
+          //                   style: const TextStyle(fontSize: 14),
+          //                 ),
+          //               ),
+          //             ),
+          //             const SizedBox(width: 12),
+          //             Expanded(
+          //               child: OutlinedButton(
+          //                 onPressed: () async {
+          //                   final confirmOrderViewModel =
+          //                       Provider.of<ConfirmOrderViewModel>(
+          //                         context,
+          //                         listen: false,
+          //                       );
+          //                   await confirmOrderViewModel.confirmOrderApi(
+          //                     order.id,
+          //                     "5",
+          //                     context,
+          //                   );
+          //
+          //                   setState(() {
+          //                     order.status = 5;
+          //                   });
+          //                 },
+          //                 style: OutlinedButton.styleFrom(
+          //                   padding: const EdgeInsets.symmetric(vertical: 12),
+          //                   side: const BorderSide(
+          //                     color: Colors.redAccent,
+          //                     width: 1.5,
+          //                   ),
+          //                   shape: RoundedRectangleBorder(
+          //                     borderRadius: BorderRadius.circular(8),
+          //                   ),
+          //                 ),
+          //                 child: Text(
+          //                   AppLocalizations.of(context)!.cancel,
+          //                   style: const TextStyle(
+          //                     color: Colors.redAccent,
+          //                     fontSize: 14,
+          //                   ),
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ],
 
           const SizedBox(height: 20),
 
@@ -1446,7 +1424,7 @@ class OrderDetailsPage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            '₹${discount}%',
+                                            '${discount}%',
                                             style: const TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w600,

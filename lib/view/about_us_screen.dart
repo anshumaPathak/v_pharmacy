@@ -723,7 +723,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon, color: const Color(0xFF2563EB), size: 36),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Text(
           title,
           style: const TextStyle(
@@ -732,7 +732,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Text(
           desc,
           style: const TextStyle(
